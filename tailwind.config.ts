@@ -10,9 +10,10 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                mono: ['"JetBrains Mono"', 'monospace'],
+                sans: ['var(--font-sans)', 'sans-serif'],
+                mono: ['var(--font-mono)', 'monospace'],
             },
+
             colors: {
                 nexus: {
                     black: '#050505',
