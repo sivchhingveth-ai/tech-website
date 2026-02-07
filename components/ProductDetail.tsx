@@ -127,7 +127,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             </div>
           </div>
           <div
-            className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden border border-nexus-border relative group cursor-zoom-in"
+            className="w-full aspect-square rounded-lg overflow-hidden border border-nexus-border relative group cursor-zoom-in"
             onClick={() => setIsImageModalOpen(true)}
           >
             <Image
