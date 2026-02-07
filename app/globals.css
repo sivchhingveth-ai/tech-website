@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505;
+  --foreground: #e5e5e5;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
+
+/* 3D Transform Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+/* Cube Faces for 40px (w-10) cube -> translateZ = 20px */
+.translate-z-5 {
+  transform: translateZ(20px);
+}
+.rotate-y-90 {
+  transform: rotateY(90deg) translateZ(20px);
+}
+.rotate-y-180 {
+  transform: rotateY(180deg) translateZ(20px);
+}
+.rotate-y--90 {
+  transform: rotateY(-90deg) translateZ(20px);
+}
+.rotate-x-90 {
+  transform: rotateX(90deg) translateZ(20px);
+}
+.rotate-x--90 {
+  transform: rotateX(-90deg) translateZ(20px);
+}
