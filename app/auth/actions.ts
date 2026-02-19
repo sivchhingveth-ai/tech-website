@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
+import { headers } from 'next/headers'
 
 export async function login(formData: FormData) {
     const supabase = await createClient()
@@ -24,6 +25,10 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
     const supabase = await createClient()
+    const headerList = await headers()
+    const host = headerList.get('host')
+    const protocol = headerList.get('x-forwarded-proto') || 'https'
+    const siteUrl = `${protocol}://${host}`
 
     const data = {
         email: formData.get('email') as string,
@@ -33,7 +38,7 @@ export async function signup(formData: FormData) {
     const { error } = await supabase.auth.signUp({
         ...data,
         options: {
-            emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+            emailRedirectTo: `${siteUrl}/auth/callback`,
         },
     })
 
@@ -47,10 +52,15 @@ export async function signup(formData: FormData) {
 
 export async function resetPassword(formData: FormData) {
     const supabase = await createClient()
+    const headerList = await headers()
+    const host = headerList.get('host')
+    const protocol = headerList.get('x-forwarded-proto') || 'https'
+    const siteUrl = `${protocol}://${host}`
+
     const email = formData.get('email') as string
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback?next=/auth/reset-password`,
+        redirectTo: `${siteUrl}/auth/callback?next=/auth/reset-password`,
     })
 
     if (error) {
