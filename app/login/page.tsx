@@ -1,11 +1,13 @@
+import { use } from 'react'
 import { login, signup, resetPassword } from '@/app/auth/actions'
 import { Key, Mail, Scissors, Sparkles } from 'lucide-react'
 
 export default function LoginPage({
     searchParams,
 }: {
-    searchParams: { message?: string; error?: string }
+    searchParams: Promise<{ message?: string; error?: string }>
 }) {
+    const { message, error } = use(searchParams)
     return (
         <div className="min-h-screen bg-[#030303] flex items-center justify-center p-4 relative overflow-hidden font-['Inter',_sans-serif]">
             {/* Decorative Gradients */}
@@ -61,15 +63,15 @@ export default function LoginPage({
                             </div>
                         </div>
 
-                        {searchParams?.error && (
+                        {error && (
                             <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3 rounded-lg text-center animate-shake">
-                                {searchParams.error}
+                                {error}
                             </div>
                         )}
 
-                        {searchParams?.message && (
+                        {message && (
                             <div className="bg-green-500/10 border border-green-500/20 text-green-400 text-sm p-3 rounded-lg text-center">
-                                {searchParams.message}
+                                {message}
                             </div>
                         )}
 
