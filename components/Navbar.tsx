@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { ShoppingBag, Search, LogIn, Home, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { createClient } from '@/utils/supabase/client';
+import { signOut } from '@/app/auth/actions';
 import { Product, Category } from '../types';
 
 interface NavbarProps {
@@ -36,6 +39,9 @@ const Navbar: React.FC<NavbarProps> = ({
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  const supabase = createClient();
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -51,9 +57,16 @@ const Navbar: React.FC<NavbarProps> = ({
         setIsUserMenuOpen(false);
       }
     };
+
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    getUser();
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [supabase.auth]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -199,14 +212,39 @@ const Navbar: React.FC<NavbarProps> = ({
               {isUserMenuOpen && (
                 <div className="absolute top-full mt-3 w-48 right-0 bg-nexus-card border border-nexus-border rounded-xl shadow-2xl overflow-hidden animate-fade-in z-50 flex flex-col ring-1 ring-white/5">
                   <div className="p-1 space-y-0.5">
-                    <button className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors">
-                      <UserPlus className="h-4 w-4" />
-                      Sign Up
-                    </button>
-                    <button className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors">
-                      <LogIn className="h-4 w-4" />
-                      Sign In
-                    </button>
+                    {user ? (
+                      <>
+                        <div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5 mb-1 truncate">
+                          {user.email}
+                        </div>
+                        <button
+                          onClick={() => signOut()}
+                          className="w-full text-left px-3 py-2 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
+                        >
+                          <LogIn className="h-4 w-4 rotate-180" />
+                          Sign Out
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          href="/login"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
+                        >
+                          <UserPlus className="h-4 w-4" />
+                          Sign Up
+                        </Link>
+                        <Link
+                          href="/login"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
+                        >
+                          <LogIn className="h-4 w-4" />
+                          Sign In
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
               )}

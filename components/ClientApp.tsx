@@ -237,7 +237,7 @@ export default function ClientApp() {
                                 <a href="#" className="hover:text-nexus-accent transition-colors">Privacy</a>
                                 <a href="#" className="hover:text-nexus-accent transition-colors">Terms</a>
                             </div>
-                            <p className="text-gray-600 text-sm">© 2024 KeyCraft Studio Inc.</p>
+                            <p className="text-gray-600 text-sm">© 2026 KeyCraft Studio Inc.</p>
                         </div>
                     </footer>
                 </main>
