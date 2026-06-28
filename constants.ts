@@ -11,7 +11,7 @@ const KEYBOARDS: Product[] = [
     price: 129.99,
     category: 'Keyboard',
     subcategory: '65%',
-    size: '65%',
+    size: '65-68%',
     image: '/products/kb-001.jpg',
     images: [
       '/products/kb-001.jpg',
@@ -58,7 +58,7 @@ const KEYBOARDS: Product[] = [
     price: 149.99,
     category: 'Keyboard',
     subcategory: 'TKL',
-    size: 'TKL',
+    size: 'TKL (80-84%)',
     image: '/products/kb-002.jpg',
     images: [
       '/products/kb-002.jpg',
@@ -96,7 +96,7 @@ const KEYBOARDS: Product[] = [
     price: 169.99,
     category: 'Keyboard',
     subcategory: 'Full Size',
-    size: 'Full Size Compact',
+    size: '96-99%',
     image: '/products/kb-003.jpg',
     images: ['/products/kb-003.jpg'],
     specs: {
@@ -149,7 +149,7 @@ const KEYBOARDS: Product[] = [
     price: 119.99,
     category: 'Keyboard',
     subcategory: '40%',
-    size: '40%',
+    size: '60%',
     image: '/products/kb-005.jpg',
     images: ['/products/kb-005.jpg'],
     specs: {
@@ -201,7 +201,7 @@ const KEYBOARDS: Product[] = [
     price: 159.99,
     category: 'Keyboard',
     subcategory: 'TKL',
-    size: 'TKL',
+    size: 'TKL (80-84%)',
     image: '/products/kb-007.jpg',
     images: ['/products/kb-007.jpg'],
     specs: {
