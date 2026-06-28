@@ -1,0 +1,24 @@
+
+> keycraft-studio@0.0.0 dev
+> next dev -p 3006
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3006
+- Network:       http://26.206.226.249:3006
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 1603ms
+ GET / 200 in 774ms (compile: 295ms, proxy.ts: 184ms, render: 295ms)
+ GET / 200 in 51ms (compile: 7ms, proxy.ts: 6ms, render: 38ms)
+⨯ Error: Event handlers cannot be passed to Client Component props.
+  <img src=... alt=... className=... onError={function onError}>
+                                             ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at stringify (<anonymous>) {
+  digest: '2099352483'
+}
+ GET /login 500 in 581ms (compile: 51ms, proxy.ts: 7ms, render: 523ms)
+ GET /auth/reset-password 200 in 318ms (compile: 190ms, proxy.ts: 9ms, render: 119ms)
+✓ Compiled in 1252ms
+ GET / 200 in 53ms (compile: 8ms, proxy.ts: 12ms, render: 32ms)

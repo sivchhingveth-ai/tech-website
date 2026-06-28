@@ -1,15 +1,14 @@
-import { use } from 'react'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
-import { Sparkles, Key } from 'lucide-react'
+import { Key } from 'lucide-react'
 
-export default function ResetPasswordPage({
+export default async function ResetPasswordPage({
     searchParams,
 }: {
     searchParams: Promise<{ error?: string; message?: string }>
 }) {
-    const { error } = use(searchParams)
+    const { error } = await searchParams
     async function updatePassword(formData: FormData) {
         'use server'
         const password = formData.get('password') as string

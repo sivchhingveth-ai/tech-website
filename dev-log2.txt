@@ -1,0 +1,32 @@
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3006
+- Network:       http://26.206.226.249:3006
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 1457ms
+ GET / 200 in 622ms (compile: 237ms, proxy.ts: 164ms, render: 221ms)
+⨯ Error: Expected a suspended thenable. This is a bug in React. Please file an issue.
+    at ignore-listed frames {
+  digest: '486347283'
+}
+⨯ Error: failed to pipe response
+    at ignore-listed frames {
+  [cause]: Error: Expected a suspended thenable. This is a bug in React. Please file an issue.
+      at ignore-listed frames {
+    digest: '486347283'
+  }
+}
+⨯ Error: failed to pipe response
+    at ignore-listed frames {
+  page: '/login',
+  [cause]: Error: Expected a suspended thenable. This is a bug in React. Please file an issue.
+      at ignore-listed frames {
+    digest: '486347283'
+  }
+}
+ GET /login 500 in 1825ms (compile: 49ms, proxy.ts: 5ms, render: 1771ms)
+✓ Compiled in 1574ms
+ GET / 200 in 60ms (compile: 10ms, proxy.ts: 12ms, render: 38ms)
+✓ Compiled in 130ms
+ GET / 200 in 77ms (compile: 15ms, proxy.ts: 15ms, render: 48ms)

@@ -1,14 +1,12 @@
-import { use } from 'react'
 import { login, signup, resetPassword } from '@/app/auth/actions'
-import { Key, Mail, Sparkles } from 'lucide-react'
-import Image from 'next/image'
+import { Key, Mail } from 'lucide-react'
 
 export default async function LoginPage({
     searchParams,
 }: {
     searchParams: Promise<{ message?: string; error?: string }>
 }) {
-    const { message, error } = use(searchParams)
+    const { message, error } = await searchParams
     return (
         <div className="min-h-screen bg-[#030303] flex items-center justify-center p-4 relative overflow-hidden font-['Inter',_sans-serif]">
             {/* Decorative Gradients */}
@@ -23,14 +21,6 @@ export default async function LoginPage({
                                 src="/logo/logo.png"
                                 alt="KeyCraft Studio Logo"
                                 className="w-full h-full object-cover"
-                                onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.style.display = 'none';
-                                    const parent = target.parentElement;
-                                    if (parent) {
-                                        parent.innerHTML = '<svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
-                                    }
-                                }}
                             />
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Welcome Back</h1>
