@@ -33,18 +33,12 @@ const Hero: React.FC<HeroProps> = ({ onViewFeatures }) => {
 
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 flex items-center justify-center">
         <div className="h-64 w-full sm:h-72 md:h-96 lg:w-full lg:h-full relative flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10 lg:w-32 w-full h-full lg:h-auto top-0 bottom-0 left-0 pointer-events-none"></div>
-          <div className="relative z-0">
-            <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-full pointer-events-none"></div>
-            <div className="absolute -inset-4 bg-white/5 blur-2xl rounded-full pointer-events-none"></div>
-            <img
-              src="/hero.png"
-              alt="Tech Setup"
-              className="h-[70%] w-[70%] object-cover relative z-10 scale-110 drop-shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-              style={{ objectPosition: 'center 60%' }}
-            />
-          </div>
-          <div className="absolute inset-0 bg-[#0a0a0a]/40 lg:hidden pointer-events-none"></div>
+          <img
+            src="/hero.png"
+            alt="Tech Setup"
+            className="h-[70%] w-[70%] object-cover relative z-0 rounded-2xl"
+            style={{ objectPosition: 'center 60%' }}
+          />
         </div>
       </div>
     </div>
