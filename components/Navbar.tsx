@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { ShoppingBag, Search, LogIn, Home, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
@@ -41,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
 
-  const supabase = createClient();
+  const supabase = React.useMemo(() => createClient(), []);
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -75,7 +76,11 @@ const Navbar: React.FC<NavbarProps> = ({
 
   // Search Suggestion Logic
   const filteredSuggestions = searchValue
-    ? products.filter(p => p.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0, 5)
+    ? products.filter(p =>
+      p.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchValue.toLowerCase()) ||
+      p.tagline.toLowerCase().includes(searchValue.toLowerCase())
+    )
     : [];
 
   const navLinks: { id: Category; label: string }[] = [
@@ -86,71 +91,98 @@ const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-nexus-black/95 backdrop-blur-md border-b border-nexus-border shadow-lg shadow-black/50 h-16">
+    <nav className="sticky top-0 z-50 w-full bg-nexus-black/95 backdrop-blur-md border-b border-nexus-border shadow-lg shadow-black/50 h-24">
       <div className="w-full px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex h-full items-center justify-between">
+        <div className="flex h-full items-center justify-between gap-4">
 
           {/* Left Section: Back Button OR Home Link */}
-          <div className="flex-shrink-0 flex items-center gap-4">
+          <div className="flex-shrink-0 flex items-center gap-2">
             {showBackButton && onBack ? (
-              <div className="flex items-center gap-2 animate-fade-in">
+              <div className="flex items-center gap-1.5 sm:gap-2 animate-fade-in">
                 <button
-                  className="flex items-center gap-2 p-2 rounded-lg bg-nexus-card border border-nexus-border text-white transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+                  className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg bg-nexus-card border border-nexus-border text-white transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] flex-shrink-0"
                   onClick={onBack}
                   title="Go Back"
                 >
-                  <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
-                  <span className="font-bold text-sm uppercase hidden sm:block">Back</span>
+                  <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform" />
+                  <span className="font-bold text-xs sm:text-sm uppercase hidden sm:block">Back</span>
                 </button>
 
                 {showHomeButton && onHomeClick && (
                   <button
                     onClick={onHomeClick}
-                    className="p-2 rounded-lg bg-nexus-card border border-nexus-border text-gray-400 transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+                    className="p-1.5 sm:p-2 rounded-lg bg-nexus-card border border-nexus-border text-gray-400 transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] flex-shrink-0"
                     title="Back to Home"
                   >
-                    <Home className="h-5 w-5" />
+                    <Home className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-4">
-                {/* Home Button (Replacing 3D Logo) */}
+              <div className="flex items-center gap-2">
                 <button
                   onClick={onLogoClick}
-                  className="group flex items-center gap-2 text-white hover:text-nexus-accent transition-colors"
+                  className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0"
                 >
-                  <Home className="h-6 w-6 group-hover:scale-110 transition-transform" />
-                  <span className="font-bold text-lg tracking-wider hidden sm:block">Home</span>
+                  <img
+                    src="/logo/logo.png"
+                    alt="KeyCraft Studio Logo"
+                    className="h-16 w-auto hidden md:block"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
+                  <span className="brand-text-gaming animate-brand-3d text-xl md:text-2xl lg:text-3xl tracking-wider leading-none">
+                    KeyCRAFT Studio
+                  </span>
                 </button>
-
-                {/* Desktop Navigation Links Removed */}
               </div>
             )}
           </div>
 
           {/* Right Section: Search & Cart & User */}
-          <div className="flex items-center gap-3 md:gap-5">
-            {/* Desktop Search Bar with Dropdown */}
-            <div className="hidden md:block relative" ref={searchContainerRef}>
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
+            {/* Search Bar with Dropdown - Now Responsive (Short Form) */}
+            <div className="relative" ref={searchContainerRef}>
               <div className="relative group">
-                <input
-                  type="text"
-                  placeholder="Search gear..."
-                  value={searchValue}
-                  onChange={handleSearchChange}
-                  onFocus={() => setIsSearchFocused(true)}
-                  className="bg-nexus-card/50 text-gray-300 text-sm rounded-full pl-10 pr-4 py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-48 lg:w-64 transition-all placeholder:text-gray-600 focus:bg-nexus-black"
-                />
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500 group-focus-within:text-nexus-accent transition-colors" />
+                <form
+                  className="w-full h-full"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    // Don't close the dropdown on submit, let the user see the results
+                  }}
+                >
+                  <input
+                    type="search"
+                    placeholder="Search..."
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                    onFocus={() => setIsSearchFocused(true)}
+                    className="bg-nexus-card/50 text-gray-300 text-sm rounded-full pl-11 pr-10 py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-28 focus:w-36 sm:w-40 sm:focus:w-48 md:w-44 md:focus:w-56 lg:w-64 lg:focus:w-72 transition-all duration-300 placeholder:text-gray-600 focus:bg-nexus-black focus:shadow-[0_0_15px_rgba(139,92,246,0.3)] [&::-webkit-search-cancel-button]:hidden"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute left-4 top-2.5 text-gray-500 hover:text-nexus-accent transition-all duration-200 outline-none active:scale-90"
+                    aria-label="Submit search"
+                  >
+                    <Search className="h-4 w-4 pointer-events-none" />
+                  </button>
+                </form>
+                {searchValue && (
+                  <button
+                    type="button"
+                    onClick={() => { setSearchValue(''); onSearch(''); }}
+                    className="absolute right-3 top-2.5 text-gray-500 hover:text-white transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
               </div>
 
-              {/* Search Dropdown */}
+              {/* Search Dropdown - fixed full-width on mobile, anchored on desktop */}
               {isSearchFocused && (
-                <div className="absolute top-full mt-2 w-72 right-0 bg-nexus-card border border-nexus-border rounded-lg shadow-2xl overflow-hidden animate-fade-in z-50">
+                <div className="fixed left-0 right-0 top-16 mx-2 sm:absolute sm:mx-0 sm:top-full sm:mt-2 sm:w-72 sm:right-0 sm:left-auto bg-nexus-black/95 backdrop-blur-md border border-nexus-border rounded-lg shadow-2xl max-h-96 overflow-y-auto animate-fade-in z-[70]">
                   {searchValue === '' ? (
                     <div className="p-3 text-center text-xs text-gray-500">
-                      Type to search products...
+                      Type to search...
                     </div>
                   ) : (
                     <div className="p-2">
@@ -163,9 +195,10 @@ const Navbar: React.FC<NavbarProps> = ({
                               onClick={() => {
                                 onProductSelect(product);
                                 setSearchValue('');
+                                onSearch('');
                                 setIsSearchFocused(false);
                               }}
-                              className="w-full text-left px-2 py-2 rounded-md flex items-center gap-3 hover:bg-nexus-dark transition-colors group"
+                              className="w-full text-left px-2 py-2 rounded-md flex items-center gap-3 hover:bg-nexus-card transition-colors group"
                             >
                               <div className="relative w-10 h-10 flex-shrink-0">
                                 <Image
@@ -193,11 +226,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 </div>
               )}
             </div>
-
-            {/* Mobile Search Icon */}
-            <button className="md:hidden text-gray-400 hover:text-white p-2">
-              <Search className="h-6 w-6" />
-            </button>
 
             {/* User Menu Dropdown */}
             <div className="relative hidden sm:block" ref={userMenuRef}>
@@ -265,10 +293,16 @@ const Navbar: React.FC<NavbarProps> = ({
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden text-gray-400 hover:text-white p-2"
+              className="md:hidden text-gray-400 hover:text-white relative w-10 h-10 flex flex-shrink-0 items-center justify-center transition-all duration-300 active:scale-90"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isMobileMenuOpen ? 'rotate-90 opacity-0 scale-50' : 'rotate-0 opacity-100 scale-100'}`}>
+                <Menu className="h-6 w-6" />
+              </div>
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isMobileMenuOpen ? 'rotate-0 opacity-100 scale-100' : '-rotate-90 opacity-0 scale-50'}`}>
+                <X className="h-6 w-6" />
+              </div>
             </button>
           </div>
         </div>
@@ -278,12 +312,6 @@ const Navbar: React.FC<NavbarProps> = ({
       {isMobileMenuOpen && (
         <div className="absolute top-16 left-0 w-full bg-nexus-black border-b border-nexus-border p-4 md:hidden animate-fade-in shadow-2xl">
           <div className="flex flex-col space-y-2">
-            <button
-              onClick={() => { onLogoClick(); setIsMobileMenuOpen(false); }}
-              className={`px-4 py-3 rounded-lg text-left font-medium ${activeCategory === 'Home' ? 'bg-nexus-accent/10 text-nexus-accent' : 'text-gray-300 hover:bg-nexus-card'}`}
-            >
-              Home
-            </button>
             {navLinks.map((link) => (
               <button
                 key={link.id}
@@ -294,13 +322,45 @@ const Navbar: React.FC<NavbarProps> = ({
               </button>
             ))}
             <div className="border-t border-nexus-border my-2 pt-2">
-              <button className="w-full text-left px-4 py-3 text-gray-300 hover:bg-nexus-card rounded-lg flex items-center gap-2">
-                <User className="h-5 w-5" /> Account
-              </button>
+              {user ? (
+                <div className="space-y-2">
+                  <div className="px-4 py-2 text-xs text-gray-500 truncate">
+                    {user.email}
+                  </div>
+                  <button
+                    onClick={() => {
+                      signOut();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-3 text-red-400 hover:bg-nexus-card rounded-lg flex items-center gap-2"
+                  >
+                    <LogIn className="h-5 w-5 rotate-180" /> Sign Out
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <Link
+                    href="/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full text-left px-4 py-3 text-gray-300 hover:bg-nexus-card rounded-lg flex items-center gap-2"
+                  >
+                    <UserPlus className="h-5 w-5" /> Sign Up
+                  </Link>
+                  <Link
+                    href="/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full text-left px-4 py-3 text-gray-300 hover:bg-nexus-card rounded-lg flex items-center gap-2"
+                  >
+                    <LogIn className="h-5 w-5" /> Sign In
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
+
+
     </nav>
   );
 };

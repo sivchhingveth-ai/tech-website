@@ -1,6 +1,7 @@
 
 export type Category = 'Home' | 'All' | 'Keyboard' | 'Mouse' | 'Monitor' | 'Accessory';
-export type KeyboardSize = '40%' | '65%' | 'TKL' | 'TKL Compact' | 'Full Size Compact';
+export type KeyboardSize = '40%' | '60%' | '65%' | '75%' | 'TKL' | 'TKL Compact' | 'Full Size' | 'Full Size Compact';
+export type AccessorySubcategory = 'Keycaps' | 'Switches' | 'Tools' | 'Wrist Rest' | 'Cable' | 'Desk Mat' | 'Monitor Arm' | 'Storage' | 'Lighting' | 'Audio' | 'Other';
 
 export interface Review {
   id: string;
@@ -18,6 +19,7 @@ export interface Product {
   description: string;
   price: number;
   category: Category;
+  subcategory?: string;
   size?: KeyboardSize;
   image: string;
   images: string[];
@@ -32,6 +34,7 @@ export interface Product {
   stock: number; // Current stock level
   inStock: boolean;
   isNew?: boolean;
+  tags?: string[]; // For filtering: Wireless, RGB, Gaming, etc.
 }
 
 export interface CartItem extends Product {

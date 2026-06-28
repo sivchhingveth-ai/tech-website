@@ -29,6 +29,8 @@ const config: Config = {
                 'fade-in': 'fadeIn 0.5s ease-out',
                 'slide-in': 'slideIn 0.3s ease-out',
                 'spin-3d': 'spin3d 8s linear infinite',
+                'shake': 'shake 0.5s ease-in-out',
+                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -42,6 +44,11 @@ const config: Config = {
                 spin3d: {
                     '0%': { transform: 'rotateX(0deg) rotateY(0deg)' },
                     '100%': { transform: 'rotateX(360deg) rotateY(360deg)' }
+                },
+                shake: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-4px)' },
+                    '20%, 40%, 60%, 80%': { transform: 'translateX(4px)' },
                 }
             }
         },

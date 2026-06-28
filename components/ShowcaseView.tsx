@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Product, Category } from '../types';
 import { ArrowRight, Plus } from 'lucide-react';
 
@@ -52,10 +53,12 @@ const ShowcaseView: React.FC<ShowcaseViewProps> = ({ products, onAddToCart, onVi
                     <div 
                         className="relative h-48 bg-nexus-black overflow-hidden"
                     >
-                      <img 
+                      <Image 
                         src={product.image} 
                         alt={product.name} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                        unoptimized
                       />
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
                     </div>

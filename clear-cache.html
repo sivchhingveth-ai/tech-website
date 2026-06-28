@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Service Worker Cache</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1 { color: #8b5cf6; }
+        button {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover { background: #7c3aed; }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        #log {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Service Worker Cleaner</h1>
+    <p>This tool will clear all service workers and caches that may be interfering with your Next.js app.</p>
+    
+    <button onclick="clearEverything()">Clear All Service Workers & Caches</button>
+    <button onclick="location.reload()">Reload Page</button>
+    
+    <div id="log"></div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const color = type === 'success' ? '#4ade80' : type === 'error' ? '#f87171' : '#fff';
+            logEl.innerHTML += `<span style="color: ${color}">${message}</span>\n`;
+        }
+
+        async function clearEverything() {
+            log('Starting cleanup...', 'info');
+            
+            // Unregister service workers
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    log(`Found ${registrations.length} service worker(s)`);
+                    
+                    for (let registration of registrations) {
+                        await registration.unregister();
+                        log(`✓ Unregistered: ${registration.scope}`, 'success');
+                    }
+                } catch (e) {
+                    log(`✗ Error unregistering: ${e.message}`, 'error');
+                }
+            } else {
+                log('Service workers not supported in this browser');
+            }
+            
+            // Clear caches
+            if ('caches' in window) {
+                try {
+                    const cacheNames = await caches.keys();
+                    log(`Found ${cacheNames.length} cache(s)`);
+                    
+                    for (let cacheName of cacheNames) {
+                        await caches.delete(cacheName);
+                        log(`✓ Deleted cache: ${cacheName}`, 'success');
+                    }
+                } catch (e) {
+                    log(`✗ Error clearing caches: ${e.message}`, 'error');
+                }
+            }
+            
+            // Clear localStorage
+            try {
+                localStorage.clear();
+                log('✓ localStorage cleared', 'success');
+            } catch (e) {
+                log(`✗ Error clearing localStorage: ${e.message}`, 'error');
+            }
+            
+            // Clear sessionStorage
+            try {
+                sessionStorage.clear();
+                log('✓ sessionStorage cleared', 'success');
+            } catch (e) {
+                log(`✗ Error clearing sessionStorage: ${e.message}`, 'error');
+            }
+            
+            log('\n✅ Cleanup complete! You can now close this tab and reload your app.', 'success');
+        }
+    </script>
+</body>
+</html>

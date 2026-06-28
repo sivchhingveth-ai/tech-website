@@ -1,8 +1,8 @@
 
 import { Product } from './types';
 
-export const PRODUCTS: Product[] = [
-  // --- Keyboards ---
+// ==================== KEYBOARDS ====================
+const KEYBOARDS: Product[] = [
   {
     id: 'kb-001',
     name: 'Nebula 65',
@@ -10,6 +10,7 @@ export const PRODUCTS: Product[] = [
     description: 'The Nebula 65 is a masterpiece of engineering. Featuring a gasket-mounted design, hot-swappable PCB, and triple-mode connectivity, it delivers a typing experience that sounds as good as it feels.',
     price: 129.99,
     category: 'Keyboard',
+    subcategory: '65%',
     size: '65%',
     image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=800&auto=format&fit=crop',
     images: [
@@ -46,7 +47,8 @@ export const PRODUCTS: Product[] = [
     sales: 1200,
     stock: 45,
     inStock: true,
-    isNew: true
+    isNew: true,
+    tags: ['Wireless', 'Hot-swappable', 'RGB']
   },
   {
     id: 'kb-002',
@@ -55,6 +57,7 @@ export const PRODUCTS: Product[] = [
     description: 'Built for esports, the Titan TKL Pro delivers zero-latency keystrokes with our proprietary optical switches. The aerospace-grade aluminum top plate ensures durability during intense gaming sessions.',
     price: 149.99,
     category: 'Keyboard',
+    subcategory: 'TKL',
     size: 'TKL',
     image: 'https://picsum.photos/seed/kb2/800/600',
     images: [
@@ -82,7 +85,8 @@ export const PRODUCTS: Product[] = [
     ],
     sales: 850,
     stock: 12,
-    inStock: true
+    inStock: true,
+    tags: ['Gaming', 'Wired', 'RGB']
   },
   {
     id: 'kb-003',
@@ -91,6 +95,7 @@ export const PRODUCTS: Product[] = [
     description: 'For those who need the numpad without the bulk. The Spectre 96 is a heavy-duty workstation keyboard with silent linear switches, perfect for office use by day and gaming by night.',
     price: 169.99,
     category: 'Keyboard',
+    subcategory: 'Full Size',
     size: 'Full Size Compact',
     image: 'https://picsum.photos/seed/kb3/800/600',
     images: ['https://picsum.photos/seed/kb3/800/600'],
@@ -106,7 +111,8 @@ export const PRODUCTS: Product[] = [
     reviewsList: [],
     sales: 120,
     stock: 0,
-    inStock: false
+    inStock: false,
+    tags: ['Silent', 'Office', 'Wired']
   },
   {
     id: 'kb-004',
@@ -115,7 +121,8 @@ export const PRODUCTS: Product[] = [
     description: 'The Lumina 75 brings the function row back in a compact form factor. Featuring a programmable rotary knob and a flex-cut PC plate, it offers a bouncy, resonant sound profile that enthusiasts love.',
     price: 219.99,
     category: 'Keyboard',
-    size: 'TKL Compact',
+    subcategory: '75%',
+    size: '75%',
     image: 'https://picsum.photos/seed/kb4/800/600',
     images: ['https://picsum.photos/seed/kb4/800/600', 'https://picsum.photos/seed/kb4-detail/800/600'],
     specs: {
@@ -131,7 +138,8 @@ export const PRODUCTS: Product[] = [
     sales: 430,
     stock: 4, 
     inStock: true,
-    isNew: true
+    isNew: true,
+    tags: ['Premium', 'Wireless', 'Hot-swappable']
   },
   {
     id: 'kb-005',
@@ -140,6 +148,7 @@ export const PRODUCTS: Product[] = [
     description: 'The Nano 40 is designed for the true minimalist. With a 40% orthogonal layout, every key is within one unit of your home row. Fully programmable layers mean you never sacrifice functionality for size.',
     price: 119.99,
     category: 'Keyboard',
+    subcategory: '40%',
     size: '40%',
     image: 'https://picsum.photos/seed/kb5/800/600',
     images: ['https://picsum.photos/seed/kb5/800/600'],
@@ -155,10 +164,64 @@ export const PRODUCTS: Product[] = [
     reviews: 28,
     sales: 150,
     stock: 8,
-    inStock: true
+    inStock: true,
+    tags: ['Portable', 'Programmable', 'Bluetooth']
   },
+  {
+    id: 'kb-006',
+    name: 'Aurora 60',
+    tagline: 'Compact powerhouse.',
+    description: 'The Aurora 60 delivers a perfect balance of compact size and full functionality. With a solid aluminum case and south-facing RGB, its perfect for enthusiasts who want a clean, minimalist setup.',
+    price: 139.99,
+    category: 'Keyboard',
+    subcategory: '60%',
+    size: '60%',
+    image: 'https://picsum.photos/seed/kb6/800/600',
+    images: ['https://picsum.photos/seed/kb6/800/600'],
+    specs: {
+      Switch: 'Gateron Oil King',
+      Layout: '60% ANSI',
+      Connectivity: 'USB-C Wired',
+      Case: 'Aluminum',
+      Plate: 'Brass'
+    },
+    features: ['South-facing RGB', 'Hot-swappable', 'Tape Mod Ready'],
+    rating: 4.5,
+    reviews: 78,
+    sales: 340,
+    stock: 15,
+    inStock: true,
+    tags: ['Compact', 'Wired', 'RGB']
+  },
+  {
+    id: 'kb-007',
+    name: 'Eclipse 80%',
+    tagline: 'All the keys you need.',
+    description: 'The Eclipse 80% brings back the function row while keeping your desk clean. Perfect for productivity and gaming with dedicated media controls.',
+    price: 159.99,
+    category: 'Keyboard',
+    subcategory: 'TKL',
+    size: 'TKL',
+    image: 'https://picsum.photos/seed/kb7/800/600',
+    images: ['https://picsum.photos/seed/kb7/800/600'],
+    specs: {
+      Switch: 'Cherry MX Brown',
+      Layout: 'TKL',
+      Connectivity: 'Wireless 2.4GHz',
+      Battery: '3000mAh'
+    },
+    features: ['Media Controls', 'Volume Wheel', 'N-key Rollover'],
+    rating: 4.6,
+    reviews: 45,
+    sales: 280,
+    stock: 20,
+    inStock: true,
+    tags: ['Wireless', 'Productivity']
+  },
+];
 
-  // --- Mice ---
+// ==================== MICE ====================
+const MICE: Product[] = [
   {
     id: 'm-001',
     name: 'Phantom Air',
@@ -166,6 +229,7 @@ export const PRODUCTS: Product[] = [
     description: 'Engineered for speed and precision. The Phantom Air features a magnesium alloy honeycomb shell, PixArt PAW3395 sensor, and lag-free wireless connectivity.',
     price: 89.99,
     category: 'Mouse',
+    subcategory: 'Wireless',
     image: 'https://picsum.photos/seed/mouse1/800/600',
     images: ['https://picsum.photos/seed/mouse1/800/600'],
     specs: {
@@ -180,7 +244,8 @@ export const PRODUCTS: Product[] = [
     sales: 2100,
     stock: 60,
     inStock: true,
-    isNew: true
+    isNew: true,
+    tags: ['Wireless', 'Lightweight', 'Gaming']
   },
   {
     id: 'm-002',
@@ -189,6 +254,7 @@ export const PRODUCTS: Product[] = [
     description: 'The Basilisk Ergo is sculpted to fit your hand perfectly. With 12 programmable buttons and a hyper-scroll tilt wheel, it gives you complete control over your gameplay.',
     price: 79.99,
     category: 'Mouse',
+    subcategory: 'Wireless',
     image: 'https://picsum.photos/seed/mouse2/800/600',
     images: ['https://picsum.photos/seed/mouse2/800/600'],
     specs: {
@@ -202,10 +268,62 @@ export const PRODUCTS: Product[] = [
     reviews: 312,
     sales: 5000,
     stock: 2,
-    inStock: true
+    inStock: true,
+    tags: ['Ergonomic', 'MMO', 'Wireless']
   },
+  {
+    id: 'm-003',
+    name: 'Viper Mini',
+    tagline: 'Small size, big performance.',
+    description: 'The Viper Mini is perfect for claw and fingertip grip users. At just 61g, it offers lightning-fast movements without sacrificing build quality.',
+    price: 49.99,
+    category: 'Mouse',
+    subcategory: 'Wired',
+    image: 'https://picsum.photos/seed/mouse3/800/600',
+    images: ['https://picsum.photos/seed/mouse3/800/600'],
+    specs: {
+      Sensor: 'PixArt 3359',
+      Weight: '61g',
+      DPI: '8,500',
+      Connectivity: 'Wired'
+    },
+    features: ['Speedflex Cable', 'Onboard Memory', 'Chroma RGB'],
+    rating: 4.7,
+    reviews: 890,
+    sales: 12000,
+    stock: 150,
+    inStock: true,
+    tags: ['Lightweight', 'Budget', 'Wired']
+  },
+  {
+    id: 'm-004',
+    name: 'DeathAdder V3',
+    tagline: 'The legend, evolved.',
+    description: 'The DeathAdder V3 brings the iconic ergonomic shape into the modern era with a 59g wireless design and the latest optical switches.',
+    price: 149.99,
+    category: 'Mouse',
+    subcategory: 'Wireless',
+    image: 'https://picsum.photos/seed/mouse4/800/600',
+    images: ['https://picsum.photos/seed/mouse4/800/600'],
+    specs: {
+      Sensor: 'Focus Pro 30K',
+      Weight: '59g',
+      DPI: '30,000',
+      Connectivity: 'Wireless / Bluetooth'
+    },
+    features: ['Optical Gen-3 Switches', '90-hour Battery', 'Type-C Charging'],
+    rating: 4.8,
+    reviews: 567,
+    sales: 3200,
+    stock: 40,
+    inStock: true,
+    isNew: true,
+    tags: ['Premium', 'Wireless', 'FPS']
+  },
+];
 
-  // --- Monitors ---
+// ==================== MONITORS ====================
+const MONITORS: Product[] = [
   {
     id: 'mon-001',
     name: 'Oculus 27',
@@ -213,6 +331,7 @@ export const PRODUCTS: Product[] = [
     description: 'Experience true immersion with the Oculus 27. featuring a Fast IPS panel, 1ms GtG response time, and vibrant color accuracy covering 98% of the DCI-P3 color gamut.',
     price: 349.99,
     category: 'Monitor',
+    subcategory: '27"',
     image: 'https://picsum.photos/seed/monitor1/800/600',
     images: ['https://picsum.photos/seed/monitor1/800/600'],
     specs: {
@@ -226,7 +345,8 @@ export const PRODUCTS: Product[] = [
     reviews: 85,
     sales: 300,
     stock: 15,
-    inStock: true
+    inStock: true,
+    tags: ['Gaming', '1440p', 'IPS']
   },
   {
     id: 'mon-002',
@@ -235,6 +355,7 @@ export const PRODUCTS: Product[] = [
     description: 'Expand your field of view with the Horizon 34. This curved ultrawide monitor replaces dual monitor setups with a single, seamless display perfect for productivity and immersive gaming.',
     price: 499.99,
     category: 'Monitor',
+    subcategory: 'Ultrawide',
     image: 'https://picsum.photos/seed/monitor2/800/600',
     images: ['https://picsum.photos/seed/monitor2/800/600'],
     specs: {
@@ -248,39 +369,492 @@ export const PRODUCTS: Product[] = [
     reviews: 42,
     sales: 110,
     stock: 0,
-    inStock: false
+    inStock: false,
+    tags: ['Ultrawide', 'Productivity', 'Curved']
   },
-
-  // --- Accessories (Stands, Mats, etc) ---
   {
-    id: 'acc-001',
-    name: 'Atlas Monitor Arm',
-    tagline: 'Reclaim your desk space.',
-    description: 'The Atlas Monitor Arm features a gas-spring mechanism for effortless adjustment. Supports monitors up to 32 inches and 9kg, with integrated cable management for a clean look.',
+    id: 'mon-003',
+    name: 'Vision 24',
+    tagline: 'Compact gaming excellence.',
+    description: 'The Vision 24 is the perfect entry-level gaming monitor. 1080p resolution paired with 144Hz refresh rate delivers smooth gameplay without breaking the bank.',
+    price: 199.99,
+    category: 'Monitor',
+    subcategory: '24"',
+    image: 'https://picsum.photos/seed/monitor3/800/600',
+    images: ['https://picsum.photos/seed/monitor3/800/600'],
+    specs: {
+      Resolution: '1920 x 1080 (FHD)',
+      RefreshRate: '144Hz',
+      Panel: 'IPS',
+      Response: '1ms MPRT'
+    },
+    features: ['AMD FreeSync', 'Anti-Glare', 'VESA Mount'],
+    rating: 4.5,
+    reviews: 234,
+    sales: 890,
+    stock: 45,
+    inStock: true,
+    tags: ['Budget', '1080p', 'Gaming']
+  },
+];
+
+// ==================== ACCESSORIES ====================
+const ACCESSORIES: Product[] = [
+  // --- KEYCAPS ---
+  {
+    id: 'cap-001',
+    name: 'GMK Classic Blue',
+    tagline: 'Timeless elegance. Premium doubleshot ABS.',
+    description: 'GMK Classic Blue brings a professional aesthetic to any keyboard. Made in Germany using high-quality ABS plastic with doubleshot legends that will never fade.',
+    price: 129.99,
+    category: 'Accessory',
+    subcategory: 'Keycaps',
+    image: 'https://picsum.photos/seed/keycaps1/800/600',
+    images: ['https://picsum.photos/seed/keycaps1/800/600'],
+    specs: {
+      Profile: 'Cherry',
+      Material: 'Doubleshot ABS',
+      Compatibility: 'Cherry MX / MX Clones',
+      Keys: '160+ keys'
+    },
+    features: ['Doubleshot Legends', 'Cherry Profile', 'MX Compatible', 'Icon Mods'],
+    rating: 4.9,
+    reviews: 456,
+    sales: 2300,
+    stock: 25,
+    inStock: true,
+    isNew: false,
+    tags: ['Premium', 'GMK', 'Doubleshot']
+  },
+  {
+    id: 'cap-002',
+    name: 'PBT Gradient Sunset',
+    tagline: 'Vibrant colors, durable PBT.',
+    description: 'Add a splash of color to your setup with these dye-sub PBT keycaps. The gradient design transitions beautifully from orange to purple.',
+    price: 49.99,
+    category: 'Accessory',
+    subcategory: 'Keycaps',
+    image: 'https://picsum.photos/seed/keycaps2/800/600',
+    images: ['https://picsum.photos/seed/keycaps2/800/600'],
+    specs: {
+      Profile: 'OEM',
+      Material: 'Thick PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '104 keys'
+    },
+    features: ['Dye-sublimated', '1.4mm Thick', 'OEM Profile', 'Shine Resistant'],
+    rating: 4.6,
+    reviews: 123,
+    sales: 890,
+    stock: 60,
+    inStock: true,
+    tags: ['PBT', 'Colorful', 'Budget']
+  },
+  {
+    id: 'cap-003',
+    name: 'Akko ASA Black & Pink',
+    tagline: 'Modern aesthetic, comfortable typing.',
+    description: 'The Akko ASA profile offers a unique sculpted feel that is comfortable for long typing sessions. The black and pink colorway matches any setup.',
     price: 59.99,
     category: 'Accessory',
-    image: 'https://picsum.photos/seed/stand1/800/600',
-    images: ['https://picsum.photos/seed/stand1/800/600'],
+    subcategory: 'Keycaps',
+    image: 'https://picsum.photos/seed/keycaps3/800/600',
+    images: ['https://picsum.photos/seed/keycaps3/800/600'],
     specs: {
-      Support: '17" - 32" Screens',
-      Load: '2kg - 9kg',
-      VESA: '75x75 / 100x100',
-      Material: 'Steel & Aluminum'
+      Profile: 'ASA',
+      Material: 'PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '158 keys'
     },
-    features: ['Gas Spring', '360° Rotation', 'Clamp & Grommet Mount'],
-    rating: 4.8,
-    reviews: 156,
-    sales: 600,
-    stock: 100,
-    inStock: true
+    features: ['ASA Profile', 'Dye-sub Legends', 'Accent Keys', 'Mac Compatible'],
+    rating: 4.7,
+    reviews: 234,
+    sales: 1200,
+    stock: 40,
+    inStock: true,
+    isNew: true,
+    tags: ['PBT', 'Aesthetic', 'Mac']
   },
   {
-    id: 'acc-002',
-    name: 'Nexus Desk Mat',
+    id: 'cap-004',
+    name: 'EPBT XMAS',
+    tagline: 'Holiday spirit all year round.',
+    description: 'Enjoy PBT keycaps year-round. This set features subtle holiday colors that work even after the season ends.',
+    price: 79.99,
+    category: 'Accessory',
+    subcategory: 'Keycaps',
+    image: 'https://picsum.photos/seed/keycaps4/800/600',
+    images: ['https://picsum.photos/seed/keycaps4/800/600'],
+    specs: {
+      Profile: 'Cherry',
+      Material: 'PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '139 keys'
+    },
+    features: ['Cherry Profile', 'Dye-sub', 'Novelties Included', 'International Support'],
+    rating: 4.5,
+    reviews: 89,
+    sales: 450,
+    stock: 15,
+    inStock: true,
+    tags: ['PBT', 'Themed', 'Limited']
+  },
+  // --- SWITCHES ---
+  {
+    id: 'sw-001',
+    name: 'Gateron Oil King (70-pack)',
+    tagline: 'Silky smooth linear switches.',
+    description: 'Factory-lubed linear switches with a deep, satisfying sound profile. The Oil Kings are known for their incredible smoothness right out of the box.',
+    price: 42.99,
+    category: 'Accessory',
+    subcategory: 'Switches',
+    image: 'https://picsum.photos/seed/switches1/800/600',
+    images: ['https://picsum.photos/seed/switches1/800/600'],
+    specs: {
+      Type: 'Linear',
+      Actuation: '55g',
+      Bottom: '65g',
+      Pretravel: '2.0mm',
+      Total: '4.0mm'
+    },
+    features: ['Pre-lubed', '5-pin PCB Mount', 'Nylon Housing', 'POM Stem'],
+    rating: 4.8,
+    reviews: 567,
+    sales: 3400,
+    stock: 100,
+    inStock: true,
+    tags: ['Linear', 'Pre-lubed', 'Popular']
+  },
+  {
+    id: 'sw-002',
+    name: 'Boba U4T (90-pack)',
+    tagline: 'The perfect tactile bump.',
+    description: 'Tactile switches with no pre-travel and a sharp, satisfying bump. One of the most popular tactile switches in the enthusiast community.',
+    price: 65.99,
+    category: 'Accessory',
+    subcategory: 'Switches',
+    image: 'https://picsum.photos/seed/switches2/800/600',
+    images: ['https://picsum.photos/seed/switches2/800/600'],
+    specs: {
+      Type: 'Tactile',
+      Actuation: '68g',
+      Bottom: '68g',
+      Pretravel: '0mm',
+      Total: '4.0mm'
+    },
+    features: ['No Pretravel', 'Thocky Sound', 'Gazzew Lubed', 'RGB Clear'],
+    rating: 4.9,
+    reviews: 890,
+    sales: 5600,
+    stock: 80,
+    inStock: true,
+    isNew: false,
+    tags: ['Tactile', 'Thocky', 'Popular']
+  },
+  {
+    id: 'sw-003',
+    name: 'Kailh Box White (110-pack)',
+    tagline: 'Clicky satisfaction guaranteed.',
+    description: 'Clicky switches with Box stem design for enhanced stability and dust protection. Perfect for typists who love audible feedback.',
+    price: 44.99,
+    category: 'Accessory',
+    subcategory: 'Switches',
+    image: 'https://picsum.photos/seed/switches3/800/600',
+    images: ['https://picsum.photos/seed/switches3/800/600'],
+    specs: {
+      Type: 'Clicky',
+      Actuation: '50g',
+      Bottom: '60g',
+      Pretravel: '1.8mm',
+      Total: '3.6mm'
+    },
+    features: ['Box Stem Design', 'Click Bar', 'IP56 Rated', 'Tight Tolerance'],
+    rating: 4.6,
+    reviews: 345,
+    sales: 2100,
+    stock: 120,
+    inStock: true,
+    tags: ['Clicky', 'Box', 'Budget']
+  },
+  {
+    id: 'sw-004',
+    name: 'Cherry MX Silent Red (70-pack)',
+    tagline: 'Whisper quiet performance.',
+    description: 'Silent linear switches with internal dampening for reduced noise. Perfect for office environments or shared spaces.',
+    price: 54.99,
+    category: 'Accessory',
+    subcategory: 'Switches',
+    image: 'https://picsum.photos/seed/switches4/800/600',
+    images: ['https://picsum.photos/seed/switches4/800/600'],
+    specs: {
+      Type: 'Silent Linear',
+      Actuation: '45g',
+      Bottom: '60g',
+      Pretravel: '2.0mm',
+      Total: '3.7mm'
+    },
+    features: ['Silent Dampening', 'Cherry Original', '5-pin', 'Gold Crosspoint'],
+    rating: 4.5,
+    reviews: 234,
+    sales: 1800,
+    stock: 50,
+    inStock: true,
+    tags: ['Silent', 'Office', 'Linear']
+  },
+  // --- TOOLS & MAINTENANCE ---
+  {
+    id: 'tool-001',
+    name: 'Complete Lube Kit Pro',
+    tagline: 'Everything you need to mod switches.',
+    description: 'Professional-grade switch lubrication kit including Krytox 205g0, GPL 105 oil, brush set, switch opener, and keycap puller.',
+    price: 39.99,
+    category: 'Accessory',
+    subcategory: 'Tools',
+    image: 'https://picsum.photos/seed/tools1/800/600',
+    images: ['https://picsum.photos/seed/tools1/800/600'],
+    specs: {
+      'Lube Type': 'Krytox 205g0 + 105',
+      'Brush Size': '0/00/000',
+      'Includes': '15 items',
+      Weight: '250g'
+    },
+    features: ['Premium Lube', 'Multiple Brushes', 'Switch Opener', 'Storage Case'],
+    rating: 4.7,
+    reviews: 456,
+    sales: 2100,
+    stock: 75,
+    inStock: true,
+    tags: ['Modding', 'Essential', 'Bundle']
+  },
+  {
+    id: 'tool-002',
+    name: 'Switch Puller + Keycap Puller Set',
+    tagline: 'Essential tools for keyboard modding.',
+    description: 'Stainless steel switch puller and wire keycap puller. The perfect starter kit for anyone looking to customize their keyboard.',
+    price: 12.99,
+    category: 'Accessory',
+    subcategory: 'Tools',
+    image: 'https://picsum.photos/seed/tools2/800/600',
+    images: ['https://picsum.photos/seed/tools2/800/600'],
+    specs: {
+      Material: 'Stainless Steel',
+      'Puller Type': 'Wire + Claw',
+      Compatible: 'Cherry MX',
+      Warranty: 'Lifetime'
+    },
+    features: ['Anti-scratch', 'Ergonomic Grip', 'Dual Tool Set', 'Compact'],
+    rating: 4.8,
+    reviews: 1234,
+    sales: 8900,
+    stock: 200,
+    inStock: true,
+    tags: ['Essential', 'Budget', 'Tools']
+  },
+  {
+    id: 'tool-003',
+    name: 'Keyboard Cleaning Kit',
+    tagline: 'Keep your setup pristine.',
+    description: 'Complete cleaning kit with keycap puller, cleaning gel, brushes, and compressed air. Keeps your keyboard looking and feeling new.',
+    price: 19.99,
+    category: 'Accessory',
+    subcategory: 'Tools',
+    image: 'https://picsum.photos/seed/tools3/800/600',
+    images: ['https://picsum.photos/seed/tools3/800/600'],
+    specs: {
+      Items: '7 pieces',
+      'Cleaning Gel': 'Reusable',
+      Brushes: '3 sizes',
+      'Air Duster': 'Included'
+    },
+    features: ['Eco-friendly', 'Reusable', 'Safe for Electronics', 'Travel Case'],
+    rating: 4.6,
+    reviews: 678,
+    sales: 3400,
+    stock: 150,
+    inStock: true,
+    tags: ['Maintenance', 'Essential', 'Bundle']
+  },
+  {
+    id: 'tool-004',
+    name: 'O-Ring Dampeners (120-pack)',
+    tagline: 'Silence your bottom-out.',
+    description: 'Clear rubber O-rings that dampen the sound of bottoming out. Perfect for open offices or late-night gaming sessions.',
+    price: 8.99,
+    category: 'Accessory',
+    subcategory: 'Tools',
+    image: 'https://picsum.photos/seed/tools4/800/600',
+    images: ['https://picsum.photos/seed/tools4/800/600'],
+    specs: {
+      Material: 'Clear Silicone',
+      Hardness: '40A',
+      Thickness: '1.5mm',
+      Quantity: '120 pieces'
+    },
+    features: ['Reduces Noise', 'Easy Install', 'Transparent', 'Universal Fit'],
+    rating: 4.4,
+    reviews: 890,
+    sales: 5600,
+    stock: 300,
+    inStock: true,
+    tags: ['Silencing', 'Budget', 'Easy']
+  },
+  // --- WRIST RESTS ---
+  {
+    id: 'rest-001',
+    name: 'Walnut Wood Wrist Rest TKL',
+    tagline: 'Natural beauty, ergonomic support.',
+    description: 'Handcrafted from solid walnut, this wrist rest provides comfortable support while adding a touch of natural elegance to your desk.',
+    price: 34.99,
+    category: 'Accessory',
+    subcategory: 'Wrist Rest',
+    image: 'https://picsum.photos/seed/rest1/800/600',
+    images: ['https://picsum.photos/seed/rest1/800/600'],
+    specs: {
+      Material: 'Solid Walnut',
+      Size: 'TKL (14")',
+      Finish: 'Oil & Wax',
+      Height: '19mm'
+    },
+    features: ['Ergonomic Angle', 'Non-slip Base', 'Hand-finished', 'Natural Grain'],
+    rating: 4.8,
+    reviews: 234,
+    sales: 1200,
+    stock: 45,
+    inStock: true,
+    isNew: false,
+    tags: ['Ergonomic', 'Premium', 'Wooden']
+  },
+  {
+    id: 'rest-002',
+    name: 'Gel Memory Foam Wrist Rest',
+    tagline: 'Cloud-like comfort for long sessions.',
+    description: 'Cooling gel-infused memory foam provides optimal support and temperature regulation. The smooth lycra surface feels great against your skin.',
+    price: 24.99,
+    category: 'Accessory',
+    subcategory: 'Wrist Rest',
+    image: 'https://picsum.photos/seed/rest2/800/600',
+    images: ['https://picsum.photos/seed/rest2/800/600'],
+    specs: {
+      Material: 'Gel + Memory Foam',
+      Size: 'Full Size (17")',
+      Cover: 'Lycra Fabric',
+      Height: '25mm'
+    },
+    features: ['Cooling Gel', 'Anti-slip', 'Removable Cover', 'Machine Washable'],
+    rating: 4.5,
+    reviews: 567,
+    sales: 2300,
+    stock: 80,
+    inStock: true,
+    tags: ['Ergonomic', 'Comfort', 'Gel']
+  },
+  {
+    id: 'rest-003',
+    name: 'Acrylic Crystal Wrist Rest',
+    tagline: 'Transparent elegance.',
+    description: 'Crystal clear acrylic wrist rest that complements any setup. The smooth surface and perfect height provide excellent ergonomic support.',
+    price: 29.99,
+    category: 'Accessory',
+    subcategory: 'Wrist Rest',
+    image: 'https://picsum.photos/seed/rest3/800/600',
+    images: ['https://picsum.photos/seed/rest3/800/600'],
+    specs: {
+      Material: 'Clear Acrylic',
+      Size: '60% (11")',
+      Thickness: '18mm',
+      Weight: '300g'
+    },
+    features: ['Crystal Clear', 'Polished Edges', 'Anti-slip Pads', 'Minimalist'],
+    rating: 4.6,
+    reviews: 123,
+    sales: 800,
+    stock: 35,
+    inStock: true,
+    isNew: true,
+    tags: ['Aesthetic', 'Minimalist', 'Clear']
+  },
+  // --- CABLES ---
+  {
+    id: 'cable-001',
+    name: 'Aviator Coiled Cable - Rose Gold',
+    tagline: 'Premium aesthetics, durable build.',
+    description: 'Custom coiled aviator cable with rose gold connector. Double-sleeved for durability and a premium look that matches your setup.',
+    price: 39.99,
+    category: 'Accessory',
+    subcategory: 'Cable',
+    image: 'https://picsum.photos/seed/cable1/800/600',
+    images: ['https://picsum.photos/seed/cable1/800/600'],
+    specs: {
+      Length: '1.5m + 15cm coil',
+      Connector: 'USB-C to USB-A',
+      Aviator: 'GX16',
+      Colors: 'Rose Gold'
+    },
+    features: ['Double-sleeved', 'Gold-plated', 'Aviator Connector', 'Coiled Design'],
+    rating: 4.7,
+    reviews: 345,
+    sales: 1800,
+    stock: 30,
+    inStock: true,
+    tags: ['Aesthetic', 'Premium', 'Coiled']
+  },
+  {
+    id: 'cable-002',
+    name: 'Braided USB-C Cable - 3m',
+    tagline: 'Long reach, durable design.',
+    description: 'Extra-long braided USB-C cable perfect for keyboard setups. The braided nylon exterior resists tangling and fraying.',
+    price: 14.99,
+    category: 'Accessory',
+    subcategory: 'Cable',
+    image: 'https://picsum.photos/seed/cable2/800/600',
+    images: ['https://picsum.photos/seed/cable2/800/600'],
+    specs: {
+      Length: '3 meters',
+      Connector: 'USB-C to USB-A',
+      'Data Rate': 'USB 2.0',
+      Material: 'Braided Nylon'
+    },
+    features: ['Extra Long', 'Tangle-resistant', 'Universal', 'Budget Friendly'],
+    rating: 4.5,
+    reviews: 789,
+    sales: 4200,
+    stock: 100,
+    inStock: true,
+    tags: ['Long', 'Budget', 'Practical']
+  },
+  {
+    id: 'cable-003',
+    name: 'Magnetic Cable Organizer Set',
+    tagline: 'Keep your cables tidy.',
+    description: 'Magnetic cable clips and ties to keep your desk clean. Includes 6 magnetic clips and 3 reusable cable ties.',
+    price: 16.99,
+    category: 'Accessory',
+    subcategory: 'Cable',
+    image: 'https://picsum.photos/seed/cable3/800/600',
+    images: ['https://picsum.photos/seed/cable3/800/600'],
+    specs: {
+      'Clip Quantity': '6 pieces',
+      'Tie Quantity': '3 pieces',
+      Magnetic: 'Yes',
+      Adhesive: '3M VHB'
+    },
+    features: ['Strong Magnets', 'Reusable', 'Easy Install', 'Cable Management'],
+    rating: 4.6,
+    reviews: 456,
+    sales: 2100,
+    stock: 85,
+    inStock: true,
+    tags: ['Organization', 'Cable Management', 'Desk Setup']
+  },
+  // --- DESK MATS ---
+  {
+    id: 'mat-001',
+    name: 'Nexus Extended Desk Mat',
     tagline: 'The foundation of your setup.',
     description: 'A premium 900x400mm desk mat with a micro-textured cloth surface for speed and control. Features stitched edges and a non-slip rubber base.',
     price: 24.99,
     category: 'Accessory',
+    subcategory: 'Desk Mat',
     image: 'https://picsum.photos/seed/mat1/800/600',
     images: ['https://picsum.photos/seed/mat1/800/600'],
     specs: {
@@ -289,33 +863,433 @@ export const PRODUCTS: Product[] = [
       Material: 'Micro-weave Cloth',
       Base: 'Natural Rubber'
     },
-    features: ['Water Resistant', 'Stitched Edges', 'Machine Washable'],
+    features: ['Water Resistant', 'Stitched Edges', 'Machine Washable', 'Non-slip'],
     rating: 4.9,
     reviews: 405,
     sales: 3500,
     stock: 200,
-    inStock: true
+    inStock: true,
+    tags: ['Essential', 'Large', 'Quality']
   },
   {
-    id: 'acc-003',
-    name: 'Aviator Coiled Cable',
-    tagline: 'Aesthetic durability.',
-    description: 'Complete your keyboard build with our custom coiled aviator cables. Double-sleeved with PET and Paracord for rigidity and vibrant color.',
+    id: 'mat-002',
+    name: 'Leather Desk Mat - Brown',
+    tagline: 'Professional elegance.',
+    description: 'Genuine leather desk mat that develops a beautiful patina over time. Perfect for professional setups and adds warmth to your workspace.',
+    price: 59.99,
+    category: 'Accessory',
+    subcategory: 'Desk Mat',
+    image: 'https://picsum.photos/seed/mat2/800/600',
+    images: ['https://picsum.photos/seed/mat2/800/600'],
+    specs: {
+      Dimensions: '800mm x 400mm',
+      Material: 'Genuine Leather',
+      Thickness: '3mm',
+      Backing: 'Suede'
+    },
+    features: ['Ages Beautifully', 'Water Resistant', 'Non-slip', 'Professional'],
+    rating: 4.7,
+    reviews: 123,
+    sales: 600,
+    stock: 25,
+    inStock: true,
+    isNew: false,
+    tags: ['Premium', 'Leather', 'Professional']
+  },
+  {
+    id: 'mat-003',
+    name: 'RGB Gaming Mouse Pad',
+    tagline: 'Light up your battlefield.',
+    description: 'Large gaming mouse pad with customizable RGB lighting around the edges. Multiple lighting modes to match your setup.',
     price: 34.99,
     category: 'Accessory',
-    image: 'https://picsum.photos/seed/cable1/800/600',
-    images: ['https://picsum.photos/seed/cable1/800/600'],
+    subcategory: 'Desk Mat',
+    image: 'https://picsum.photos/seed/mat3/800/600',
+    images: ['https://picsum.photos/seed/mat3/800/600'],
     specs: {
-      Length: '1.5m Straight + 15cm Coil',
-      Connector: 'USB-C to USB-A',
-      Aviator: 'GX12 Metal',
-      Colors: 'Various'
+      Dimensions: '800mm x 300mm',
+      RGB: '12 lighting modes',
+      Interface: 'USB-C',
+      Surface: 'Micro-textured'
     },
-    features: ['Double Sleeved', 'Gold Plated Connectors', 'High Power Delivery'],
+    features: ['RGB Lighting', 'Plug & Play', 'Waterproof', 'Multiple Modes'],
+    rating: 4.5,
+    reviews: 567,
+    sales: 2300,
+    stock: 60,
+    inStock: true,
+    isNew: true,
+    tags: ['RGB', 'Gaming', 'Lighting']
+  },
+  // --- MONITOR ARMS & STANDS ---
+  {
+    id: 'stand-001',
+    name: 'Atlas Single Monitor Arm',
+    tagline: 'Reclaim your desk space.',
+    description: 'The Atlas Monitor Arm features a gas-spring mechanism for effortless adjustment. Supports monitors up to 32 inches and 9kg, with integrated cable management.',
+    price: 59.99,
+    category: 'Accessory',
+    subcategory: 'Monitor Arm',
+    image: 'https://picsum.photos/seed/stand1/800/600',
+    images: ['https://picsum.photos/seed/stand1/800/600'],
+    specs: {
+      Support: '17" - 32" Screens',
+      Load: '2kg - 9kg',
+      VESA: '75x75 / 100x100',
+      Material: 'Steel & Aluminum'
+    },
+    features: ['Gas Spring', '360° Rotation', 'Clamp & Grommet Mount', 'Cable Management'],
+    rating: 4.8,
+    reviews: 156,
+    sales: 600,
+    stock: 100,
+    inStock: true,
+    tags: ['Ergonomic', 'Essential', 'Quality']
+  },
+  {
+    id: 'stand-002',
+    name: 'Dual Monitor Arm Setup',
+    tagline: 'Perfect for productivity.',
+    description: 'Dual monitor arm setup that holds two monitors side by side. Independent adjustment for each monitor for optimal ergonomics.',
+    price: 89.99,
+    category: 'Accessory',
+    subcategory: 'Monitor Arm',
+    image: 'https://picsum.photos/seed/stand2/800/600',
+    images: ['https://picsum.photos/seed/stand2/800/600'],
+    specs: {
+      Support: '2x 17" - 27" Screens',
+      Load: '2kg - 7kg per arm',
+      VESA: '75x75 / 100x100',
+      Mount: 'C-clamp / Grommet'
+    },
+    features: ['Dual Monitor', 'Independent Adjustment', 'Integrated Cables', 'Tool-free Install'],
+    rating: 4.6,
+    reviews: 234,
+    sales: 900,
+    stock: 40,
+    inStock: true,
+    tags: ['Dual Monitor', 'Productivity', 'Ergonomic']
+  },
+  {
+    id: 'stand-003',
+    name: 'Laptop Stand Riser',
+    tagline: 'Elevate your workflow.',
+    description: 'Aluminum laptop stand that raises your screen to eye level. Improves posture and airflow for better cooling.',
+    price: 29.99,
+    category: 'Accessory',
+    subcategory: 'Monitor Arm',
+    image: 'https://picsum.photos/seed/stand3/800/600',
+    images: ['https://picsum.photos/seed/stand3/800/600'],
+    specs: {
+      Material: 'Aluminum Alloy',
+      Compatibility: '10" - 17" Laptops',
+      Angle: '18° fixed',
+      Weight: '800g'
+    },
+    features: ['Ergonomic Height', 'Better Cooling', 'Cable Hole', 'Portable'],
     rating: 4.7,
-    reviews: 98,
+    reviews: 678,
+    sales: 2800,
+    stock: 120,
+    inStock: true,
+    tags: ['Laptop', 'Ergonomic', 'Portable']
+  },
+  // --- STORAGE & ORGANIZATION ---
+  {
+    id: 'store-001',
+    name: 'Keyboard Display Case',
+    tagline: 'Showcase your collection.',
+    description: 'Acrylic display case with UV protection for your prized keyboards. Stackable design for collectors with multiple boards.',
+    price: 44.99,
+    category: 'Accessory',
+    subcategory: 'Storage',
+    image: 'https://picsum.photos/seed/store1/800/600',
+    images: ['https://picsum.photos/seed/store1/800/600'],
+    specs: {
+      Material: 'Acrylic',
+      Dimensions: '450mm x 180mm x 70mm',
+      'UV Protection': 'Yes',
+      Stackable: 'Yes'
+    },
+    features: ['UV Protection', 'Stackable', 'Clear View', 'Fits 65%-TKL'],
+    rating: 4.8,
+    reviews: 89,
     sales: 450,
-    stock: 5,
-    inStock: true
-  }
+    stock: 30,
+    inStock: true,
+    isNew: false,
+    tags: ['Collector', 'Display', 'Protection']
+  },
+  {
+    id: 'store-002',
+    name: 'Switch Storage Box',
+    tagline: 'Organize your switches.',
+    description: 'Magnetic switch storage box with 5 compartments. Perfect for keeping your switch collection organized and easily accessible.',
+    price: 18.99,
+    category: 'Accessory',
+    subcategory: 'Storage',
+    image: 'https://picsum.photos/seed/store2/800/600',
+    images: ['https://picsum.photos/seed/store2/800/600'],
+    specs: {
+      Material: 'ABS Plastic',
+      Compartments: '5 dividers',
+      Capacity: '~150 switches',
+      Lid: 'Magnetic'
+    },
+    features: ['Magnetic Lid', '5 Compartments', 'Label Cards', 'Stackable'],
+    rating: 4.5,
+    reviews: 234,
+    sales: 1200,
+    stock: 80,
+    inStock: true,
+    tags: ['Organization', 'Switches', 'Storage']
+  },
+  {
+    id: 'store-003',
+    name: 'Keycap Tray Organizer',
+    tagline: 'Keep your keycaps sorted.',
+    description: 'Plastic keycap tray with 8 compartments for organizing keycap sets. Clear lid makes it easy to find what you need.',
+    price: 14.99,
+    category: 'Accessory',
+    subcategory: 'Storage',
+    image: 'https://picsum.photos/seed/store3/800/600',
+    images: ['https://picsum.photos/seed/store3/800/600'],
+    specs: {
+      Material: 'Clear PP',
+      Compartments: '8 sections',
+      Dimensions: '280mm x 180mm x 45mm',
+      Lid: 'Snap-on'
+    },
+    features: ['8 Compartments', 'Clear Lid', 'Stackable', 'Label Area'],
+    rating: 4.6,
+    reviews: 345,
+    sales: 1800,
+    stock: 100,
+    inStock: true,
+    tags: ['Organization', 'Keycaps', 'Storage']
+  },
+  // --- LIGHTING ---
+  {
+    id: 'light-001',
+    name: 'ScreenBar Monitor Light',
+    tagline: 'Illuminate without glare.',
+    description: 'LED monitor light bar that mounts on top of your screen. Provides even desk illumination without screen glare or eye strain.',
+    price: 79.99,
+    category: 'Accessory',
+    subcategory: 'Lighting',
+    image: 'https://picsum.photos/seed/light1/800/600',
+    images: ['https://picsum.photos/seed/light1/800/600'],
+    specs: {
+      'Color Temp': '2700K - 6500K',
+      Brightness: '500 lux',
+      Power: 'USB 5V',
+      'Auto Dimming': 'Yes'
+    },
+    features: ['No Screen Glare', 'Auto Dimming', 'Touch Control', 'Space Saving'],
+    rating: 4.7,
+    reviews: 567,
+    sales: 2100,
+    stock: 50,
+    inStock: true,
+    isNew: true,
+    tags: ['Lighting', 'Eye Care', 'Premium']
+  },
+  {
+    id: 'light-002',
+    name: 'LED Strip Kit - 2m',
+    tagline: 'Ambient lighting for your setup.',
+    description: 'RGB LED strip kit perfect for under-desk or monitor backlighting. Includes remote and multiple lighting modes.',
+    price: 24.99,
+    category: 'Accessory',
+    subcategory: 'Lighting',
+    image: 'https://picsum.photos/seed/light2/800/600',
+    images: ['https://picsum.photos/seed/light2/800/600'],
+    specs: {
+      Length: '2 meters',
+      LEDs: '60 LEDs/m',
+      Colors: 'RGB + Warm White',
+      Control: 'Remote + App'
+    },
+    features: ['App Control', 'Music Sync', 'Cuttable', 'Easy Install'],
+    rating: 4.5,
+    reviews: 890,
+    sales: 3400,
+    stock: 120,
+    inStock: true,
+    tags: ['RGB', 'Ambient', 'Budget']
+  },
+  // --- AUDIO ACCESSORIES ---
+  {
+    id: 'audio-001',
+    name: 'Headset Stand with USB Hub',
+    tagline: 'Store and connect.',
+    description: 'Aluminum headset stand with integrated 3-port USB 3.0 hub. Keeps your headset safe while adding connectivity to your setup.',
+    price: 34.99,
+    category: 'Accessory',
+    subcategory: 'Audio',
+    image: 'https://picsum.photos/seed/audio1/800/600',
+    images: ['https://picsum.photos/seed/audio1/800/600'],
+    specs: {
+      Material: 'Aluminum',
+      'USB Ports': '3x USB 3.0',
+      Cable: '1.5m braided',
+      Height: '280mm'
+    },
+    features: ['USB Hub', 'Cable Management', 'Non-slip Base', 'Universal Fit'],
+    rating: 4.6,
+    reviews: 456,
+    sales: 1800,
+    stock: 65,
+    inStock: true,
+    tags: ['Headset', 'USB Hub', 'Organization']
+  },
+  {
+    id: 'audio-002',
+    name: 'Under-desk Headphone Hanger',
+    tagline: 'Save desk space.',
+    description: 'Adhesive headphone hanger that mounts under your desk. Keeps your headset within reach but out of the way.',
+    price: 9.99,
+    category: 'Accessory',
+    subcategory: 'Audio',
+    image: 'https://picsum.photos/seed/audio2/800/600',
+    images: ['https://picsum.photos/seed/audio2/800/600'],
+    specs: {
+      Material: 'ABS + Silicone',
+      Mount: '3M Adhesive',
+      Weight: '50g',
+      Load: 'Up to 2kg'
+    },
+    features: ['Space Saving', 'Easy Install', 'Universal', 'Foldable'],
+    rating: 4.4,
+    reviews: 678,
+    sales: 2900,
+    stock: 200,
+    inStock: true,
+    tags: ['Headset', 'Budget', 'Space Saver']
+  },
+  {
+    id: 'audio-003',
+    name: 'Microphone Boom Arm',
+    tagline: 'Professional positioning.',
+    description: 'Scissor-style microphone boom arm with internal cable management. Compatible with most USB and XLR microphones.',
+    price: 49.99,
+    category: 'Accessory',
+    subcategory: 'Audio',
+    image: 'https://picsum.photos/seed/audio3/800/600',
+    images: ['https://picsum.photos/seed/audio3/800/600'],
+    specs: {
+      Material: 'Steel',
+      Reach: '800mm',
+      'Max Load': '1.5kg',
+      Mount: 'C-clamp'
+    },
+    features: ['Internal Cabling', 'Full Rotation', 'Spring Loaded', 'Universal Thread'],
+    rating: 4.7,
+    reviews: 345,
+    sales: 1200,
+    stock: 40,
+    inStock: true,
+    tags: ['Microphone', 'Streaming', 'Professional']
+  },
+  // --- OTHER ACCESSORIES ---
+  {
+    id: 'other-001',
+    name: 'Desk Footrest',
+    tagline: 'Ergonomic comfort under your desk.',
+    description: 'Adjustable footrest with textured surface for foot massage. Improves circulation and posture during long sessions.',
+    price: 29.99,
+    category: 'Accessory',
+    subcategory: 'Other',
+    image: 'https://picsum.photos/seed/other1/800/600',
+    images: ['https://picsum.photos/seed/other1/800/600'],
+    specs: {
+      Material: 'ABS + Rubber',
+      'Angle Range': '0° - 30°',
+      Surface: 'Textured',
+      Height: '90mm - 150mm'
+    },
+    features: ['Angle Adjustable', 'Massage Surface', 'Non-slip', 'Ergonomic'],
+    rating: 4.5,
+    reviews: 234,
+    sales: 1100,
+    stock: 55,
+    inStock: true,
+    tags: ['Ergonomic', 'Comfort', 'Health']
+  },
+  {
+    id: 'other-002',
+    name: 'Webcam 1080p - Pro',
+    tagline: 'Crystal clear video calls.',
+    description: '1080p webcam with auto-focus and noise-canceling microphone. Perfect for streaming, video calls, and content creation.',
+    price: 59.99,
+    category: 'Accessory',
+    subcategory: 'Other',
+    image: 'https://picsum.photos/seed/other2/800/600',
+    images: ['https://picsum.photos/seed/other2/800/600'],
+    specs: {
+      Resolution: '1080p @ 60fps',
+      Field: '90° wide angle',
+      Mic: 'Dual noise-canceling',
+      Mount: 'Clip / Tripod'
+    },
+    features: ['Auto-focus', 'Low Light Correction', 'Plug & Play', 'Privacy Shutter'],
+    rating: 4.6,
+    reviews: 567,
+    sales: 2300,
+    stock: 70,
+    inStock: true,
+    isNew: true,
+    tags: ['Webcam', 'Streaming', 'Work From Home']
+  },
+  {
+    id: 'other-003',
+    name: 'Desk Cup Holder Clip',
+    tagline: 'Keep drinks off your desk.',
+    description: 'Sturdy cup holder that clips to your desk edge. Prevents spills on your precious keyboard and electronics.',
+    price: 12.99,
+    category: 'Accessory',
+    subcategory: 'Other',
+    image: 'https://picsum.photos/seed/other3/800/600',
+    images: ['https://picsum.photos/seed/other3/800/600'],
+    specs: {
+      Material: 'ABS + Metal',
+      'Cup Size': 'Up to 90mm diameter',
+      'Desk Thickness': '10-45mm',
+      Weight: '150g'
+    },
+    features: ['Prevents Spills', 'Easy Install', 'Rotatable', 'Universal'],
+    rating: 4.7,
+    reviews: 890,
+    sales: 4500,
+    stock: 150,
+    inStock: true,
+    tags: ['Safety', 'Drink Holder', 'Essential']
+  },
+  {
+    id: 'other-004',
+    name: 'USB-C Hub 7-in-1',
+    tagline: 'Expand your connectivity.',
+    description: '7-in-1 USB-C hub with HDMI, USB-A, SD card reader, and power delivery. Essential for modern laptops with limited ports.',
+    price: 44.99,
+    category: 'Accessory',
+    subcategory: 'Other',
+    image: 'https://picsum.photos/seed/other4/800/600',
+    images: ['https://picsum.photos/seed/other4/800/600'],
+    specs: {
+      Ports: '7 ports',
+      HDMI: '4K @ 30Hz',
+      USB: '3x USB 3.0',
+      'Power Delivery': '100W'
+    },
+    features: ['4K HDMI', 'SD Card Reader', '100W PD', 'Aluminum Body'],
+    rating: 4.5,
+    reviews: 1234,
+    sales: 5600,
+    stock: 100,
+    inStock: true,
+    tags: ['Connectivity', 'USB-C', 'Essential']
+  },
 ];
+
+export const PRODUCTS: Product[] = [...KEYBOARDS, ...MICE, ...MONITORS, ...ACCESSORIES];
+

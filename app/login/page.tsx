@@ -1,8 +1,9 @@
 import { use } from 'react'
 import { login, signup, resetPassword } from '@/app/auth/actions'
-import { Key, Mail, Scissors, Sparkles } from 'lucide-react'
+import { Key, Mail, Sparkles } from 'lucide-react'
+import Image from 'next/image'
 
-export default function LoginPage({
+export default async function LoginPage({
     searchParams,
 }: {
     searchParams: Promise<{ message?: string; error?: string }>
@@ -17,8 +18,20 @@ export default function LoginPage({
             <div className="w-full max-w-md relative z-10 group">
                 <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-[2rem] shadow-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/10">
                     <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 mb-4 shadow-lg shadow-blue-500/20 transform group-hover:scale-110 transition-transform duration-500">
-                            <Sparkles className="w-8 h-8 text-white" />
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 mb-4 shadow-lg shadow-blue-500/20 transform group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                            <img
+                                src="/logo/logo.png"
+                                alt="KeyCraft Studio Logo"
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const parent = target.parentElement;
+                                    if (parent) {
+                                        parent.innerHTML = '<svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
+                                    }
+                                }}
+                            />
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Welcome Back</h1>
                         <p className="text-gray-400">Join the elite rank of KeyCraft creators.</p>

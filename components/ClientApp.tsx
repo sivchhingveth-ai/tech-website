@@ -25,12 +25,14 @@ export default function ClientApp() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [mounted, setMounted] = useState(false);
 
     // History Stack to track navigation path
     const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
 
     // Load cart from local storage on mount
     useEffect(() => {
+        setMounted(true);
         const savedCart = localStorage.getItem('nexus_cart');
         if (savedCart) {
             try {
@@ -159,6 +161,15 @@ export default function ClientApp() {
     // we might not need the contextual home button as much, but keeping logic is fine.
     const showHomeButton = viewHistory.length >= 2;
 
+    // Prevent hydration mismatch - show loading state until mounted
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+                <div className="animate-pulse text-gray-500">Loading...</div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-white flex flex-col">
             <Navbar
@@ -186,7 +197,7 @@ export default function ClientApp() {
                             {activeCategory === 'Home' && <Hero onViewFeatures={handleViewFeatures} />}
 
                             <div id="product-grid">
-                                {activeCategory === 'Home' ? (
+                                {activeCategory === 'Home' && !searchQuery ? (
                                     <HomeView
                                         products={PRODUCTS}
                                         onAddToCart={handleAddToCart}
@@ -195,7 +206,7 @@ export default function ClientApp() {
                                 ) : (
                                     <ProductGrid
                                         products={PRODUCTS}
-                                        category={activeCategory}
+                                        category={activeCategory === 'Home' ? 'All' : activeCategory}
                                         searchQuery={searchQuery}
                                         onAddToCart={handleAddToCart}
                                         onViewDetails={handleViewDetails}
@@ -228,7 +239,7 @@ export default function ClientApp() {
                     {/* Footer inside main to scroll with content */}
                     <footer className="bg-nexus-dark border-t border-nexus-border py-12 mt-12">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                            <div className="text-center md:text-left">
+                            <div className="hidden md:block text-center md:text-left">
                                 <h3 className="text-white font-bold text-lg">KEYCRAFT STUDIO</h3>
                                 <p className="text-gray-500 text-sm mt-1">Elevating your digital experience since 2024.</p>
                             </div>
