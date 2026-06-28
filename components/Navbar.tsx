@@ -119,18 +119,18 @@ const Navbar: React.FC<NavbarProps> = ({
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 min-w-0">
                 <button
                   onClick={onLogoClick}
-                  className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0"
+                  className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0 min-w-0"
                 >
                   <img
                     src="/logo/logo.svg"
                     alt="KeyCraft Studio Logo"
-                    className="h-14 w-auto hidden md:block"
+                    className="h-10 md:h-14 w-auto flex-shrink-0"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
-                  <span className="brand-text-gaming animate-brand-3d text-xl md:text-2xl lg:text-3xl tracking-wider leading-none">
+                  <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
                     KeyCRAFT Studio
                   </span>
                 </button>
