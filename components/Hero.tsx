@@ -36,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({ onViewFeatures }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10 lg:w-32 w-full h-full lg:h-auto top-0 bottom-0 left-0"></div>
           <Image
             className="h-full w-full object-cover object-center"
-            src="https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=1600&auto=format&fit=crop"
+            src="/hero.png"
             alt="Tech Setup"
             fill
             priority
