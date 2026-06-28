@@ -125,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0"
                 >
                   <img
-                    src="/logo/logo.png"
+                    src="/logo/logo.svg"
                     alt="KeyCraft Studio Logo"
                     className="h-16 w-auto hidden md:block"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}

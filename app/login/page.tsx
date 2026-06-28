@@ -18,7 +18,7 @@ export default async function LoginPage({
                     <div className="text-center mb-8">
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 mb-4 shadow-lg shadow-blue-500/20 transform group-hover:scale-110 transition-transform duration-500 overflow-hidden">
                             <img
-                                src="/logo/logo.png"
+                                src="/logo/logo.svg"
                                 alt="KeyCraft Studio Logo"
                                 className="w-full h-full object-cover"
                             />

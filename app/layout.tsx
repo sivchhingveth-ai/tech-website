@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description: "Elevating your digital experience since 2024.",
     icons: {
         icon: [
-            { url: "/logo/logo.png", type: "image/png" },
+            { url: "/logo/logo.svg", type: "image/svg+xml" },
         ],
     },
 };
