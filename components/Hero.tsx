@@ -9,10 +9,10 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onViewFeatures }) => {
   return (
     <div className="relative bg-transparent overflow-hidden border-b border-white/10">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto overflow-hidden">
         <div className="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <p className="text-xl text-gray-300 font-medium sm:max-w-xl sm:mx-auto lg:mx-0">
+          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 overflow-hidden">
+            <p className="text-xl text-gray-300 font-medium sm:max-w-xl lg:mx-0 pr-4">
               Your ultimate destination for premium keyboards, mice, and gaming accessories. Elevate your setup today.
             </p>
 
