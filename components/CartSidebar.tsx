@@ -116,9 +116,9 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                       <button
                         type="button"
                         onClick={() => onRemoveItem(item.id)}
-                        className="font-medium text-red-500 hover:text-red-400 hover:underline flex items-center transition-colors text-xs group select-none"
+                        className="font-medium text-red-500/70 hover:text-red-400 hover:bg-red-500/10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all text-xs group select-none border border-transparent hover:border-red-500/20"
                       >
-                        <X className="h-3 w-3 mr-1 group-hover:scale-110 transition-transform" /> Remove
+                        <X className="h-3.5 w-3.5 group-hover:rotate-90 transition-transform duration-200" /> Remove
                       </button>
                     </div>
                   </div>
