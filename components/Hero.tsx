@@ -37,7 +37,8 @@ const Hero: React.FC<HeroProps> = ({ onViewFeatures }) => {
           <img
             src="/hero.png"
             alt="Tech Setup"
-            className="h-[70%] w-[70%] object-cover object-center relative z-0 scale-110"
+            className="h-[70%] w-[70%] object-cover relative z-0 scale-110"
+            style={{ objectPosition: 'center 60%' }}
           />
           <div className="absolute inset-0 bg-[#0a0a0a]/40 lg:hidden pointer-events-none"></div>
         </div>
