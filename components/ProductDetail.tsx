@@ -142,11 +142,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 <ZoomIn className="h-6 w-6" />
               </div>
             </div>
-            {product.isNew && (
-              <span className="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded text-xs font-bold tracking-wider bg-gradient-to-r from-nexus-highlight to-blue-600 text-white shadow-[0_0_10px_rgba(56,189,248,0.5)] z-10 pointer-events-none">
-                LATEST DROPS
-              </span>
-            )}
           </div>
         </div>
 
