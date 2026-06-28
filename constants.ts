@@ -218,6 +218,32 @@ const KEYBOARDS: Product[] = [
     inStock: true,
     tags: ['Wireless', 'Productivity']
   },
+  {
+    id: 'kb-008',
+    name: 'F108 Pro',
+    tagline: 'Full-size powerhouse for office and productivity.',
+    description: 'The F108 Pro delivers a complete 100% layout with a numpad, function row, and dedicated media controls. Perfect for Excel, accounting, and any workflow that demands every key at your fingertips.',
+    price: 179.99,
+    category: 'Keyboard',
+    subcategory: 'Full Size',
+    size: '100%',
+    image: '/products/kb-008.jpg',
+    images: ['/products/kb-008.jpg'],
+    specs: {
+      Switch: 'Cherry MX Brown',
+      Layout: '100% Full Size (108 keys)',
+      Connectivity: 'USB-C Wired / Bluetooth 5.0',
+      Battery: '4000mAh',
+      Material: 'Aluminum Top Plate'
+    },
+    features: ['Numpad', 'Dedicated Media Keys', 'Macro Keys', 'RGB Backlight', 'USB Pass-through'],
+    rating: 4.5,
+    reviews: 67,
+    sales: 420,
+    stock: 25,
+    inStock: true,
+    tags: ['Office', 'Full Size', 'Productivity']
+  },
 ];
 
 // ==================== MICE ====================
