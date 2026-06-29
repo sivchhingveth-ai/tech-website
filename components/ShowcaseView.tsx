@@ -14,7 +14,7 @@ const ShowcaseView: React.FC<ShowcaseViewProps> = ({ products, onAddToCart, onVi
   const categories: Category[] = ['Keyboard', 'Mouse', 'Monitor', 'Accessory'];
 
   return (
-    <div className="min-h-screen bg-nexus-black pt-8 pb-20">
+    <div className="min-h-screen bg-nexus-black pt-8 pb-20 animate-fade-in">
       {categories.map((category) => {
         const categoryProducts = products.filter(p => p.category === category);
         if (categoryProducts.length === 0) return null;
