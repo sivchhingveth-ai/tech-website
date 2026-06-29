@@ -29,6 +29,7 @@ export default function ClientApp() {
 
     // History Stack to track navigation path
     const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
+    const [forwardHistory, setForwardHistory] = useState<HistoryState[]>([]);
 
     // Load cart from local storage on mount
     useEffect(() => {
@@ -93,16 +94,23 @@ export default function ClientApp() {
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
-        setViewHistory([]); // Clear history when going home explicitly
+        setViewHistory([]);
+        setForwardHistory([]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleBack = () => {
         if (viewHistory.length > 0) {
             const lastState = viewHistory[viewHistory.length - 1];
-            setViewHistory(prev => prev.slice(0, -1)); // Pop stack
+            setViewHistory(prev => prev.slice(0, -1));
 
-            // Restore State
+            const currentState: HistoryState = {
+                view: currentView,
+                category: activeCategory,
+                productId: selectedProduct?.id
+            };
+            setForwardHistory(prev => [...prev, currentState]);
+
             setCurrentView(lastState.view);
             setActiveCategory(lastState.category);
 
@@ -114,26 +122,50 @@ export default function ClientApp() {
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            handleGoHome();
+        }
+    };
+
+    const handleForward = () => {
+        if (forwardHistory.length > 0) {
+            const nextState = forwardHistory[forwardHistory.length - 1];
+            setForwardHistory(prev => prev.slice(0, -1));
+
+            const currentState: HistoryState = {
+                view: currentView,
+                category: activeCategory,
+                productId: selectedProduct?.id
+            };
+            setViewHistory(prev => [...prev, currentState]);
+
+            setCurrentView(nextState.view);
+            setActiveCategory(nextState.category);
+
+            if (nextState.productId) {
+                const product = PRODUCTS.find(p => p.id === nextState.productId);
+                setSelectedProduct(product || null);
+            } else {
+                setSelectedProduct(null);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
     const handleViewDetails = (product: Product) => {
-        // Push current state to history before moving to new product
-        // Even if we are already in 'product' view (e.g. clicking similar item), we want to push history so Back button works
         if (selectedProduct?.id !== product.id) {
             pushHistory();
         }
 
         setSelectedProduct(product);
         setCurrentView('product');
+        setForwardHistory([]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleViewFeatures = () => {
         pushHistory();
         setCurrentView('features');
+        setForwardHistory([]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -141,12 +173,13 @@ export default function ClientApp() {
         pushHistory();
         setActiveCategory(category);
         setCurrentView('home');
+        setForwardHistory([]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleNavCategoryChange = (cat: Category) => {
-        // Navigation resets history for clean state
         setViewHistory([]);
+        setForwardHistory([]);
         setActiveCategory(cat);
         if (currentView !== 'home') {
             setCurrentView('home');
@@ -154,8 +187,9 @@ export default function ClientApp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Determine if back button should show (If we have history, OR if we are in a sub-view)
+    // Determine if back/forward buttons should show
     const shouldShowBack = viewHistory.length > 0 || currentView === 'product' || currentView === 'features';
+    const shouldShowForward = forwardHistory.length > 0;
 
     // Show Home button if we are deep in navigation, but since we have a main Home link in navbar now, 
     // we might not need the contextual home button as much, but keeping logic is fine.
@@ -181,6 +215,8 @@ export default function ClientApp() {
                 onProductSelect={handleViewDetails}
                 showBackButton={shouldShowBack}
                 onBack={handleBack}
+                showForwardButton={shouldShowForward}
+                onForward={handleForward}
                 showHomeButton={showHomeButton}
                 onHomeClick={handleGoHome}
                 onCategoryClick={handleNavCategoryChange}
