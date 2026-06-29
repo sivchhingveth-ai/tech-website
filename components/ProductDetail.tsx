@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 import { Product, Review } from '../types';
 import { Star, ShoppingBag, Check, Zap, Truck, Shield, AlertCircle, X, ZoomIn, User, Upload, Image as ImageIcon } from 'lucide-react';
@@ -121,7 +120,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 >
                   <span className="sr-only">Image {idx + 1}</span>
                   <span className="absolute inset-0 rounded-md overflow-hidden">
-                    <Image src={img} alt="" fill className="object-center object-cover" />
+                    <img src={img} alt="" className="w-full h-full object-center object-cover" />
                   </span>
                 </button>
               ))}
@@ -131,11 +130,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             className="w-full aspect-square rounded-lg overflow-hidden border border-nexus-border relative group cursor-zoom-in"
             onClick={() => setIsImageModalOpen(true)}
           >
-            <Image
+            <img
               src={activeImage}
               alt={product.name}
-              fill
-              className="object-center object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
               <div className="bg-black/50 backdrop-blur-sm p-3 rounded-full text-white">
@@ -339,7 +337,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                   />
                   {newReviewImage && (
                     <div className="relative h-12 w-12 rounded overflow-hidden border border-nexus-border group">
-                      <Image src={newReviewImage} alt="Preview" fill className="object-cover" />
+                       <img src={newReviewImage} alt="Preview" className="w-full h-full object-cover" />
                       <button
                         type="button"
                         onClick={() => {
@@ -402,11 +400,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                     {review.imageUrl && (
                       <div className="mt-3">
                         <div className="relative h-24 w-40 rounded border border-nexus-border cursor-pointer hover:opacity-80 transition-opacity">
-                          <Image
+                           <img
                             src={review.imageUrl}
                             alt="User review"
-                            fill
-                            className="object-cover"
+                            className="w-full h-full object-cover"
                             onClick={() => {
                               setActiveImage(review.imageUrl!);
                               setIsImageModalOpen(true);
@@ -455,11 +452,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             <X className="h-10 w-10" />
           </button>
           <div className="relative w-full h-full flex items-center justify-center">
-            <Image
+            <img
               src={activeImage}
               alt={product.name}
-              fill
-              className="object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-md"
+              className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-md"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
