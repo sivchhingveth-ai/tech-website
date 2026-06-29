@@ -25,7 +25,6 @@ export default function ClientApp() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-    const [mounted, setMounted] = useState(false);
 
     // History Stack to track navigation path
     const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
@@ -53,7 +52,6 @@ export default function ClientApp() {
             window.scrollTo({ top: 0 });
         };
         window.addEventListener('popstate', handlePopState);
-        window.history.replaceState({ view: 'home', category: 'Home' }, '', '');
         return () => window.removeEventListener('popstate', handlePopState);
     }, []);
 
@@ -67,7 +65,6 @@ export default function ClientApp() {
                 console.error("Failed to parse cart", e);
             }
         }
-        requestAnimationFrame(() => setMounted(true));
     }, []);
 
     // Save cart to local storage on update
@@ -206,13 +203,6 @@ export default function ClientApp() {
     // Show Home button if we are deep in navigation, but since we have a main Home link in navbar now, 
     // we might not need the contextual home button as much, but keeping logic is fine.
     const showHomeButton = viewHistory.length >= 2;
-
-    // Prevent hydration mismatch - show loading state until mounted
-    if (!mounted) {
-        return (
-            <div className="min-h-screen bg-nexus-black" />
-        );
-    }
 
     return (
         <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-white flex flex-col">
