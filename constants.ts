@@ -176,8 +176,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: '60%',
     size: '60%',
-    image: '/products/kb-006.jpg',
-    images: ['/products/kb-006.jpg'],
+    image: '/products/kb-006.png',
+    images: ['/products/kb-006.png'],
     specs: {
       Switch: 'Gateron Oil King',
       Layout: '60% ANSI',
