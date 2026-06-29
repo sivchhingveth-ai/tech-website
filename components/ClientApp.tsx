@@ -15,7 +15,6 @@ interface HistoryState {
     view: 'home' | 'features' | 'product';
     category: Category;
     productId?: string;
-    canGoBack?: boolean;
 }
 
 export default function ClientApp() {
@@ -28,7 +27,7 @@ export default function ClientApp() {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     // History Stack to track navigation path
-    const [canGoBack, setCanGoBack] = useState(false);
+    const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
     const isNavigatingRef = useRef(false);
 
     // Sync with browser history for mouse back/forward buttons
@@ -42,14 +41,12 @@ export default function ClientApp() {
                     setCurrentView(state.view);
                     setActiveCategory(state.category);
                     setSelectedProduct(product);
-                    setCanGoBack(!!state.canGoBack);
                 });
             } else {
                 React.startTransition(() => {
                     setCurrentView('home');
                     setActiveCategory('Home');
                     setSelectedProduct(null);
-                    setCanGoBack(false);
                 });
             }
             window.scrollTo({ top: 0 });
@@ -112,24 +109,48 @@ export default function ClientApp() {
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
-        setCanGoBack(false);
-        window.history.pushState({ view: 'home', category: 'Home', canGoBack: false }, '', '/');
+        setViewHistory([]);
+        window.history.pushState({ view: 'home', category: 'Home' }, '', '/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleBack = () => {
         isNavigatingRef.current = true;
-        window.history.back();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (viewHistory.length > 0) {
+            const lastState = viewHistory[viewHistory.length - 1];
+            setViewHistory(prev => prev.slice(0, -1));
+
+            setCurrentView(lastState.view);
+            setActiveCategory(lastState.category);
+
+            if (lastState.productId) {
+                const product = PRODUCTS.find(p => p.id === lastState.productId);
+                setSelectedProduct(product || null);
+            } else {
+                setSelectedProduct(null);
+            }
+
+            window.history.back();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleViewDetails = (product: Product) => {
         isNavigatingRef.current = true;
+        if (selectedProduct?.id !== product.id) {
+            const currentState: HistoryState = {
+                view: currentView,
+                category: activeCategory,
+                productId: selectedProduct?.id
+            };
+            setViewHistory(prev => [...prev, currentState]);
+        }
+
         setSelectedProduct(product);
         setCurrentView('product');
-        const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id, canGoBack: true };
+        const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id };
         window.history.pushState(newState, '', `/product/${product.id}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
@@ -137,40 +158,47 @@ export default function ClientApp() {
 
     const handleViewFeatures = () => {
         isNavigatingRef.current = true;
+        const currentState: HistoryState = {
+            view: currentView,
+            category: activeCategory,
+            productId: selectedProduct?.id
+        };
+        setViewHistory(prev => [...prev, currentState]);
         setCurrentView('features');
-        window.history.pushState({ view: 'features', category: activeCategory, canGoBack: true }, '', '/features');
+        window.history.pushState({ view: 'features', category: activeCategory }, '', '/features');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleBrowseCategory = (category: Category) => {
         isNavigatingRef.current = true;
+        const currentState: HistoryState = {
+            view: currentView,
+            category: activeCategory,
+            productId: selectedProduct?.id
+        };
+        setViewHistory(prev => [...prev, currentState]);
         setActiveCategory(category);
         setCurrentView('home');
-        setSelectedProduct(null);
-        setCanGoBack(true);
-        window.history.pushState({ view: 'home', category, canGoBack: true }, '', `/${category.toLowerCase()}`);
+        window.history.pushState({ view: 'home', category }, '', `/${category.toLowerCase()}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleNavCategoryChange = (cat: Category) => {
         isNavigatingRef.current = true;
+        setViewHistory([]);
         setActiveCategory(cat);
-        setCurrentView('home');
-        setSelectedProduct(null);
-        setCanGoBack(true);
-        window.history.pushState({ view: 'home', category: cat, canGoBack: true }, '', `/${cat.toLowerCase()}`);
+        if (currentView !== 'home') {
+            setCurrentView('home');
+        }
+        window.history.pushState({ view: 'home', category: cat }, '', `/${cat.toLowerCase()}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     // Determine if back button should show
-    const shouldShowBack = canGoBack;
-
-    // Show Home button if we are deep in navigation, but since we have a main Home link in navbar now, 
-    // we might not need the contextual home button as much, but keeping logic is fine.
-    const showHomeButton = canGoBack;
+    const shouldShowBack = viewHistory.length > 0 || currentView === 'product' || currentView === 'features';
 
     return (
         <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-white flex flex-col">
@@ -183,8 +211,6 @@ export default function ClientApp() {
                 onProductSelect={handleViewDetails}
                 showBackButton={shouldShowBack}
                 onBack={handleBack}
-                showHomeButton={showHomeButton}
-                onHomeClick={handleGoHome}
                 onCategoryClick={handleNavCategoryChange}
                 activeCategory={activeCategory}
             />
@@ -212,7 +238,7 @@ export default function ClientApp() {
                                         searchQuery={searchQuery}
                                         onAddToCart={handleAddToCart}
                                         onViewDetails={handleViewDetails}
-                                        onBack={canGoBack ? handleBack : undefined}
+                                        onBack={viewHistory.length > 0 ? handleBack : undefined}
                                     />
                                 )}
                             </div>

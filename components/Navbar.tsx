@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, Search, LogIn, Home, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, LogIn, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { signOut } from '@/app/auth/actions';
@@ -15,8 +15,6 @@ interface NavbarProps {
   onProductSelect: (product: Product) => void;
   onBack?: () => void;
   showBackButton?: boolean;
-  showHomeButton?: boolean;
-  onHomeClick?: () => void;
   onCategoryClick?: (category: Category) => void;
   activeCategory?: Category;
 }
@@ -30,8 +28,6 @@ const Navbar: React.FC<NavbarProps> = ({
   onProductSelect,
   onBack,
   showBackButton = false,
-  showHomeButton = false,
-  onHomeClick,
   onCategoryClick,
   activeCategory
 }) => {
@@ -94,46 +90,31 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="w-full px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex h-full items-center justify-between gap-4">
 
-          {/* Left Section: Back Button OR Home Link */}
-          <div className="flex-shrink-0 flex items-center gap-2">
-            {showBackButton && onBack ? (
-              <div className="flex items-center gap-1.5 sm:gap-2 animate-fade-in">
-                <button
-                  className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg bg-nexus-card border border-nexus-border text-white transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] flex-shrink-0"
-                  onClick={onBack}
-                  title="Go Back"
-                >
-                  <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform" />
-                  <span className="font-bold text-xs sm:text-sm uppercase hidden sm:block">Back</span>
-                </button>
-
-                {showHomeButton && onHomeClick && (
-                  <button
-                    onClick={onHomeClick}
-                    className="p-1.5 sm:p-2 rounded-lg bg-nexus-card border border-nexus-border text-gray-400 transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] flex-shrink-0"
-                    title="Back to Home"
-                  >
-                    <Home className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 min-w-0">
-                <button
-                  onClick={onLogoClick}
-                  className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0 min-w-0"
-                >
-                  <img
-                    src="/logo/logo.svg"
-                    alt="KeyCraft Studio Logo"
-                    className="h-10 md:h-14 w-auto flex-shrink-0"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
-                  <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
-                    KeyCRAFT Studio
-                  </span>
-                </button>
-              </div>
+          {/* Left Section: Logo always visible, Back button below */}
+          <div className="flex-shrink-0 flex flex-col gap-1">
+            <button
+              onClick={onLogoClick}
+              className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0 min-w-0"
+            >
+              <img
+                src="/logo/logo.svg"
+                alt="KeyCraft Studio Logo"
+                className="h-10 md:h-14 w-auto flex-shrink-0"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
+                KeyCRAFT Studio
+              </span>
+            </button>
+            {showBackButton && onBack && (
+              <button
+                className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-nexus-card border border-nexus-border text-gray-400 transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] w-fit animate-fade-in"
+                onClick={onBack}
+                title="Go Back"
+              >
+                <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-1 transition-transform" />
+                <span className="font-bold text-[10px] uppercase">Back</span>
+              </button>
             )}
           </div>
 
