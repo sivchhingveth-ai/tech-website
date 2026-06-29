@@ -12,10 +12,10 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: '65%',
     size: '65-68%',
-    image: '/products/kb-001.jpg',
+    image: '/products/kb-001.png',
     images: [
-      '/products/kb-001.jpg',
-      '/products/kb-001-2.jpg',
+      '/products/kb-001.png',
+      '/products/kb-001-2.png',
     ],
     specs: {
       Switch: 'Nexus Linear (Pre-lubed)',
@@ -34,7 +34,7 @@ const KEYBOARDS: Product[] = [
             rating: 5,
             date: '2023-11-15',
             comment: 'The sound profile on this is insane right out of the box. No mods needed!',
-            imageUrl: '/products/kb-001.jpg'
+            imageUrl: '/products/kb-001.png'
         },
         {
             id: 'r2',
@@ -59,10 +59,10 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: 'TKL',
     size: 'TKL (80-84%)',
-    image: '/products/kb-002.jpg',
+    image: '/products/kb-002.png',
     images: [
-      '/products/kb-002.jpg',
-      '/products/kb-002-2.jpg',
+      '/products/kb-002.png',
+      '/products/kb-002-2.png',
     ],
     specs: {
       Switch: 'Nexus Optical Red',
@@ -97,8 +97,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: 'Full Size',
     size: '96-99%',
-    image: '/products/kb-003.jpg',
-    images: ['/products/kb-003.jpg'],
+    image: '/products/kb-003.png',
+    images: ['/products/kb-003.png'],
     specs: {
       Switch: 'Cherry MX Silent Red',
       Layout: '96% Compact Full Size',
@@ -123,8 +123,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: '75%',
     size: '75%',
-    image: '/products/kb-004.jpg',
-    images: ['/products/kb-004.jpg', '/products/kb-004-2.jpg'],
+    image: '/products/kb-004.png',
+    images: ['/products/kb-004.png', '/products/kb-004-2.jpg'],
     specs: {
       Switch: 'Boba U4T (Tactile)',
       Layout: '75% Exploded',
@@ -150,8 +150,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: '40%',
     size: '60%',
-    image: '/products/kb-005.jpg',
-    images: ['/products/kb-005.jpg'],
+    image: '/products/kb-005.png',
+    images: ['/products/kb-005.png'],
     specs: {
       Switch: 'Kailh Speed Copper',
       Layout: '40% Ortholinear',
@@ -202,8 +202,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: 'TKL',
     size: 'TKL (80-84%)',
-    image: '/products/kb-007.jpg',
-    images: ['/products/kb-007.jpg'],
+    image: '/products/kb-007.png',
+    images: ['/products/kb-007.png'],
     specs: {
       Switch: 'Cherry MX Brown',
       Layout: 'TKL',
@@ -227,8 +227,8 @@ const KEYBOARDS: Product[] = [
     category: 'Keyboard',
     subcategory: 'Full Size',
     size: '100%',
-    image: '/products/kb-008.jpg',
-    images: ['/products/kb-008.jpg'],
+    image: '/products/kb-008.png',
+    images: ['/products/kb-008.png'],
     specs: {
       Switch: 'Cherry MX Brown',
       Layout: '100% Full Size (108 keys)',
