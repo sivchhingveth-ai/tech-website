@@ -37,31 +37,28 @@ export default function ClientApp() {
             if (isNavigatingRef.current) return;
             const state = e.state as HistoryState | null;
             if (state) {
-                setCurrentView(state.view);
-                setActiveCategory(state.category);
-                if (state.productId) {
-                    const product = PRODUCTS.find(p => p.id === state.productId);
-                    setSelectedProduct(product || null);
-                } else {
-                    setSelectedProduct(null);
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const product = state.productId ? PRODUCTS.find(p => p.id === state.productId) || null : null;
+                React.startTransition(() => {
+                    setCurrentView(state.view);
+                    setActiveCategory(state.category);
+                    setSelectedProduct(product);
+                });
             } else {
-                setCurrentView('home');
-                setActiveCategory('Home');
-                setSelectedProduct(null);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                React.startTransition(() => {
+                    setCurrentView('home');
+                    setActiveCategory('Home');
+                    setSelectedProduct(null);
+                });
             }
+            window.scrollTo({ top: 0 });
         };
         window.addEventListener('popstate', handlePopState);
-        // Push initial state
         window.history.replaceState({ view: 'home', category: 'Home' }, '', '');
         return () => window.removeEventListener('popstate', handlePopState);
     }, []);
 
     // Load cart from local storage on mount
     useEffect(() => {
-        setMounted(true);
         const savedCart = localStorage.getItem('nexus_cart');
         if (savedCart) {
             try {
@@ -70,6 +67,7 @@ export default function ClientApp() {
                 console.error("Failed to parse cart", e);
             }
         }
+        requestAnimationFrame(() => setMounted(true));
     }, []);
 
     // Save cart to local storage on update
@@ -212,9 +210,7 @@ export default function ClientApp() {
     // Prevent hydration mismatch - show loading state until mounted
     if (!mounted) {
         return (
-            <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-                <div className="animate-pulse text-gray-500">Loading...</div>
-            </div>
+            <div className="min-h-screen bg-nexus-black" />
         );
     }
 
@@ -236,7 +232,7 @@ export default function ClientApp() {
             />
 
             <div className="flex flex-1">
-                <main className="flex-1 min-w-0">
+                <main className="flex-1 min-w-0 transition-opacity duration-150">
                     {/* Added min-w-0 to prevent flex item overflow. Removed pb-20 as bottom nav is gone. */}
 
                     {currentView === 'home' && (
