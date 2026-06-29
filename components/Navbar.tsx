@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, Search, LogIn, Home, User, UserPlus, ArrowLeft, ArrowRight, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, LogIn, Home, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { signOut } from '@/app/auth/actions';
@@ -15,8 +15,6 @@ interface NavbarProps {
   onProductSelect: (product: Product) => void;
   onBack?: () => void;
   showBackButton?: boolean;
-  onForward?: () => void;
-  showForwardButton?: boolean;
   showHomeButton?: boolean;
   onHomeClick?: () => void;
   onCategoryClick?: (category: Category) => void;
@@ -32,8 +30,6 @@ const Navbar: React.FC<NavbarProps> = ({
   onProductSelect,
   onBack,
   showBackButton = false,
-  onForward,
-  showForwardButton = false,
   showHomeButton = false,
   onHomeClick,
   onCategoryClick,
@@ -110,17 +106,6 @@ const Navbar: React.FC<NavbarProps> = ({
                   <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform" />
                   <span className="font-bold text-xs sm:text-sm uppercase hidden sm:block">Back</span>
                 </button>
-
-                {showForwardButton && onForward && (
-                  <button
-                    className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg bg-nexus-card border border-nexus-border text-white transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] flex-shrink-0"
-                    onClick={onForward}
-                    title="Go Forward"
-                  >
-                    <span className="font-bold text-xs sm:text-sm uppercase hidden sm:block">Forward</span>
-                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                )}
 
                 {showHomeButton && onHomeClick && (
                   <button
