@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { X, Plus, Minus, CreditCard } from 'lucide-react';
 import { CartItem } from '../types';
@@ -91,11 +90,10 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               items.map((item) => (
                 <div key={item.id} className="flex flex-col sm:flex-row py-2 animate-fade-in gap-3">
                   <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-nexus-border bg-nexus-black self-center sm:self-start relative">
-                    <Image
+                    <img
                       src={item.image}
                       alt={item.name}
-                      fill
-                      className="object-cover object-center select-none"
+                      className="absolute inset-0 w-full h-full object-cover object-center select-none"
                     />
                   </div>
 
