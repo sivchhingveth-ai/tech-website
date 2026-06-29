@@ -19,7 +19,7 @@ const config: Config = {
                     black: '#050505',
                     dark: '#0a0a0a',
                     card: '#121212',
-                    border: '#262626',
+                    border: '#3a3a3a',
                     accent: '#8b5cf6', // Violet
                     accentGlow: '#a78bfa',
                     highlight: '#00f3ff', // Cyan
