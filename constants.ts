@@ -348,6 +348,108 @@ const MICE: Product[] = [
   },
 ];
 
+// ==================== KEYCAPS ====================
+const KEYCAPS: Product[] = [
+  {
+    id: 'cap-001',
+    name: 'GMK Classic Blue',
+    tagline: 'Timeless elegance. Premium doubleshot ABS.',
+    description: 'GMK Classic Blue brings a professional aesthetic to any keyboard. Made in Germany using high-quality ABS plastic with doubleshot legends that will never fade.',
+    price: 129.99,
+    category: 'Keycap',
+    subcategory: 'Keycaps',
+    image: '/products/cap-001.jpg',
+    images: ['/products/cap-001.jpg'],
+    specs: {
+      Profile: 'Cherry',
+      Material: 'Doubleshot ABS',
+      Compatibility: 'Cherry MX / MX Clones',
+      Keys: '160+ keys'
+    },
+    features: ['Doubleshot Legends', 'Cherry Profile', 'MX Compatible', 'Icon Mods'],
+    rating: 4.9,
+    reviews: 456,
+    sales: 2300,
+    stock: 25,
+    inStock: true,
+    isNew: false,
+    tags: ['Premium', 'GMK', 'Doubleshot']
+  },
+  {
+    id: 'cap-002',
+    name: 'PBT Gradient Sunset',
+    tagline: 'Vibrant colors, durable PBT.',
+    description: 'Add a splash of color to your setup with these dye-sub PBT keycaps. The gradient design transitions beautifully from orange to purple.',
+    price: 49.99,
+    category: 'Keycap',
+    subcategory: 'Keycaps',
+    image: '/products/cap-002.jpg',
+    images: ['/products/cap-002.jpg'],
+    specs: {
+      Profile: 'OEM',
+      Material: 'Thick PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '104 keys'
+    },
+    features: ['Dye-sublimated', '1.4mm Thick', 'OEM Profile', 'Shine Resistant'],
+    rating: 4.6,
+    reviews: 123,
+    sales: 890,
+    stock: 60,
+    inStock: true,
+    tags: ['PBT', 'Colorful', 'Budget']
+  },
+  {
+    id: 'cap-003',
+    name: 'Akko ASA Black & Pink',
+    tagline: 'Modern aesthetic, comfortable typing.',
+    description: 'The Akko ASA profile offers a unique sculpted feel that is comfortable for long typing sessions. The black and pink colorway matches any setup.',
+    price: 59.99,
+    category: 'Keycap',
+    subcategory: 'Keycaps',
+    image: '/products/cap-003.jpg',
+    images: ['/products/cap-003.jpg'],
+    specs: {
+      Profile: 'ASA',
+      Material: 'PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '158 keys'
+    },
+    features: ['ASA Profile', 'Dye-sub Legends', 'Accent Keys', 'Mac Compatible'],
+    rating: 4.7,
+    reviews: 234,
+    sales: 1200,
+    stock: 40,
+    inStock: true,
+    isNew: true,
+    tags: ['PBT', 'Aesthetic', 'Mac']
+  },
+  {
+    id: 'cap-004',
+    name: 'EPBT XMAS',
+    tagline: 'Holiday spirit all year round.',
+    description: 'Enjoy PBT keycaps year-round. This set features subtle holiday colors that work even after the season ends.',
+    price: 79.99,
+    category: 'Keycap',
+    subcategory: 'Keycaps',
+    image: '/products/cap-004.jpg',
+    images: ['/products/cap-004.jpg'],
+    specs: {
+      Profile: 'Cherry',
+      Material: 'PBT',
+      Compatibility: 'Cherry MX',
+      Keys: '139 keys'
+    },
+    features: ['Cherry Profile', 'Dye-sub', 'Novelties Included', 'International Support'],
+    rating: 4.5,
+    reviews: 89,
+    sales: 450,
+    stock: 15,
+    inStock: true,
+    tags: ['PBT', 'Themed', 'Limited']
+  },
+];
+
 // ==================== ACCESSORIES ====================
 const ACCESSORIES: Product[] = [
   {
@@ -449,5 +551,5 @@ const ACCESSORIES: Product[] = [
   }
 ];
 
-export const PRODUCTS: Product[] = [...KEYBOARDS, ...MICE, ...ACCESSORIES];
+export const PRODUCTS: Product[] = [...KEYBOARDS, ...MICE, ...KEYCAPS, ...ACCESSORIES];
 

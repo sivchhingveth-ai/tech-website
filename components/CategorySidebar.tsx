@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Keyboard, Mouse, Disc } from 'lucide-react';
+import { Home, Keyboard, Mouse, Type, Disc } from 'lucide-react';
 import { Category } from '../types';
 
 interface CategorySidebarProps {
@@ -12,6 +12,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({ activeCategory, onCat
         { id: 'Home', label: 'KeyCRAFT Studio', icon: Home },
         { id: 'Keyboard', label: 'Keyboards', icon: Keyboard },
         { id: 'Mouse', label: 'Mice', icon: Mouse },
+        { id: 'Keycap', label: 'Keycaps', icon: Type },
         { id: 'Accessory', label: 'Accessories', icon: Disc },
     ];
 
