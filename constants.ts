@@ -348,82 +348,6 @@ const MICE: Product[] = [
   },
 ];
 
-// ==================== MONITORS ====================
-const MONITORS: Product[] = [
-  {
-    id: 'mon-001',
-    name: 'Oculus 27',
-    tagline: 'Crystal clear 1440p at 165Hz.',
-    description: 'Experience true immersion with the Oculus 27. featuring a Fast IPS panel, 1ms GtG response time, and vibrant color accuracy covering 98% of the DCI-P3 color gamut.',
-    price: 349.99,
-    category: 'Monitor',
-    subcategory: '27"',
-    image: '/products/monitor-001.jpg',
-    images: ['/products/monitor-001.jpg'],
-    specs: {
-      Resolution: '2560 x 1440 (QHD)',
-      RefreshRate: '165Hz',
-      Panel: 'Fast IPS',
-      HDR: 'HDR400'
-    },
-    features: ['G-Sync Compatible', 'Low Blue Light', 'Height Adjustable Stand'],
-    rating: 4.7,
-    reviews: 85,
-    sales: 300,
-    stock: 15,
-    inStock: true,
-    tags: ['Gaming', '1440p', 'IPS']
-  },
-  {
-    id: 'mon-002',
-    name: 'Horizon 34 Ultrawide',
-    tagline: 'See more, do more.',
-    description: 'Expand your field of view with the Horizon 34. This curved ultrawide monitor replaces dual monitor setups with a single, seamless display perfect for productivity and immersive gaming.',
-    price: 499.99,
-    category: 'Monitor',
-    subcategory: 'Ultrawide',
-    image: '/products/monitor-002.jpg',
-    images: ['/products/monitor-002.jpg'],
-    specs: {
-      Resolution: '3440 x 1440',
-      Curvature: '1500R',
-      RefreshRate: '144Hz',
-      Panel: 'VA'
-    },
-    features: ['Ultrawide 21:9', 'Picture-in-Picture', 'USB Hub'],
-    rating: 4.6,
-    reviews: 42,
-    sales: 110,
-    stock: 0,
-    inStock: false,
-    tags: ['Ultrawide', 'Productivity', 'Curved']
-  },
-  {
-    id: 'mon-003',
-    name: 'Vision 24',
-    tagline: 'Compact gaming excellence.',
-    description: 'The Vision 24 is the perfect entry-level gaming monitor. 1080p resolution paired with 144Hz refresh rate delivers smooth gameplay without breaking the bank.',
-    price: 199.99,
-    category: 'Monitor',
-    subcategory: '24"',
-    image: '/products/monitor-003.jpg',
-    images: ['/products/monitor-003.jpg'],
-    specs: {
-      Resolution: '1920 x 1080 (FHD)',
-      RefreshRate: '144Hz',
-      Panel: 'IPS',
-      Response: '1ms MPRT'
-    },
-    features: ['AMD FreeSync', 'Anti-Glare', 'VESA Mount'],
-    rating: 4.5,
-    reviews: 234,
-    sales: 890,
-    stock: 45,
-    inStock: true,
-    tags: ['Budget', '1080p', 'Gaming']
-  },
-];
-
 // ==================== ACCESSORIES ====================
 const ACCESSORIES: Product[] = [
   // --- KEYCAPS ---
@@ -1317,5 +1241,5 @@ const ACCESSORIES: Product[] = [
   },
 ];
 
-export const PRODUCTS: Product[] = [...KEYBOARDS, ...MICE, ...MONITORS, ...ACCESSORIES];
+export const PRODUCTS: Product[] = [...KEYBOARDS, ...MICE, ...ACCESSORIES];
 

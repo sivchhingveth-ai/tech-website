@@ -86,7 +86,6 @@ const Navbar: React.FC<NavbarProps> = ({
   const navLinks: { id: Category; label: string }[] = [
     { id: 'Keyboard', label: 'Keyboards' },
     { id: 'Mouse', label: 'Mice' },
-    { id: 'Monitor', label: 'Monitors' },
     { id: 'Accessory', label: 'Accessories' },
   ];
 

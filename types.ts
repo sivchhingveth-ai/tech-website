@@ -1,5 +1,5 @@
 
-export type Category = 'Home' | 'All' | 'Keyboard' | 'Mouse' | 'Monitor' | 'Accessory';
+export type Category = 'Home' | 'All' | 'Keyboard' | 'Mouse' | 'Accessory';
 export type KeyboardSize = '60%' | '65-68%' | '75%' | 'TKL (80-84%)' | '96-99%' | '100%';
 export type AccessorySubcategory = 'Keycaps' | 'Switches' | 'Tools' | 'Wrist Rest' | 'Cable' | 'Desk Mat' | 'Monitor Arm' | 'Storage' | 'Lighting' | 'Audio' | 'Other';
 

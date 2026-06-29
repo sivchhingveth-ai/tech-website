@@ -11,7 +11,7 @@ interface ShowcaseViewProps {
 }
 
 const ShowcaseView: React.FC<ShowcaseViewProps> = ({ products, onAddToCart, onViewDetails, onBrowseCategory }) => {
-  const categories: Category[] = ['Keyboard', 'Mouse', 'Monitor', 'Accessory'];
+  const categories: Category[] = ['Keyboard', 'Mouse', 'Accessory'];
 
   return (
     <div className="min-h-screen bg-nexus-black pt-8 pb-20 animate-fade-in">
@@ -29,7 +29,6 @@ const ShowcaseView: React.FC<ShowcaseViewProps> = ({ products, onAddToCart, onVi
               <p className="text-gray-500 mt-2 text-sm font-medium tracking-wide">
                 {category === 'Keyboard' && 'Mechanical Precision'}
                 {category === 'Mouse' && 'Ultra-lightweight'}
-                {category === 'Monitor' && 'High Refresh Rate'}
                 {category === 'Accessory' && 'Essentials'}
               </p>
               <button 
