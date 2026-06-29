@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import ProductGrid from './ProductGrid';
@@ -29,6 +29,66 @@ export default function ClientApp() {
 
     // History Stack to track navigation path
     const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
+
+    // Track if we're handling popstate to avoid pushing duplicate entries
+    const isPopState = useRef(false);
+
+    // Push browser history entry
+    const pushBrowserHistory = useCallback((state: HistoryState, url: string) => {
+        if (!isPopState.current) {
+            window.history.pushState(state, '', url);
+        }
+        isPopState.current = false;
+    }, []);
+
+    // Build URL from state
+    const buildUrl = useCallback((state: HistoryState): string => {
+        if (state.view === 'product' && state.productId) {
+            return `/?product=${state.productId}`;
+        }
+        if (state.view === 'features') {
+            return '/?view=showcase';
+        }
+        if (state.category !== 'Home') {
+            return `/?category=${encodeURIComponent(state.category)}`;
+        }
+        return '/';
+    }, []);
+
+    // Handle browser back/forward
+    useEffect(() => {
+        const handlePopState = (event: PopStateEvent) => {
+            isPopState.current = true;
+            const state = event.state as HistoryState | null;
+
+            if (state) {
+                setCurrentView(state.view);
+                setActiveCategory(state.category);
+
+                if (state.productId) {
+                    const product = PRODUCTS.find(p => p.id === state.productId);
+                    setSelectedProduct(product || null);
+                } else {
+                    setSelectedProduct(null);
+                }
+            } else {
+                // No state = root page
+                setCurrentView('home');
+                setActiveCategory('Home');
+                setSelectedProduct(null);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        // Set initial browser history state
+        const initialState: HistoryState = { view: 'home', category: 'Home' };
+        window.history.replaceState(initialState, '', '/');
+
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, []);
 
     // Load cart from local storage on mount
     useEffect(() => {
@@ -90,38 +150,24 @@ export default function ClientApp() {
     };
 
     const handleGoHome = () => {
+        const newState: HistoryState = { view: 'home', category: 'Home' };
+        pushBrowserHistory(newState, '/');
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
-        setViewHistory([]); // Clear history when going home explicitly
+        setViewHistory([]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleBack = () => {
-        if (viewHistory.length > 0) {
-            const lastState = viewHistory[viewHistory.length - 1];
-            setViewHistory(prev => prev.slice(0, -1)); // Pop stack
-
-            // Restore State
-            setCurrentView(lastState.view);
-            setActiveCategory(lastState.category);
-
-            if (lastState.productId) {
-                const product = PRODUCTS.find(p => p.id === lastState.productId);
-                setSelectedProduct(product || null);
-            } else {
-                setSelectedProduct(null);
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            handleGoHome();
-        }
+        // Use browser back instead of internal history
+        window.history.back();
     };
 
     const handleViewDetails = (product: Product) => {
-        // Push current state to history before moving to new product
-        // Even if we are already in 'product' view (e.g. clicking similar item), we want to push history so Back button works
+        const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id };
+        pushBrowserHistory(newState, buildUrl(newState));
+
         if (selectedProduct?.id !== product.id) {
             pushHistory();
         }
@@ -132,12 +178,16 @@ export default function ClientApp() {
     };
 
     const handleViewFeatures = () => {
+        const newState: HistoryState = { view: 'features', category: activeCategory };
+        pushBrowserHistory(newState, buildUrl(newState));
         pushHistory();
         setCurrentView('features');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleBrowseCategory = (category: Category) => {
+        const newState: HistoryState = { view: 'home', category };
+        pushBrowserHistory(newState, buildUrl(newState));
         pushHistory();
         setActiveCategory(category);
         setCurrentView('home');
@@ -145,7 +195,8 @@ export default function ClientApp() {
     };
 
     const handleNavCategoryChange = (cat: Category) => {
-        // Navigation resets history for clean state
+        const newState: HistoryState = { view: 'home', category: cat };
+        pushBrowserHistory(newState, buildUrl(newState));
         setViewHistory([]);
         setActiveCategory(cat);
         if (currentView !== 'home') {
