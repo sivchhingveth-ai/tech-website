@@ -256,8 +256,8 @@ const MICE: Product[] = [
     price: 89.99,
     category: 'Mouse',
     subcategory: 'Wireless',
-    image: '/products/mouse-001.jpg',
-    images: ['/products/mouse-001.jpg'],
+    image: '/products/mouse-001.png',
+    images: ['/products/mouse-001.png'],
     specs: {
       Sensor: 'PixArt PAW3395',
       Weight: '49g',
@@ -305,8 +305,8 @@ const MICE: Product[] = [
     price: 49.99,
     category: 'Mouse',
     subcategory: 'Wired',
-    image: '/products/mouse-003.jpg',
-    images: ['/products/mouse-003.jpg'],
+    image: '/products/mouse-003.png',
+    images: ['/products/mouse-003.png'],
     specs: {
       Sensor: 'PixArt 3359',
       Weight: '61g',
