@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import ProductGrid from './ProductGrid';
@@ -11,14 +11,7 @@ import ShowcaseView from './ShowcaseView';
 import { PRODUCTS } from '../constants';
 import { Product, CartItem, Category } from '../types';
 
-interface HistoryState {
-    view: 'home' | 'features' | 'product';
-    category: Category;
-    productId?: string;
-}
-
 export default function ClientApp() {
-    // State
     const [activeCategory, setActiveCategory] = useState<Category>('Home');
     const [searchQuery, setSearchQuery] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -26,96 +19,25 @@ export default function ClientApp() {
     const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [viewHistory, setViewHistory] = useState<string[]>([]);
 
-    // History Stack to track navigation path
-    const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
-
-    // Track if we're handling popstate to avoid pushing duplicate entries
-    const isPopState = useRef(false);
-
-    // Push browser history entry
-    const pushBrowserHistory = useCallback((state: HistoryState, url: string) => {
-        if (!isPopState.current) {
-            window.history.pushState(state, '', url);
-        }
-        isPopState.current = false;
-    }, []);
-
-    // Build URL from state
-    const buildUrl = useCallback((state: HistoryState): string => {
-        if (state.view === 'product' && state.productId) {
-            return `/?product=${state.productId}`;
-        }
-        if (state.view === 'features') {
-            return '/?view=showcase';
-        }
-        if (state.category !== 'Home') {
-            return `/?category=${encodeURIComponent(state.category)}`;
-        }
-        return '/';
-    }, []);
-
-    // Handle browser back/forward
-    useEffect(() => {
-        const handlePopState = (event: PopStateEvent) => {
-            isPopState.current = true;
-            const state = event.state as HistoryState | null;
-
-            if (state) {
-                setCurrentView(state.view);
-                setActiveCategory(state.category);
-
-                if (state.productId) {
-                    const product = PRODUCTS.find(p => p.id === state.productId);
-                    setSelectedProduct(product || null);
-                } else {
-                    setSelectedProduct(null);
-                }
-            } else {
-                // No state = root page
-                setCurrentView('home');
-                setActiveCategory('Home');
-                setSelectedProduct(null);
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        window.addEventListener('popstate', handlePopState);
-
-        // Set initial browser history state
-        const initialState: HistoryState = { view: 'home', category: 'Home' };
-        window.history.replaceState(initialState, '', '/');
-
-        return () => window.removeEventListener('popstate', handlePopState);
-    }, []);
-
-    // Load cart from local storage on mount
     useEffect(() => {
         setMounted(true);
         const savedCart = localStorage.getItem('nexus_cart');
         if (savedCart) {
-            try {
-                setCartItems(JSON.parse(savedCart));
-            } catch (e) {
-                console.error("Failed to parse cart", e);
-            }
+            try { setCartItems(JSON.parse(savedCart)); } catch (e) { console.error("Failed to parse cart", e); }
         }
     }, []);
 
-    // Save cart to local storage on update
     useEffect(() => {
         localStorage.setItem('nexus_cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    // Handlers
     const handleAddToCart = (product: Product) => {
         setCartItems(prev => {
             const existing = prev.find(item => item.id === product.id);
             if (existing) {
-                return prev.map(item =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-                );
+                return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
             }
             return [...prev, { ...product, quantity: 1 }];
         });
@@ -123,35 +45,16 @@ export default function ClientApp() {
     };
 
     const handleUpdateQuantity = (id: string, quantity: number) => {
-        setCartItems(prev => prev.map(item => {
-            if (item.id === id) {
-                return { ...item, quantity: Math.max(1, quantity) };
-            }
-            return item;
-        }));
+        setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item));
     };
 
     const handleRemoveItem = (id: string) => {
         setCartItems(prev => prev.filter(item => item.id !== id));
     };
 
-    const handleClearCart = () => {
-        setCartItems([]);
-    };
-
-    // Navigation Helpers
-    const pushHistory = () => {
-        const currentState: HistoryState = {
-            view: currentView,
-            category: activeCategory,
-            productId: selectedProduct?.id
-        };
-        setViewHistory(prev => [...prev, currentState]);
-    };
+    const handleClearCart = () => setCartItems([]);
 
     const handleGoHome = () => {
-        const newState: HistoryState = { view: 'home', category: 'Home' };
-        pushBrowserHistory(newState, '/');
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
@@ -160,59 +63,50 @@ export default function ClientApp() {
     };
 
     const handleBack = () => {
-        // Use browser back instead of internal history
-        window.history.back();
+        if (viewHistory.length > 0) {
+            const prev = viewHistory[viewHistory.length - 1];
+            setViewHistory(h => h.slice(0, -1));
+            if (prev === 'home') {
+                setCurrentView('home');
+                setSelectedProduct(null);
+            }
+        } else {
+            setCurrentView('home');
+            setSelectedProduct(null);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleViewDetails = (product: Product) => {
-        const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id };
-        pushBrowserHistory(newState, buildUrl(newState));
-
-        if (selectedProduct?.id !== product.id) {
-            pushHistory();
-        }
-
+        setViewHistory(h => [...h, currentView]);
         setSelectedProduct(product);
         setCurrentView('product');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleViewFeatures = () => {
-        const newState: HistoryState = { view: 'features', category: activeCategory };
-        pushBrowserHistory(newState, buildUrl(newState));
-        pushHistory();
+        setViewHistory(h => [...h, currentView]);
         setCurrentView('features');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleBrowseCategory = (category: Category) => {
-        const newState: HistoryState = { view: 'home', category };
-        pushBrowserHistory(newState, buildUrl(newState));
-        pushHistory();
+        setViewHistory(h => [...h, currentView]);
         setActiveCategory(category);
         setCurrentView('home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleNavCategoryChange = (cat: Category) => {
-        const newState: HistoryState = { view: 'home', category: cat };
-        pushBrowserHistory(newState, buildUrl(newState));
         setViewHistory([]);
         setActiveCategory(cat);
-        if (currentView !== 'home') {
-            setCurrentView('home');
-        }
+        if (currentView !== 'home') setCurrentView('home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Determine if back button should show (If we have history, OR if we are in a sub-view)
     const shouldShowBack = viewHistory.length > 0 || currentView === 'product' || currentView === 'features';
-
-    // Show Home button if we are deep in navigation, but since we have a main Home link in navbar now, 
-    // we might not need the contextual home button as much, but keeping logic is fine.
     const showHomeButton = viewHistory.length >= 2;
 
-    // Prevent hydration mismatch - show loading state until mounted
     if (!mounted) {
         return (
             <div className="min-h-screen bg-[#050505] flex items-center justify-center">
@@ -240,20 +134,12 @@ export default function ClientApp() {
 
             <div className="flex flex-1">
                 <main className="flex-1 min-w-0">
-                    {/* Added min-w-0 to prevent flex item overflow. Removed pb-20 as bottom nav is gone. */}
-
                     {currentView === 'home' && (
                         <>
-                            {/* Only show Hero on the main Home page */}
                             {activeCategory === 'Home' && <Hero onViewFeatures={handleViewFeatures} />}
-
                             <div id="product-grid">
                                 {activeCategory === 'Home' && !searchQuery ? (
-                                    <HomeView
-                                        products={PRODUCTS}
-                                        onAddToCart={handleAddToCart}
-                                        onViewDetails={handleViewDetails}
-                                    />
+                                    <HomeView products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
                                 ) : (
                                     <ProductGrid
                                         products={PRODUCTS}
@@ -269,25 +155,13 @@ export default function ClientApp() {
                     )}
 
                     {currentView === 'features' && (
-                        <ShowcaseView
-                            products={PRODUCTS}
-                            onAddToCart={handleAddToCart}
-                            onViewDetails={handleViewDetails}
-                            onBrowseCategory={handleBrowseCategory}
-                        />
+                        <ShowcaseView products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} onBrowseCategory={handleBrowseCategory} />
                     )}
 
                     {currentView === 'product' && selectedProduct && (
-                        <ProductDetail
-                            product={selectedProduct}
-                            products={PRODUCTS}
-                            onBack={handleBack}
-                            onAddToCart={handleAddToCart}
-                            onViewDetails={handleViewDetails}
-                        />
+                        <ProductDetail product={selectedProduct} products={PRODUCTS} onBack={handleBack} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
                     )}
 
-                    {/* Footer inside main to scroll with content */}
                     <footer className="bg-nexus-dark border-t border-nexus-border py-12 mt-12">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
                             <div className="hidden md:block text-center md:text-left">
@@ -312,10 +186,7 @@ export default function ClientApp() {
                 onUpdateQuantity={handleUpdateQuantity}
                 onRemoveItem={handleRemoveItem}
                 onClearCart={handleClearCart}
-                onStartShopping={() => {
-                    setIsCartOpen(false);
-                    handleViewFeatures();
-                }}
+                onStartShopping={() => { setIsCartOpen(false); handleViewFeatures(); }}
             />
         </div>
     );
