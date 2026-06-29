@@ -14,7 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
   return (
     <div
       onClick={() => onViewDetails(product)}
-      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full animate-fade-in cursor-pointer"
+      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer"
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-64">

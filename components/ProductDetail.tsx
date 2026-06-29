@@ -106,7 +106,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   const isLowStock = product.inStock && product.stock > 0 && product.stock < 10;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-8 relative">
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 lg:items-start pt-6">
         {/* Image Gallery */}

@@ -15,7 +15,7 @@ const HomeView: React.FC<HomeViewProps> = ({ products, onAddToCart, onViewDetail
     .slice(0, 4);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20 animate-fade-in">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
       {/* Latest Drops Section */}
       <section>
         <div className="flex items-end mb-8">
