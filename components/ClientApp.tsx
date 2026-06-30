@@ -29,6 +29,7 @@ export default function ClientApp() {
     // History Stack to track navigation path
     const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
     const isNavigatingRef = useRef(false);
+    const cartLoadedRef = useRef(false);
 
     // Sync with browser history for mouse back/forward buttons
     useEffect(() => {
@@ -65,11 +66,14 @@ export default function ClientApp() {
                 console.error("Failed to parse cart", e);
             }
         }
+        cartLoadedRef.current = true;
     }, []);
 
-    // Save cart to local storage on update
+    // Save cart to local storage on update (skip initial empty state)
     useEffect(() => {
-        localStorage.setItem('nexus_cart', JSON.stringify(cartItems));
+        if (cartLoadedRef.current) {
+            localStorage.setItem('nexus_cart', JSON.stringify(cartItems));
+        }
     }, [cartItems]);
 
     // Handlers
@@ -133,6 +137,8 @@ export default function ClientApp() {
 
             window.history.back();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            handleGoHome();
         }
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
@@ -216,7 +222,7 @@ export default function ClientApp() {
             />
 
             <div className="flex flex-1">
-                <main className="flex-1 min-w-0 transition-opacity duration-150">
+                <main className="flex-1 min-w-0">
                     {/* Added min-w-0 to prevent flex item overflow. Removed pb-20 as bottom nav is gone. */}
 
                     {currentView === 'home' && (
@@ -263,24 +269,24 @@ export default function ClientApp() {
                             onViewDetails={handleViewDetails}
                         />
                     )}
-
-                    {/* Footer inside main to scroll with content */}
-                    <footer className="bg-nexus-dark border-t border-nexus-border py-12 mt-12">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                            <div className="hidden md:block text-center md:text-left">
-                                <h3 className="text-white font-bold text-lg">KEYCRAFT STUDIO</h3>
-                                <p className="text-gray-500 text-sm mt-1">Elevating your digital experience since 2024.</p>
-                            </div>
-                            <div className="flex gap-8 text-sm text-gray-400">
-                                <a href="#" className="hover:text-nexus-accent transition-colors">Support</a>
-                                <a href="#" className="hover:text-nexus-accent transition-colors">Privacy</a>
-                                <a href="#" className="hover:text-nexus-accent transition-colors">Terms</a>
-                            </div>
-                            <p className="text-gray-600 text-sm">© 2026 KeyCraft Studio Inc.</p>
-                        </div>
-                    </footer>
                 </main>
             </div>
+
+            {/* Footer outside main for semantic correctness */}
+            <footer className="bg-nexus-dark border-t border-nexus-border py-12 mt-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="hidden md:block text-center md:text-left">
+                        <h3 className="text-white font-bold text-lg">KEYCRAFT STUDIO</h3>
+                        <p className="text-gray-500 text-sm mt-1">Elevating your digital experience since 2024.</p>
+                    </div>
+                    <div className="flex gap-8 text-sm text-gray-400">
+                        <a href="#" className="hover:text-nexus-accent transition-colors">Support</a>
+                        <a href="#" className="hover:text-nexus-accent transition-colors">Privacy</a>
+                        <a href="#" className="hover:text-nexus-accent transition-colors">Terms</a>
+                    </div>
+                    <p className="text-gray-600 text-sm">© 2026 KeyCraft Studio Inc.</p>
+                </div>
+            </footer>
 
             <CartSidebar
                 isOpen={isCartOpen}

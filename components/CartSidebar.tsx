@@ -137,6 +137,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               </p>
               <div className="space-y-2">
                 <button
+                  onClick={() => { alert('Checkout coming soon!'); onClose(); }}
                   className="w-full flex items-center justify-center rounded-md border border-nexus-border bg-nexus-dark px-4 py-2 text-sm font-medium text-gray-300 shadow-sm transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] select-none"
                 >
                   Checkout

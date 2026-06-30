@@ -239,6 +239,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
             <div className="flex flex-col items-center gap-1 w-full sm:w-auto">
               <button
+                onClick={() => onAddToCart(product)}
                 disabled={!product.inStock}
                 className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
               >

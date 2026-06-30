@@ -149,7 +149,7 @@ const KEYBOARDS: Product[] = [
     price: 119.99,
     category: 'Keyboard',
     subcategory: '40%',
-    size: '60%',
+    size: '40%',
     image: '/products/kb-005.png',
     images: ['/products/kb-005.png'],
     specs: {

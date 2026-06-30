@@ -27,7 +27,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     setActiveSize('All');
   }, [category]);
 
-  const sizes: (KeyboardSize | 'All')[] = ['All', '60%', '65-68%', '75%', 'TKL (80-84%)', '96-99%', '100%'];
+  const sizes: (KeyboardSize | 'All')[] = ['All', '40%', '60%', '65-68%', '75%', 'TKL (80-84%)', '96-99%', '100%'];
 
   let filteredProducts = products.filter(product => {
     const matchesCategory = category === 'All' || product.category === category;
