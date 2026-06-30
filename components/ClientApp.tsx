@@ -18,13 +18,34 @@ interface HistoryState {
 }
 
 export default function ClientApp() {
+    // Parse initial state from URL
+    const getInitialState = () => {
+        if (typeof window === 'undefined') return { view: 'home' as const, category: 'Home' as Category, product: null as Product | null };
+        const path = window.location.pathname;
+        if (path.startsWith('/product/')) {
+            const productId = path.replace('/product/', '');
+            const product = PRODUCTS.find(p => p.id === productId) || null;
+            return { view: 'product' as const, category: 'Home' as Category, product };
+        }
+        if (path === '/features') {
+            return { view: 'features' as const, category: 'Home' as Category, product: null };
+        }
+        const cat = path.replace('/', '');
+        const validCategories: Category[] = ['Home', 'All', 'Keyboard', 'Mouse', 'Keycap', 'Accessory'];
+        const matched = validCategories.find(c => c.toLowerCase() === cat);
+        if (matched) return { view: 'home' as const, category: matched, product: null };
+        return { view: 'home' as const, category: 'Home' as Category, product: null };
+    };
+
+    const initialState = getInitialState();
+
     // State
-    const [activeCategory, setActiveCategory] = useState<Category>('Home');
+    const [activeCategory, setActiveCategory] = useState<Category>(initialState.category);
     const [searchQuery, setSearchQuery] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>(initialState.view);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(initialState.product);
 
     // History Stack to track navigation path
     const cartLoadedRef = useRef(false);
@@ -60,6 +81,13 @@ export default function ClientApp() {
             }
         }
         cartLoadedRef.current = true;
+
+        // Push initial state to browser history so back/forward works from start
+        const path = window.location.pathname;
+        if (path !== '/') {
+            const historyState: HistoryState = { view: initialState.view, category: initialState.category, productId: initialState.product?.id };
+            window.history.replaceState(historyState, '', path);
+        }
     }, []);
 
     // Save cart to local storage on update (skip initial empty state)
