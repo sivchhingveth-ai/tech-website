@@ -61,7 +61,7 @@ export default function ClientApp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
 
-    // On mount: read URL and set history state if missing
+    // On mount: read URL and ensure history state exists
     useEffect(() => {
         if (mountedRef.current) return;
         mountedRef.current = true;
@@ -73,13 +73,13 @@ export default function ClientApp() {
         setActiveCategory(category);
         setSelectedProduct(product);
 
-        // Ensure history state exists for back/forward
-        if (!window.history.state) {
+        // Always push a home entry so back never leaves the site
+        if (!window.history.state || window.history.state.view !== view) {
             window.history.replaceState({ view, category, productId: product?.id }, '', path);
         }
     }, []);
 
-    // Browser back/forward — only read from history.state, never usePathname
+    // Browser back/forward — only read from history.state
     useEffect(() => {
         const handlePopState = () => {
             const state = window.history.state as HistoryState | null;
@@ -89,9 +89,12 @@ export default function ClientApp() {
                 setActiveCategory(state.category);
                 setSelectedProduct(product);
             } else {
+                // history.state is null — we're at the very first entry
+                // Replace with home state so next back doesn't leave the site
                 setCurrentView('home');
                 setActiveCategory('Home');
                 setSelectedProduct(null);
+                window.history.replaceState({ view: 'home', category: 'Home' }, '', '/');
             }
             window.scrollTo({ top: 0 });
         };
