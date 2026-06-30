@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import ProductGrid from './ProductGrid';
@@ -18,10 +19,11 @@ interface HistoryState {
 }
 
 export default function ClientApp() {
+    const pathname = usePathname();
+
     // Parse initial state from URL
     const getInitialState = () => {
-        if (typeof window === 'undefined') return { view: 'home' as const, category: 'Home' as Category, product: null as Product | null };
-        const path = window.location.pathname;
+        const path = pathname || '/';
         if (path.startsWith('/product/')) {
             const productId = path.replace('/product/', '');
             const product = PRODUCTS.find(p => p.id === productId) || null;
