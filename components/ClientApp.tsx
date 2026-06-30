@@ -18,39 +18,52 @@ interface HistoryState {
     productId?: string;
 }
 
+function getViewFromPath(path: string): HistoryState {
+    if (path.startsWith('/product/')) {
+        const productId = path.replace('/product/', '');
+        const product = PRODUCTS.find(p => p.id === productId) || null;
+        return { view: 'product', category: 'Home', productId: product?.id };
+    }
+    if (path === '/features') {
+        return { view: 'features', category: 'Home' };
+    }
+    const cat = path.replace('/', '');
+    const validCategories: Category[] = ['Home', 'All', 'Keyboard', 'Mouse', 'Keycap', 'Accessory'];
+    const matched = validCategories.find(c => c.toLowerCase() === cat);
+    if (matched) return { view: 'home', category: matched };
+    return { view: 'home', category: 'Home' };
+}
+
 export default function ClientApp() {
     const pathname = usePathname();
+    const isMountedRef = useRef(false);
 
-    // Parse initial state from URL
-    const getInitialState = () => {
-        const path = pathname || '/';
-        if (path.startsWith('/product/')) {
-            const productId = path.replace('/product/', '');
-            const product = PRODUCTS.find(p => p.id === productId) || null;
-            return { view: 'product' as const, category: 'Home' as Category, product };
-        }
-        if (path === '/features') {
-            return { view: 'features' as const, category: 'Home' as Category, product: null };
-        }
-        const cat = path.replace('/', '');
-        const validCategories: Category[] = ['Home', 'All', 'Keyboard', 'Mouse', 'Keycap', 'Accessory'];
-        const matched = validCategories.find(c => c.toLowerCase() === cat);
-        if (matched) return { view: 'home' as const, category: matched, product: null };
-        return { view: 'home' as const, category: 'Home' as Category, product: null };
-    };
-
-    const initialState = getInitialState();
-
-    // State
-    const [activeCategory, setActiveCategory] = useState<Category>(initialState.category);
+    // Always start with home view to match SSR (avoids hydration mismatch)
+    const [activeCategory, setActiveCategory] = useState<Category>('Home');
     const [searchQuery, setSearchQuery] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>(initialState.view);
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(initialState.product);
-
-    // History Stack to track navigation path
+    const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const cartLoadedRef = useRef(false);
+
+    // After mount, sync to the real URL
+    useEffect(() => {
+        if (isMountedRef.current) return;
+        isMountedRef.current = true;
+
+        const state = getViewFromPath(pathname || '/');
+        const product = state.productId ? PRODUCTS.find(p => p.id === state.productId) || null : null;
+
+        setCurrentView(state.view);
+        setActiveCategory(state.category);
+        setSelectedProduct(product);
+
+        // Push initial state to browser history so back/forward works from start
+        if (pathname && pathname !== '/') {
+            window.history.replaceState(state, '', pathname);
+        }
+    }, [pathname]);
 
     // Sync with browser history for mouse back/forward buttons
     useEffect(() => {
@@ -83,13 +96,6 @@ export default function ClientApp() {
             }
         }
         cartLoadedRef.current = true;
-
-        // Push initial state to browser history so back/forward works from start
-        const path = window.location.pathname;
-        if (path !== '/') {
-            const historyState: HistoryState = { view: initialState.view, category: initialState.category, productId: initialState.product?.id };
-            window.history.replaceState(historyState, '', path);
-        }
     }, []);
 
     // Save cart to local storage on update (skip initial empty state)
@@ -184,11 +190,8 @@ export default function ClientApp() {
 
             <div className="flex flex-1">
                 <main className="flex-1 min-w-0">
-                    {/* Added min-w-0 to prevent flex item overflow. Removed pb-20 as bottom nav is gone. */}
-
                     {currentView === 'home' && (
                         <>
-                            {/* Only show Hero on the main Home page */}
                             {activeCategory === 'Home' && <Hero onViewFeatures={handleViewFeatures} />}
 
                             <div id="product-grid">
