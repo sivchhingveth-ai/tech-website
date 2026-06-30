@@ -9,7 +9,6 @@ interface ProductGridProps {
   searchQuery: string;
   onAddToCart: (product: Product) => void;
   onViewDetails: (product: Product) => void;
-  onBack?: () => void;
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
@@ -17,8 +16,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   category,
   searchQuery,
   onAddToCart,
-  onViewDetails,
-  onBack
+  onViewDetails
 }) => {
   const [activeSize, setActiveSize] = useState<KeyboardSize | 'All'>('All');
 

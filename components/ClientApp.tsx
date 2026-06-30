@@ -27,7 +27,6 @@ export default function ClientApp() {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     // History Stack to track navigation path
-    const [viewHistory, setViewHistory] = useState<HistoryState[]>([]);
     const isNavigatingRef = useRef(false);
     const cartLoadedRef = useRef(false);
 
@@ -113,47 +112,13 @@ export default function ClientApp() {
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
-        setViewHistory([]);
         window.history.pushState({ view: 'home', category: 'Home' }, '', '/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
-    const handleBack = () => {
-        isNavigatingRef.current = true;
-        if (viewHistory.length > 0) {
-            const lastState = viewHistory[viewHistory.length - 1];
-            setViewHistory(prev => prev.slice(0, -1));
-
-            setCurrentView(lastState.view);
-            setActiveCategory(lastState.category);
-
-            if (lastState.productId) {
-                const product = PRODUCTS.find(p => p.id === lastState.productId);
-                setSelectedProduct(product || null);
-            } else {
-                setSelectedProduct(null);
-            }
-
-            window.history.back();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            handleGoHome();
-        }
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
-    };
-
     const handleViewDetails = (product: Product) => {
         isNavigatingRef.current = true;
-        if (selectedProduct?.id !== product.id) {
-            const currentState: HistoryState = {
-                view: currentView,
-                category: activeCategory,
-                productId: selectedProduct?.id
-            };
-            setViewHistory(prev => [...prev, currentState]);
-        }
-
         setSelectedProduct(product);
         setCurrentView('product');
         const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id };
@@ -164,12 +129,6 @@ export default function ClientApp() {
 
     const handleViewFeatures = () => {
         isNavigatingRef.current = true;
-        const currentState: HistoryState = {
-            view: currentView,
-            category: activeCategory,
-            productId: selectedProduct?.id
-        };
-        setViewHistory(prev => [...prev, currentState]);
         setCurrentView('features');
         window.history.pushState({ view: 'features', category: activeCategory }, '', '/features');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -178,12 +137,6 @@ export default function ClientApp() {
 
     const handleBrowseCategory = (category: Category) => {
         isNavigatingRef.current = true;
-        const currentState: HistoryState = {
-            view: currentView,
-            category: activeCategory,
-            productId: selectedProduct?.id
-        };
-        setViewHistory(prev => [...prev, currentState]);
         setActiveCategory(category);
         setCurrentView('home');
         window.history.pushState({ view: 'home', category }, '', `/${category.toLowerCase()}`);
@@ -193,7 +146,6 @@ export default function ClientApp() {
 
     const handleNavCategoryChange = (cat: Category) => {
         isNavigatingRef.current = true;
-        setViewHistory([]);
         setActiveCategory(cat);
         if (currentView !== 'home') {
             setCurrentView('home');
@@ -202,9 +154,6 @@ export default function ClientApp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
-
-    // Determine if back button should show
-    const shouldShowBack = viewHistory.length > 0 || currentView === 'product' || currentView === 'features';
 
     return (
         <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-white flex flex-col">
@@ -215,8 +164,6 @@ export default function ClientApp() {
                 onLogoClick={handleGoHome}
                 products={PRODUCTS}
                 onProductSelect={handleViewDetails}
-                showBackButton={shouldShowBack}
-                onBack={handleBack}
                 onCategoryClick={handleNavCategoryChange}
                 activeCategory={activeCategory}
             />
@@ -244,7 +191,6 @@ export default function ClientApp() {
                                         searchQuery={searchQuery}
                                         onAddToCart={handleAddToCart}
                                         onViewDetails={handleViewDetails}
-                                        onBack={viewHistory.length > 0 ? handleBack : undefined}
                                     />
                                 )}
                             </div>
@@ -264,7 +210,6 @@ export default function ClientApp() {
                         <ProductDetail
                             product={selectedProduct}
                             products={PRODUCTS}
-                            onBack={handleBack}
                             onAddToCart={handleAddToCart}
                             onViewDetails={handleViewDetails}
                         />

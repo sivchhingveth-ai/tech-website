@@ -7,7 +7,6 @@ import ProductCard from './ProductCard';
 interface ProductDetailProps {
   product: Product;
   products: Product[];
-  onBack: () => void;
   onAddToCart: (product: Product) => void;
   onViewDetails: (product: Product) => void;
 }
@@ -15,7 +14,6 @@ interface ProductDetailProps {
 const ProductDetail: React.FC<ProductDetailProps> = ({
   product,
   products,
-  onBack,
   onAddToCart,
   onViewDetails
 }) => {

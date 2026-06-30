@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, Search, LogIn, User, UserPlus, ArrowLeft, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, LogIn, User, UserPlus, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { signOut } from '@/app/auth/actions';
@@ -13,8 +13,6 @@ interface NavbarProps {
   onLogoClick: () => void;
   products: Product[];
   onProductSelect: (product: Product) => void;
-  onBack?: () => void;
-  showBackButton?: boolean;
   onCategoryClick?: (category: Category) => void;
   activeCategory?: Category;
 }
@@ -26,8 +24,6 @@ const Navbar: React.FC<NavbarProps> = ({
   onLogoClick,
   products,
   onProductSelect,
-  onBack,
-  showBackButton = false,
   onCategoryClick,
   activeCategory
 }) => {
@@ -90,8 +86,8 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="w-full px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex h-full items-center justify-between gap-4">
 
-          {/* Left Section: Logo always visible, Back button below */}
-          <div className="flex-shrink-0 flex flex-col gap-1">
+          {/* Left Section: Logo */}
+          <div className="flex-shrink-0">
             <button
               onClick={onLogoClick}
               className="group flex items-center gap-3 text-white hover:text-nexus-accent transition-colors flex-shrink-0 min-w-0"
@@ -106,16 +102,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 KeyCRAFT Studio
               </span>
             </button>
-            {showBackButton && onBack && (
-              <button
-                className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-nexus-card border border-nexus-border text-gray-400 transition-all duration-300 group hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] w-fit animate-fade-in"
-                onClick={onBack}
-                title="Go Back"
-              >
-                <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-1 transition-transform" />
-                <span className="font-bold text-[10px] uppercase">Back</span>
-              </button>
-            )}
           </div>
 
           {/* Right Section: Search & Cart & User */}
