@@ -27,27 +27,21 @@ export default function ClientApp() {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     // History Stack to track navigation path
-    const isNavigatingRef = useRef(false);
     const cartLoadedRef = useRef(false);
 
     // Sync with browser history for mouse back/forward buttons
     useEffect(() => {
         const handlePopState = (e: PopStateEvent) => {
-            if (isNavigatingRef.current) return;
             const state = e.state as HistoryState | null;
             if (state) {
                 const product = state.productId ? PRODUCTS.find(p => p.id === state.productId) || null : null;
-                React.startTransition(() => {
-                    setCurrentView(state.view);
-                    setActiveCategory(state.category);
-                    setSelectedProduct(product);
-                });
+                setCurrentView(state.view);
+                setActiveCategory(state.category);
+                setSelectedProduct(product);
             } else {
-                React.startTransition(() => {
-                    setCurrentView('home');
-                    setActiveCategory('Home');
-                    setSelectedProduct(null);
-                });
+                setCurrentView('home');
+                setActiveCategory('Home');
+                setSelectedProduct(null);
             }
             window.scrollTo({ top: 0 });
         };
@@ -108,51 +102,41 @@ export default function ClientApp() {
 
     // Navigation Helpers
     const handleGoHome = () => {
-        isNavigatingRef.current = true;
         setCurrentView('home');
         setActiveCategory('Home');
         setSelectedProduct(null);
         window.history.pushState({ view: 'home', category: 'Home' }, '', '/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleViewDetails = (product: Product) => {
-        isNavigatingRef.current = true;
         setSelectedProduct(product);
         setCurrentView('product');
         const newState: HistoryState = { view: 'product', category: activeCategory, productId: product.id };
         window.history.pushState(newState, '', `/product/${product.id}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleViewFeatures = () => {
-        isNavigatingRef.current = true;
         setCurrentView('features');
         window.history.pushState({ view: 'features', category: activeCategory }, '', '/features');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleBrowseCategory = (category: Category) => {
-        isNavigatingRef.current = true;
         setActiveCategory(category);
         setCurrentView('home');
         window.history.pushState({ view: 'home', category }, '', `/${category.toLowerCase()}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     const handleNavCategoryChange = (cat: Category) => {
-        isNavigatingRef.current = true;
         setActiveCategory(cat);
         if (currentView !== 'home') {
             setCurrentView('home');
         }
         window.history.pushState({ view: 'home', category: cat }, '', `/${cat.toLowerCase()}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => { isNavigatingRef.current = false; }, 50);
     };
 
     return (
