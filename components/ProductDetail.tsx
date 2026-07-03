@@ -133,8 +133,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               alt={product.name}
               className="absolute inset-0 w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-              <div className="bg-black/50 backdrop-blur-sm p-3 rounded-full text-white">
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors opacity-0 group-hover:opacity-100">
+              <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm p-3 rounded-full text-white">
                 <ZoomIn className="h-6 w-6" />
               </div>
             </div>
@@ -144,12 +144,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
         {/* Product Info */}
         <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
           <div className="mb-4">
-            <div className="flex items-center gap-2 text-sm uppercase font-medium tracking-wide">
-              <span className="text-gray-500">{product.category}</span>
-              <span className="text-gray-700">/</span>
-              <span className="text-nexus-accent">{product.size}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs px-3 py-1 bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 rounded-full font-medium uppercase tracking-wide">{product.category}</span>
+              {product.size && (
+                <span className="text-xs px-3 py-1 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full font-medium">{product.size}</span>
+              )}
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white mt-1">{product.name}</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight text-white mt-3">{product.name}</h1>
           </div>
 
           <div className="mt-3 flex items-baseline gap-4">

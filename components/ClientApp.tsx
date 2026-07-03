@@ -6,6 +6,7 @@ import Hero from './Hero';
 import ProductGrid from './ProductGrid';
 import ProductDetail from './ProductDetail';
 import CartSidebar from './CartSidebar';
+import CheckoutForm, { CustomerInfo } from './CheckoutForm';
 import HomeView from './HomeView';
 import ShowcaseView from './ShowcaseView';
 import { PRODUCTS } from '../constants';
@@ -40,6 +41,7 @@ export default function ClientApp() {
     const [searchQuery, setSearchQuery] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [currentView, setCurrentView] = useState<'home' | 'features' | 'product'>('home');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const cartLoadedRef = useRef(false);
@@ -132,6 +134,13 @@ export default function ClientApp() {
     const handleRemoveItem = (id: string) => setCartItems(prev => prev.filter(item => item.id !== id));
     const handleClearCart = () => setCartItems([]);
 
+    const handleCheckoutSubmit = (info: CustomerInfo) => {
+        console.log('Order submitted:', { customer: info, items: cartItems });
+        alert(`Thank you, ${info.firstName}! Your order has been placed. We will contact you at ${info.email} or ${info.phone}.`);
+        setCartItems([]);
+        setIsCheckoutOpen(false);
+    };
+
     const handleGoHome = () => navigate('home', 'Home', null, '/');
     const handleViewDetails = (product: Product) => navigate('product', activeCategory, product, `/product/${product.id}`);
     const handleViewFeatures = () => navigate('features', activeCategory, null, '/features');
@@ -197,6 +206,15 @@ export default function ClientApp() {
                 onRemoveItem={handleRemoveItem}
                 onClearCart={handleClearCart}
                 onStartShopping={() => { setIsCartOpen(false); handleViewFeatures(); }}
+                onCheckout={() => { setIsCartOpen(false); setIsCheckoutOpen(true); }}
+            />
+
+            <CheckoutForm
+                isOpen={isCheckoutOpen}
+                onClose={() => setIsCheckoutOpen(false)}
+                onBack={() => { setIsCheckoutOpen(false); setIsCartOpen(true); }}
+                items={cartItems}
+                onSubmit={handleCheckoutSubmit}
             />
         </div>
     );

@@ -11,6 +11,7 @@ interface CartSidebarProps {
   onRemoveItem: (id: string) => void;
   onClearCart: () => void;
   onStartShopping: () => void;
+  onCheckout: () => void;
 }
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
@@ -20,7 +21,8 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   onUpdateQuantity,
   onRemoveItem,
   onClearCart,
-  onStartShopping
+  onStartShopping,
+  onCheckout
 }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -97,15 +99,15 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                     />
                   </div>
 
-                  <div className="flex flex-1 flex-col">
+                  <div className="flex flex-1 flex-col min-w-0">
                     <div>
                       <div className="flex justify-between text-sm font-medium text-white">
                         <h3 className="line-clamp-1 break-all mr-2">{item.name}</h3>
-                        <p className="font-mono text-white font-bold select-none">${(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="font-mono text-white font-bold select-none flex-shrink-0">${(item.price * item.quantity).toFixed(2)}</p>
                       </div>
                       <p className="mt-1 text-xs text-gray-500 select-none">{item.size || item.category}</p>
                     </div>
-                    <div className="flex flex-1 items-end justify-between text-sm mt-2">
+                    <div className="flex flex-1 flex-wrap items-end justify-between text-sm mt-2 gap-2">
                       <QuantityControl
                         quantity={item.quantity}
                         onChange={(newQty) => onUpdateQuantity(item.id, newQty)}
@@ -114,9 +116,11 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                       <button
                         type="button"
                         onClick={() => onRemoveItem(item.id)}
-                        className="font-medium text-red-500/70 hover:text-red-400 hover:bg-red-500/10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all text-xs group select-none border border-transparent hover:border-red-500/20"
+                        aria-label="Remove item"
+                        title="Remove"
+                        className="text-red-500/70 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center p-2 rounded-lg transition-all group select-none border border-transparent hover:border-red-500/20"
                       >
-                        <X className="h-3.5 w-3.5 group-hover:rotate-90 transition-transform duration-200" /> Remove
+                        <X className="h-4 w-4 group-hover:rotate-90 transition-transform duration-200" />
                       </button>
                     </div>
                   </div>
@@ -137,7 +141,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               </p>
               <div className="space-y-2">
                 <button
-                  onClick={() => { alert('Checkout coming soon!'); onClose(); }}
+                  onClick={() => { onCheckout(); onClose(); }}
                   className="w-full flex items-center justify-center rounded-md border border-nexus-border bg-nexus-dark px-4 py-2 text-sm font-medium text-gray-300 shadow-sm transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] select-none"
                 >
                   Checkout
@@ -203,7 +207,7 @@ const QuantityControl: React.FC<{ quantity: number; onChange: (qty: number) => v
       >
         <Minus className="h-3 w-3" />
       </button>
-      <span className="w-12 text-center text-white text-xs font-mono font-medium">{quantity}</span>
+      <span className="w-10 text-center text-white text-xs font-mono font-medium">{quantity}</span>
       <button
         type="button"
         className="w-8 h-full flex items-center justify-center hover:text-white text-gray-400 border-l border-nexus-border transition-colors focus:outline-none active:bg-nexus-card touch-manipulation"

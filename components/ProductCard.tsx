@@ -52,7 +52,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
             <h3 className="text-lg font-bold text-white group-hover:text-nexus-accent transition-colors">
               {product.name}
             </h3>
-            <p className="text-sm text-nexus-accent/80 font-medium">{product.size || product.category}</p>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-xs px-2 py-0.5 bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 rounded-full font-medium">{product.category}</span>
+              {product.size && (
+                <span className="text-xs px-2 py-0.5 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full">{product.size}</span>
+              )}
+            </div>
           </div>
           <p className="text-lg font-bold font-mono text-white">
             ${product.price}

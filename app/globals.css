@@ -103,6 +103,70 @@ body::after {
   animation: brand-float 3s ease-in-out infinite;
 }
 
+/* Explore Button Animations */
+@keyframes btn-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  50% {
+    box-shadow: 0 0 25px 3px rgba(139, 92, 246, 0.35), inset 0 0 0 1px rgba(139, 92, 246, 0.4);
+  }
+}
+
+@keyframes btn-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes btn-arrow-bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.animate-btn-explore {
+  animation: btn-glow-pulse 2.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-btn-explore::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.05) 25%,
+    rgba(139, 92, 246, 0.12) 50%,
+    rgba(139, 92, 246, 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: btn-shimmer 3s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.animate-btn-explore > * {
+  position: relative;
+  z-index: 1;
+}
+
+.animate-arrow-loop {
+  animation: btn-arrow-bounce 1.5s ease-in-out infinite;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }

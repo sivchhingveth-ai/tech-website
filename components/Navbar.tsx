@@ -1,9 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, Search, LogIn, User, UserPlus, Menu, X } from 'lucide-react';
-import Link from 'next/link';
-import { createClient } from '@/utils/supabase/client';
-import { signOut } from '@/app/auth/actions';
+import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { Product, Category } from '../types';
 
 interface NavbarProps {
@@ -29,36 +26,22 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
-
-  const supabase = React.useMemo(() => createClient(), []);
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
-  const userMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdowns when clicking outside
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
       if (searchContainerRef.current && !searchContainerRef.current.contains(target)) {
         setIsSearchFocused(false);
       }
-      if (userMenuRef.current && !userMenuRef.current.contains(target)) {
-        setIsUserMenuOpen(false);
-      }
     };
 
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-
-    getUser();
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [supabase.auth]);
+  }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -98,13 +81,15 @@ const Navbar: React.FC<NavbarProps> = ({
                 className="h-10 md:h-14 w-auto flex-shrink-0"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
-              <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
-                KeyCRAFT Studio
+              <span className="hidden sm:inline">
+                <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
+                  KeyCRAFT Studio
+                </span>
               </span>
             </button>
           </div>
 
-          {/* Right Section: Search & Cart & User */}
+          {/* Right Section: Search & Cart */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
             {/* Search Bar with Dropdown - Now Responsive (Short Form) */}
             <div className="relative" ref={searchContainerRef}>
@@ -192,57 +177,6 @@ const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
-            {/* User Menu Dropdown */}
-            <div className="relative hidden sm:block" ref={userMenuRef}>
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className={`p-2 rounded-full transition-colors focus:outline-none ${isUserMenuOpen ? 'text-white bg-nexus-card' : 'text-gray-400 hover:text-white hover:bg-nexus-card/50'}`}
-                aria-label="User menu"
-              >
-                <User className="h-6 w-6" />
-              </button>
-
-              {isUserMenuOpen && (
-                <div className="absolute top-full mt-3 w-48 right-0 bg-nexus-card border border-nexus-border rounded-xl shadow-2xl overflow-hidden animate-fade-in z-50 flex flex-col ring-1 ring-white/5">
-                  <div className="p-1 space-y-0.5">
-                    {user ? (
-                      <>
-                        <div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5 mb-1 truncate">
-                          {user.email}
-                        </div>
-                        <button
-                          onClick={() => signOut()}
-                          className="w-full text-left px-3 py-2 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
-                        >
-                          <LogIn className="h-4 w-4 rotate-180" />
-                          Sign Out
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <Link
-                          href="/login"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
-                        >
-                          <UserPlus className="h-4 w-4" />
-                          Sign Up
-                        </Link>
-                        <Link
-                          href="/login"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-nexus-dark rounded-md flex items-center gap-3 transition-colors"
-                        >
-                          <LogIn className="h-4 w-4" />
-                          Sign In
-                        </Link>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Cart Button */}
             <button
               onClick={onCartClick}
@@ -286,41 +220,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 {link.label}
               </button>
             ))}
-            <div className="border-t border-nexus-border my-2 pt-2">
-              {user ? (
-                <div className="space-y-2">
-                  <div className="px-4 py-2 text-xs text-gray-500 truncate">
-                    {user.email}
-                  </div>
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-3 text-red-400 hover:bg-nexus-card rounded-lg flex items-center gap-2"
-                  >
-                    <LogIn className="h-5 w-5 rotate-180" /> Sign Out
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-1">
-                  <Link
-                    href="/login"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full text-left px-4 py-3 text-gray-300 hover:bg-nexus-card rounded-lg flex items-center gap-2"
-                  >
-                    <UserPlus className="h-5 w-5" /> Sign Up
-                  </Link>
-                  <Link
-                    href="/login"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full text-left px-4 py-3 text-gray-300 hover:bg-nexus-card rounded-lg flex items-center gap-2"
-                  >
-                    <LogIn className="h-5 w-5" /> Sign In
-                  </Link>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       )}
