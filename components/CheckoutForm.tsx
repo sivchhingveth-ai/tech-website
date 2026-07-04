@@ -209,10 +209,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                   <label className="block text-xs font-medium text-gray-400 mb-1.5">Phone *</label>
                   <input
                     type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     value={info.phone}
-                    onChange={(e) => handleChange('phone', e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^0-9]/g, '');
+                      handleChange('phone', val);
+                    }}
                     className={inputClass('phone')}
-                    placeholder="+855 12 345 678"
+                    placeholder="012 345 678"
                   />
                   {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
                 </div>
@@ -274,8 +279,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     <label className="block text-xs font-medium text-gray-400 mb-1.5">Zip Code *</label>
                     <input
                       type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       value={info.zipCode}
-                      onChange={(e) => handleChange('zipCode', e.target.value)}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/[^0-9]/g, '');
+                        handleChange('zipCode', val);
+                      }}
                       className={inputClass('zipCode')}
                       placeholder="12000"
                     />
