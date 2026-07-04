@@ -1,4 +1,4 @@
-import { ShoppingBag, AlertCircle } from 'lucide-react';
+import { ShoppingBag, AlertCircle, Zap } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
@@ -28,16 +28,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
 
         {/* Badges */}
         <div className="absolute top-0 left-0 w-full flex justify-between p-3 pointer-events-none">
-          {/* New Badge */}
+          {/* New Badge - Left */}
           {product.isNew && (
-            <span className="inline-flex items-center px-2.5 py-1 rounded bg-nexus-accent text-nexus-dark text-xs font-bold shadow-sm backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-green-500/90 text-white text-xs font-bold shadow-sm backdrop-blur-sm animate-bounce">
+              <Zap className="w-3 h-3" />
               NEW
             </span>
           )}
-          {!product.isNew && <div></div>}
 
-          {/* Status Badges */}
-          <div className="flex flex-col gap-2 items-end">
+          {/* Status Badges - Right */}
+          <div className="flex flex-col gap-2 items-end ml-auto">
             {!product.inStock && (
               <span className="inline-flex items-center px-2.5 py-1 rounded bg-red-500/90 text-white text-xs font-bold shadow-sm backdrop-blur-sm">
                 OUT OF STOCK
