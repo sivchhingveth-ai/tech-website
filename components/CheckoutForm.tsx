@@ -89,9 +89,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
   };
 
   const handleCopyPayment = () => {
-    navigator.clipboard.writeText('ABA Bank: 004 123 456 789 (KeyCraft Studio)');
+    navigator.clipboard.writeText('006 281 601');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePayWithABA = () => {
+    const ref = `KeyCraft-${Date.now()}`;
+    const url = `https://pay.ababank.com/abaPay?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
+    window.open(url, '_blank');
   };
 
   const validate = (): boolean => {
@@ -423,7 +429,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                   {/* QR Code */}
                   <div className="bg-white p-4 rounded-xl">
                     <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ABA%3A%2F%2Fpay%3Facc%3D004123456789%26amt%3D${total.toFixed(2)}%26cur%3DUSD%26ref%3DKeyCraft-${Date.now()}`}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ABA%3A%2F%2Fpay%3Facc%3D006281601%26amt%3D${total.toFixed(2)}%26cur%3DUSD%26ref%3DKeyCraft-${Date.now()}`}
                       alt="Payment QR Code"
                       className="w-44 h-44"
                     />
@@ -433,16 +439,16 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                   <div className="w-full space-y-2 text-sm">
                     <div className="flex justify-between text-gray-400">
                       <span>Bank</span>
-                      <span className="text-white font-medium">ABA Bank</span>
+                      <span className="text-white font-medium">ABA Bank (KHQR)</span>
                     </div>
                     <div className="flex justify-between text-gray-400">
                       <span>Account Name</span>
-                      <span className="text-white font-medium">KeyCraft Studio</span>
+                      <span className="text-white font-medium">SIVCHHING VETH</span>
                     </div>
                     <div className="flex justify-between text-gray-400 items-center">
-                      <span>Account Number</span>
+                      <span>USD Account</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-white font-mono font-medium">004 123 456 789</span>
+                        <span className="text-white font-mono font-medium">006 281 601</span>
                         <button
                           type="button"
                           onClick={handleCopyPayment}
@@ -453,11 +459,27 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                         </button>
                       </div>
                     </div>
+                    <div className="flex justify-between text-gray-400 items-center">
+                      <span>KHR Account</span>
+                      <span className="text-white font-mono font-medium">006 281 621</span>
+                    </div>
                     <div className="flex justify-between text-gray-400">
                       <span>Amount</span>
                       <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
                     </div>
                   </div>
+
+                  {/* Direct Pay Button */}
+                  <button
+                    type="button"
+                    onClick={handlePayWithABA}
+                    className="w-full flex items-center justify-center gap-2 bg-[#1a3c6e] hover:bg-[#245292] text-white rounded-xl py-3.5 text-sm font-bold transition-all duration-200 hover:shadow-[0_0_15px_rgba(26,60,110,0.4)]"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Pay with ABA Pay
+                  </button>
                   
                   <p className="text-xs text-gray-500 text-center">After payment, your order will be confirmed within 5 minutes.</p>
                 </div>
