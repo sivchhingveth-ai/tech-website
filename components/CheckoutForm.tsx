@@ -583,7 +583,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <CreditCard className="h-5 w-5" />
-                Pay with Delivery - ${total.toFixed(2)}
+                Pay with Delivery
               </button>
             )}
 
