@@ -28,7 +28,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
 
         {/* Badges */}
         <div className="absolute top-0 left-0 w-full flex justify-between p-3 pointer-events-none">
-          <div></div>
+          {/* New Badge */}
+          {product.isNew && (
+            <span className="inline-flex items-center px-2.5 py-1 rounded bg-nexus-accent text-nexus-dark text-xs font-bold shadow-sm backdrop-blur-sm">
+              NEW
+            </span>
+          )}
+          {!product.isNew && <div></div>}
 
           {/* Status Badges */}
           <div className="flex flex-col gap-2 items-end">
