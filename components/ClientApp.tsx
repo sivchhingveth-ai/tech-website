@@ -293,8 +293,7 @@ export default function ClientApp() {
                             <span>We Accept:</span>
                             <div className="flex items-center gap-2">
                                 <span className="px-2 py-1 bg-nexus-card rounded border border-nexus-border text-[10px] font-medium text-gray-400">ABA Pay</span>
-                                <span className="px-2 py-1 bg-nexus-card rounded border border-nexus-border text-[10px] font-medium text-gray-400">Visa</span>
-                                <span className="px-2 py-1 bg-nexus-card rounded border border-nexus-border text-[10px] font-medium text-gray-400">Mastercard</span>
+                                <span className="px-2 py-1 bg-nexus-card rounded border border-nexus-border text-[10px] font-medium text-gray-400">ACLEDA</span>
                                 <span className="px-2 py-1 bg-nexus-card rounded border border-nexus-border text-[10px] font-medium text-gray-400">COD</span>
                             </div>
                         </div>
