@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ArrowLeft, CreditCard, MapPin, Phone, User, Mail, Building, Globe, Camera, Trash2, Copy, CheckCheck } from 'lucide-react';
+import { X, ArrowLeft, CreditCard, MapPin, Phone, User, Mail, Building, Globe, Camera, Trash2, Copy, CheckCheck, QrCode } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface CheckoutFormProps {
@@ -106,6 +106,19 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
     window.open(url, '_blank');
   };
 
+  const getPaymentUrl = (method: 'aba' | 'acleda') => {
+    const ref = `KeyCraft-${Date.now()}`;
+    if (method === 'aba') {
+      return `https://pay.ababank.com/abaPay?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
+    }
+    return `https://online.acledabank.com.kh/payment?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
+  };
+
+  const getQrCodeUrl = (method: 'aba' | 'acleda') => {
+    const paymentUrl = getPaymentUrl(method);
+    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(paymentUrl)}&bgcolor=111111&color=ffffff&format=png`;
+  };
+
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof CustomerInfo, string>> = {};
     if (!info.firstName.trim()) newErrors.firstName = 'First name is required';
@@ -139,7 +152,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
 
       <div className="absolute inset-0 overflow-y-auto">
         <div className="flex items-start justify-center min-h-full py-8 px-4">
-          <div className="relative w-full max-w-2xl bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl animate-fade-in my-auto">
+          <div className="relative w-full max-w-2xl bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl animate-fade-in my-auto checkout-glow">
 
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-nexus-border">
@@ -414,11 +427,11 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 Payment Method
               </h3>
               
-              <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('aba')}
-                  className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                  className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1.5 sm:gap-2 ${
                     paymentMethod === 'aba' 
                       ? 'border-nexus-accent bg-nexus-accent/10 text-white' 
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
@@ -430,12 +443,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">ABA Pay</span>
+                  <span className="text-xs sm:text-sm font-medium">ABA Pay</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('acleda')}
-                  className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                  className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1.5 sm:gap-2 ${
                     paymentMethod === 'acleda' 
                       ? 'border-nexus-accent bg-nexus-accent/10 text-white' 
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
@@ -447,12 +460,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">ACLEDA</span>
+                  <span className="text-xs sm:text-sm font-medium">ACLEDA</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('cod')}
-                  className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                  className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1.5 sm:gap-2 ${
                     paymentMethod === 'cod' 
                       ? 'border-nexus-accent bg-nexus-accent/10 text-white' 
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
@@ -463,7 +476,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">Cash on Delivery</span>
+                  <span className="text-xs sm:text-sm font-medium">Cash on Delivery</span>
                 </button>
               </div>
 
@@ -499,6 +512,23 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <span>Amount</span>
                       <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
                     </div>
+                  </div>
+
+                  {/* QR Code */}
+                  <div className="flex flex-col items-center gap-2 mt-2">
+                    <div className="bg-white p-3 rounded-xl">
+                      <img
+                        src={getQrCodeUrl('aba')}
+                        alt="ABA Pay QR Code"
+                        width={160}
+                        height={160}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 text-center flex items-center gap-1.5">
+                      <QrCode className="h-3.5 w-3.5" />
+                      Scan with ABA Mobile app to pay
+                    </p>
                   </div>
 
                   {/* Direct Pay Button */}
@@ -551,11 +581,28 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     </div>
                   </div>
 
+                  {/* QR Code */}
+                  <div className="flex flex-col items-center gap-2 mt-2">
+                    <div className="bg-white p-3 rounded-xl">
+                      <img
+                        src={getQrCodeUrl('acleda')}
+                        alt="ACLEDA Bank QR Code"
+                        width={160}
+                        height={160}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 text-center flex items-center gap-1.5">
+                      <QrCode className="h-3.5 w-3.5" />
+                      Scan with ACLEDA Bank Plus app to pay
+                    </p>
+                  </div>
+
                   {/* Direct Pay Button */}
                   <button
                     type="button"
                     onClick={handlePayWithACLEDA}
-                    className="w-full flex items-center justify-center gap-2 bg-[#c41e3a] hover:bg-[#e63950] text-white rounded-xl py-3.5 text-sm font-bold transition-all duration-200 hover:shadow-[0_0_15px_rgba(196,30,58,0.4)]"
+                    className="w-full flex items-center justify-center gap-2 bg-[#003087] hover:bg-[#004aad] text-white rounded-xl py-3.5 text-sm font-bold transition-all duration-200 hover:shadow-[0_0_15px_rgba(0,48,135,0.4)]"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>

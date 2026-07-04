@@ -150,12 +150,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 <span className="text-xs px-3 py-1 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full font-medium">{product.size}</span>
               )}
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white mt-3">{product.name}</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-3">{product.name}</h1>
           </div>
 
           <div className="mt-3 flex items-baseline gap-4">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl font-bold font-mono text-white">${product.price}</p>
+            <p className="text-2xl sm:text-3xl font-bold font-mono text-white">${product.price}</p>
             {isLowStock && (
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 border border-orange-500/30 text-xs font-bold animate-pulse">
                 <AlertCircle className="w-4 h-4" />
@@ -248,7 +248,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+          <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 text-center">
             <div className="flex flex-col items-center justify-center p-4 bg-nexus-card/50 rounded-lg">
               <Zap className="h-6 w-6 text-nexus-highlight mb-2" />
               <span className="text-xs text-gray-400">Fast Shipping</span>

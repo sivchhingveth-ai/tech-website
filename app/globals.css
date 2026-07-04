@@ -103,6 +103,42 @@ body::after {
   animation: brand-float 3s ease-in-out infinite;
 }
 
+/* Checkout glow animation */
+.checkout-glow {
+  position: relative;
+}
+
+.checkout-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  padding: 1px;
+  background: linear-gradient(
+    var(--glow-angle, 0deg),
+    transparent 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 80%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: checkout-rotate-glow 4s linear infinite;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes checkout-rotate-glow {
+  0% { --glow-angle: 0deg; }
+  100% { --glow-angle: 360deg; }
+}
+
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

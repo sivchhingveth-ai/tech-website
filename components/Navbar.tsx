@@ -209,7 +209,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-nexus-black border-b border-nexus-border p-4 md:hidden animate-fade-in shadow-2xl">
+        <div className="absolute top-24 left-0 w-full bg-nexus-black border-b border-nexus-border p-4 md:hidden animate-fade-in shadow-2xl">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <button
