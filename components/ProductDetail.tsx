@@ -443,7 +443,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       {/* Full Screen Image Modal */}
       {isImageModalOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsImageModalOpen(false)}
         >
           <button
@@ -452,7 +452,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           >
             <X className="h-10 w-10" />
           </button>
-          <div className="relative w-full h-full max-w-4xl max-h-[85vh] flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
             <img
               src={activeImage}
               alt={product.name}
