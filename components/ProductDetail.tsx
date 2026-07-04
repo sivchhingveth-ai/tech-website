@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Product, Review } from '../types';
 import { Star, ShoppingBag, Check, Zap, Truck, Shield, AlertCircle, X, ZoomIn, User, Upload, Image as ImageIcon } from 'lucide-react';
 import ProductCard from './ProductCard';
@@ -441,26 +442,27 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       </div>
 
       {/* Full Screen Image Modal */}
-      {isImageModalOpen && (
+      {isImageModalOpen && createPortal(
         <div
-          className="fixed inset-0 bg-black flex items-center justify-center p-4 animate-fade-in"
-          style={{ zIndex: 9999 }}
+          className="fixed inset-0 bg-black flex items-center justify-center p-4"
+          style={{ zIndex: 99999 }}
           onClick={() => setIsImageModalOpen(false)}
         >
           <button
             onClick={() => setIsImageModalOpen(false)}
             className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
-            style={{ zIndex: 10000 }}
+            style={{ zIndex: 100000 }}
           >
             <X className="h-10 w-10" />
           </button>
           <img
             src={activeImage}
             alt={product.name}
-            className="max-w-[90vw] max-h-[90vh] object-contain rounded-md"
+            className="max-w-[90vw] max-h-[90vh] object-contain"
             onClick={(e) => e.stopPropagation()}
           />
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
