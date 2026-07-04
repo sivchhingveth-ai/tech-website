@@ -111,11 +111,11 @@ export default function WarrantyPage() {
     return (
         <InfoPageLayout title="Warranty" description="We stand behind every product we sell with comprehensive warranty coverage.">
             {/* Warranty Tiers */}
-            <div className="grid gap-6 md:grid-cols-3 mb-16">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8 md:mb-16">
                 {warrantyTiers.map(tier => (
                     <div
                         key={tier.name}
-                        className={`rounded-2xl p-6 border transition-colors ${
+                        className={`rounded-2xl p-4 md:p-6 border transition-colors ${
                             tier.highlight
                                 ? 'bg-nexus-accent/5 border-nexus-accent/40 relative'
                                 : 'bg-nexus-card border-nexus-border hover:border-nexus-accent/20'
@@ -144,12 +144,12 @@ export default function WarrantyPage() {
             </div>
 
             {/* Coverage Comparison Table */}
-            <h2 className="text-2xl font-bold text-white mb-3">Coverage at a Glance</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">Coverage at a Glance</h2>
             <p className="text-gray-400 text-sm mb-6">
                 Every tier builds on the last. Use this matrix to see exactly what each plan protects against before
                 you choose.
             </p>
-            <div className="overflow-x-auto mb-16">
+            <div className="overflow-x-auto mb-8 md:mb-16">
                 <div className="min-w-[560px] bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden">
                     <div className="grid grid-cols-4 bg-nexus-dark/40 border-b border-nexus-border">
                         <div className="p-4 text-xs font-bold uppercase tracking-wider text-gray-500">Coverage</div>
@@ -172,10 +172,10 @@ export default function WarrantyPage() {
             </div>
 
             {/* SLA / Response Time Strip */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 mb-16 hover:border-nexus-accent/20 transition-colors">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 mb-8 md:mb-16 hover:border-nexus-accent/20 transition-colors">
                 <h3 className="text-white font-bold mb-1">Our Service Commitments</h3>
-                <p className="text-gray-500 text-sm mb-6">What you can expect once a claim is filed.</p>
-                <div className="grid gap-6 md:grid-cols-3">
+                <p className="text-gray-500 text-sm mb-4 md:mb-6">What you can expect once a claim is filed.</p>
+                <div className="grid gap-4 md:gap-6 md:grid-cols-3">
                     {slaItems.map(item => (
                         <div key={item.label} className="flex items-start gap-3">
                             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
@@ -191,8 +191,8 @@ export default function WarrantyPage() {
             </div>
 
             {/* Claim Process */}
-            <h2 className="text-2xl font-bold text-white mb-8">How to File a Claim</h2>
-            <div className="grid gap-6 md:grid-cols-3 mb-16">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">How to File a Claim</h2>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8 md:mb-16">
                 {claimSteps.map(step => (
                     <div key={step.num} className="text-center md:text-left">
                         <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-nexus-accent/10 text-nexus-accent font-bold text-sm mb-3">
@@ -205,9 +205,9 @@ export default function WarrantyPage() {
             </div>
 
             {/* How to Register Your Warranty */}
-            <h2 className="text-2xl font-bold text-white mb-8">How to Register Your Warranty</h2>
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">How to Register Your Warranty</h2>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -221,7 +221,7 @@ export default function WarrantyPage() {
                         every order placed through KeyCraft Studio &mdash; your order ID is your proof of coverage.
                     </p>
                 </div>
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -238,8 +238,8 @@ export default function WarrantyPage() {
             </div>
 
             {/* What's Covered / Not Covered */}
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6">
                     <h3 className="text-white font-bold mb-4 flex items-center gap-2">
                         <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -256,7 +256,7 @@ export default function WarrantyPage() {
                         <li>&bull; USB port, cable, and connector faults on arrival</li>
                     </ul>
                 </div>
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6">
                     <h3 className="text-white font-bold mb-4 flex items-center gap-2">
                         <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -276,13 +276,13 @@ export default function WarrantyPage() {
             </div>
 
             {/* Telegram CTA */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:border-nexus-accent/20 transition-colors">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-8 text-center hover:border-nexus-accent/20 transition-colors">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 text-nexus-accent mb-4">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 className="text-white font-bold text-xl mb-2">Need to File a Claim?</h3>
+                <h3 className="text-white font-bold text-lg md:text-xl mb-2">Need to File a Claim?</h3>
                 <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
                     Send us your order ID and a few photos on Telegram. We review every claim within 24 hours and get you
                     back to typing as fast as possible.

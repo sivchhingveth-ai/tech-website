@@ -82,9 +82,9 @@ export default function ReturnsPage() {
     return (
         <InfoPageLayout title="Returns & Refunds" description="Hassle-free returns with our 30-day money-back guarantee.">
             {/* Policy Cards */}
-            <div className="grid gap-4 md:grid-cols-2 mb-16">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
                 {policies.map(item => (
-                    <div key={item.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div key={item.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="flex items-center gap-3 mb-2">
                             <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -97,8 +97,8 @@ export default function ReturnsPage() {
             </div>
 
             {/* Process */}
-            <h2 className="text-2xl font-bold text-white mb-8">Return Process</h2>
-            <div className="space-y-6 mb-16">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">Return Process</h2>
+            <div className="space-y-4 md:space-y-6 mb-8 md:mb-16">
                 {steps.map((step, i) => (
                     <div key={step.num} className="flex gap-6 items-start">
                         <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
@@ -119,12 +119,12 @@ export default function ReturnsPage() {
             </div>
 
             {/* Refund Timeline by Payment Method */}
-            <h2 className="text-2xl font-bold text-white mb-3">Refund Timeline by Payment Method</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">Refund Timeline by Payment Method</h2>
             <p className="text-gray-400 text-sm mb-6">
                 Once your return passes inspection, your refund is issued to the method you originally paid with.
                 Timelines below start from the moment your return is approved.
             </p>
-            <div className="overflow-x-auto mb-16">
+            <div className="overflow-x-auto mb-8 md:mb-16">
                 <div className="min-w-[560px] bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden">
                     <div className="grid grid-cols-3 bg-nexus-dark/40 border-b border-nexus-border">
                         <div className="p-4 text-xs font-bold uppercase tracking-wider text-gray-500">Payment Method</div>
@@ -145,9 +145,9 @@ export default function ReturnsPage() {
             </div>
 
             {/* Exchange vs Refund */}
-            <h2 className="text-2xl font-bold text-white mb-8">Exchange or Refund &mdash; Your Choice</h2>
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">Exchange or Refund &mdash; Your Choice</h2>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -175,7 +175,7 @@ export default function ReturnsPage() {
                         </li>
                     </ul>
                 </div>
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 flex items-center justify-center text-nexus-accent">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -206,12 +206,12 @@ export default function ReturnsPage() {
             </div>
 
             {/* Return Conditions Checklist */}
-            <h2 className="text-2xl font-bold text-white mb-3">What &ldquo;Original Condition&rdquo; Means</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">What &ldquo;Original Condition&rdquo; Means</h2>
             <p className="text-gray-400 text-sm mb-6">
                 To qualify for a refund or exchange, your item needs to check every box below. Our inspection team
                 verifies each point when your return arrives.
             </p>
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 mb-16 hover:border-nexus-accent/20 transition-colors">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 mb-8 md:mb-16 hover:border-nexus-accent/20 transition-colors">
                 <ul className="space-y-3 text-gray-400 text-sm">
                     {conditionChecklist.map(item => (
                         <li key={item} className="flex items-start gap-3">
@@ -225,9 +225,9 @@ export default function ReturnsPage() {
             </div>
 
             {/* Restocking Fees & Return Shipping */}
-            <h2 className="text-2xl font-bold text-white mb-8">Fees &amp; Return Shipping</h2>
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">Fees &amp; Return Shipping</h2>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <h3 className="text-white font-bold mb-3">Restocking Fees</h3>
                     <ul className="space-y-2 text-gray-400 text-sm">
                         <li className="flex items-start gap-2">
@@ -250,7 +250,7 @@ export default function ReturnsPage() {
                         </li>
                     </ul>
                 </div>
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                     <h3 className="text-white font-bold mb-3">Who Pays Return Shipping</h3>
                     <ul className="space-y-2 text-gray-400 text-sm">
                         <li className="flex items-start gap-2">
@@ -276,7 +276,7 @@ export default function ReturnsPage() {
             </div>
 
             {/* Non-Returnable Items */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 mb-16">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 mb-8 md:mb-16">
                 <h3 className="text-white font-bold mb-3">Non-Returnable Items</h3>
                 <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-center gap-2">
@@ -299,13 +299,13 @@ export default function ReturnsPage() {
             </div>
 
             {/* Telegram CTA */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:border-nexus-accent/20 transition-colors">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-8 text-center hover:border-nexus-accent/20 transition-colors">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-nexus-accent/10 border border-nexus-accent/20 text-nexus-accent mb-4">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.6.6 0 01.6-.6c.966 0 1.75.784 1.75 1.75 0 1.2-.29 2.333-.804 3.332-.302.588.126 1.268.788 1.268h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M6.633 10.5H5.25a2.25 2.25 0 00-2.25 2.25v6a2.25 2.25 0 002.25 2.25h.879" />
                     </svg>
                 </div>
-                <h3 className="text-white font-bold text-xl mb-2">Ready to Start a Return?</h3>
+                <h3 className="text-white font-bold text-lg md:text-xl mb-2">Ready to Start a Return?</h3>
                 <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
                     Message us on Telegram with your order number and we&apos;ll walk you through the whole process &mdash;
                     usually reviewed within 24 hours.

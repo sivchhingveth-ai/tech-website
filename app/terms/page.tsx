@@ -116,8 +116,8 @@ export default function TermsPage() {
         <InfoPageLayout title="Terms of Service" description="Please read these terms carefully before using our website.">
             <p className="text-gray-500 text-sm mb-6">Last Updated: July 4, 2026</p>
 
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 mb-10">
-                <h2 className="text-white text-lg font-bold mb-4">Contents</h2>
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 mb-6 md:mb-10">
+                <h2 className="text-white text-base md:text-lg font-bold mb-3 md:mb-4">Contents</h2>
                 <ul className="space-y-2">
                     {sections.map((section, index) => (
                         <li key={section.title}>
@@ -132,7 +132,7 @@ export default function TermsPage() {
                 </ul>
             </div>
 
-            <div className="space-y-10">
+            <div className="space-y-6 md:space-y-10">
                 {sections.map(section => (
                     <div key={section.title}>
                         <h2 id={slugify(section.title)} className="text-white text-xl font-bold mb-3 scroll-mt-24">

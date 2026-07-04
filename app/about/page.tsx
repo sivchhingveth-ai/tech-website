@@ -134,35 +134,35 @@ export default function AboutPage() {
     return (
         <InfoPageLayout title="About KeyCraft Studio" description="Cambodia's premier destination for mechanical keyboards, gaming mice, and enthusiast accessories.">
             {/* Hero Story */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 md:p-12 mb-16">
-                <p className="text-gray-400 text-lg leading-relaxed mb-6">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 md:p-12 mb-8 md:mb-16">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
                     KeyCraft Studio was born from a simple frustration: finding quality mechanical keyboards in Cambodia was nearly impossible. We were tired of waiting weeks for international shipping, paying excessive import fees, and receiving products we couldn&apos;t even try before buying.
                 </p>
-                <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
                     In 2024, we decided to change that. We started with a small collection of carefully curated keyboards and quickly grew into Cambodia&apos;s most trusted source for mechanical keyboards, gaming mice, custom keycaps, and premium accessories.
                 </p>
-                <p className="text-gray-400 text-lg leading-relaxed">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed">
                     Today, we stock products from over 50 brands and have served thousands of happy customers across the country. But we&apos;re still just getting started.
                 </p>
             </div>
 
             {/* Mission / What We Do */}
-            <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Our Mission</h2>
+            <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-6 md:mb-8">
                 To make premium mechanical keyboards and gaming gear genuinely accessible in Cambodia — with honest advice, hands-on testing, and support that treats every customer like part of the community.
             </p>
-            <div className="grid gap-6 md:grid-cols-3 mb-16">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8 md:mb-16">
                 {whatWeDo.map(item => (
-                    <div key={item.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div key={item.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="text-nexus-accent mb-3">{item.icon}</div>
-                        <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
-                        <p className="text-gray-400 text-sm">{item.desc}</p>
+                        <h3 className="text-white font-bold text-base md:text-lg mb-2">{item.title}</h3>
+                        <p className="text-gray-400 text-xs md:text-sm">{item.desc}</p>
                     </div>
                 ))}
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16">
                 {stats.map(stat => (
                     <div key={stat.label} className="text-center">
                         <div className="text-3xl md:text-4xl font-black text-nexus-accent mb-1">{stat.value}</div>
@@ -172,10 +172,10 @@ export default function AboutPage() {
             </div>
 
             {/* Milestones */}
-            <h2 className="text-2xl font-bold text-white mb-8">Our Journey</h2>
-            <div className="mb-16">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-5 md:mb-8">Our Journey</h2>
+            <div className="mb-8 md:mb-16">
                 {milestones.map((m, i) => (
-                    <div key={`${m.year}-${i}`} className="relative flex gap-4 pb-8 last:pb-0 md:gap-6">
+                    <div key={`${m.year}-${i}`} className="relative flex gap-3 md:gap-4 pb-6 md:pb-8 last:pb-0">
                         {/* Connector: runs from the bottom of this badge to the top of the next one */}
                         {i < milestones.length - 1 && (
                             <span
@@ -184,51 +184,51 @@ export default function AboutPage() {
                             />
                         )}
                         <div className="relative z-10 flex-shrink-0">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/40 text-nexus-accent text-xs font-black ring-4 ring-nexus-black md:h-16 md:w-16 md:text-sm">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/40 text-nexus-accent text-[10px] font-black ring-4 ring-nexus-black md:h-16 md:w-16 md:text-sm">
                                 {m.year}
                             </div>
                         </div>
-                        <div className="flex-1 bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
-                            <h3 className="text-white font-bold text-lg mb-1">{m.title}</h3>
-                            <p className="text-gray-400 text-sm">{m.desc}</p>
+                        <div className="flex-1 bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
+                            <h3 className="text-white font-bold text-base md:text-lg mb-1">{m.title}</h3>
+                            <p className="text-gray-400 text-xs md:text-sm">{m.desc}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Values */}
-            <h2 className="text-2xl font-bold text-white mb-8">Our Values</h2>
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-5 md:mb-8">Our Values</h2>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
                 {values.map(val => (
-                    <div key={val.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div key={val.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="text-nexus-accent mb-3">{val.icon}</div>
-                        <h3 className="text-white font-bold text-lg mb-2">{val.title}</h3>
-                        <p className="text-gray-400 text-sm">{val.desc}</p>
+                        <h3 className="text-white font-bold text-base md:text-lg mb-2">{val.title}</h3>
+                        <p className="text-gray-400 text-xs md:text-sm">{val.desc}</p>
                     </div>
                 ))}
             </div>
 
             {/* Meet the Team */}
-            <h2 className="text-2xl font-bold text-white mb-4">Meet the Team</h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Meet the Team</h2>
+            <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-5 md:mb-8">
                 We&apos;re a small crew of keyboard enthusiasts wearing a lot of hats. Here&apos;s who keeps KeyCraft running.
             </p>
-            <div className="grid gap-6 md:grid-cols-2 mb-16">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2 mb-8 md:mb-16">
                 {team.map(member => (
-                    <div key={member.role} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors flex items-center gap-4">
-                        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/30 text-nexus-accent font-black">
+                    <div key={member.role} className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors flex items-center gap-3 md:gap-4">
+                        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/30 text-nexus-accent font-black md:h-14 md:w-14">
                             {member.initials}
                         </div>
                         <div>
-                            <h3 className="text-white font-bold text-lg mb-1">{member.role}</h3>
-                            <p className="text-gray-400 text-sm">{member.desc}</p>
+                            <h3 className="text-white font-bold text-base md:text-lg mb-1">{member.role}</h3>
+                            <p className="text-gray-400 text-xs md:text-sm">{member.desc}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* CTA */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center overflow-hidden">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-8 text-center overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-2">Join the Community</h3>
                 <p className="text-gray-400 mb-6">Follow us on social media for the latest drops, reviews, and exclusive deals.</p>
                 

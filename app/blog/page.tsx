@@ -95,7 +95,7 @@ export default function BlogPage() {
     return (
         <InfoPageLayout title="Blog" description="Keyboard guides, reviews, and tips from the KeyCraft team.">
             {/* Featured Post */}
-            <article className="mb-16 bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden hover:border-nexus-accent/20 transition-colors group cursor-pointer">
+            <article className="mb-8 md:mb-16 bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden hover:border-nexus-accent/20 transition-colors group cursor-pointer">
                 <div className="md:flex">
                     {/* Placeholder image */}
                     <div className="md:w-2/5 h-56 md:h-auto bg-gradient-to-br from-nexus-accent/20 to-nexus-highlight/5 flex items-center justify-center">
@@ -103,7 +103,7 @@ export default function BlogPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6V7.5z" />
                         </svg>
                     </div>
-                    <div className="p-8 md:w-3/5">
+                    <div className="p-5 md:p-8 md:w-3/5">
                         <div className="flex items-center gap-3 mb-4">
                             <span className="px-2.5 py-0.5 bg-nexus-accent/10 text-nexus-accent text-xs font-medium rounded-full">Featured</span>
                             <span className="px-2.5 py-0.5 bg-nexus-accent/10 text-nexus-accent text-xs font-medium rounded-full">{featured.category}</span>
@@ -153,7 +153,7 @@ export default function BlogPage() {
                     <p className="text-gray-600 text-sm mt-2">Check back soon or browse another topic.</p>
                 </div>
             ) : (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {gridPosts.map(post => (
                         <article key={post.title} className="bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden hover:border-nexus-accent/20 transition-colors group cursor-pointer">
                             {/* Placeholder image */}
@@ -162,12 +162,12 @@ export default function BlogPage() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6V7.5z" />
                                 </svg>
                             </div>
-                            <div className="p-6">
+                            <div className="p-4 md:p-6">
                                 <div className="flex items-center gap-3 mb-3">
                                     <span className="px-2.5 py-0.5 bg-nexus-accent/10 text-nexus-accent text-xs font-medium rounded-full">{post.category}</span>
                                     <span className="text-gray-600 text-xs">{post.readTime}</span>
                                 </div>
-                                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-nexus-accent transition-colors">{post.title}</h3>
+                                <h3 className="text-white font-bold text-base md:text-lg mb-2 group-hover:text-nexus-accent transition-colors">{post.title}</h3>
                                 <p className="text-gray-500 text-sm leading-relaxed">{post.excerpt}</p>
                                 <div className="flex items-center gap-2 mt-4 text-gray-600 text-xs">
                                     <span className="text-gray-500">{post.author}</span>

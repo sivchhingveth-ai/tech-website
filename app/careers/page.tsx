@@ -80,24 +80,24 @@ export default function CareersPage() {
     return (
         <InfoPageLayout title="Careers" description="Join the team that's building Cambodia's keyboard community.">
             {/* Intro */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 mb-12">
-                <p className="text-gray-400 text-lg leading-relaxed mb-4">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-8 mb-6 md:mb-12">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4">
                     We&apos;re a small, passionate team that loves keyboards, gaming, and building great products. We&apos;re always looking for talented people who share our enthusiasm.
                 </p>
-                <p className="text-gray-400 text-lg leading-relaxed">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed">
                     Don&apos;t see a role that fits? Send us your resume on Telegram anyway — we&apos;re always open to meeting great people.
                 </p>
             </div>
 
             {/* Culture / Life at KeyCraft */}
-            <h2 className="text-2xl font-bold text-white mb-4">Life at KeyCraft</h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-4">Life at KeyCraft</h2>
+            <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-2 md:mb-4">
                 We&apos;re enthusiasts first and a business second. That means we&apos;d rather recommend the right board than the expensive one, and we learn by actually building, testing, and breaking things.
             </p>
-            <p className="text-gray-400 text-lg leading-relaxed mb-6">
+            <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-3 md:mb-6">
                 As a small team in Phnom Penh, everyone&apos;s work is visible and everyone&apos;s ideas count. If you care about the details and love sharing what you know, you&apos;ll feel right at home.
             </p>
-            <div className="flex flex-wrap gap-2 mb-12">
+            <div className="flex flex-wrap gap-2 mb-6 md:mb-12">
                 {chips.map(chip => (
                     <span key={chip} className="px-3 py-1.5 bg-nexus-accent/10 text-nexus-accent text-sm font-medium rounded-full border border-nexus-accent/20">
                         {chip}
@@ -106,13 +106,13 @@ export default function CareersPage() {
             </div>
 
             {/* Open Positions */}
-            <h2 className="text-2xl font-bold text-white mb-8">Open Positions</h2>
-            <div className="space-y-4 mb-12">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">Open Positions</h2>
+            <div className="space-y-4 mb-6 md:mb-12">
                 {openings.map(job => (
-                    <div key={job.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div key={job.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                             <div>
-                                <h3 className="text-white font-bold text-lg">{job.title}</h3>
+                                <h3 className="text-white font-bold text-base md:text-lg">{job.title}</h3>
                                 <div className="flex flex-wrap gap-2 mt-2">
                                     <span className="px-2.5 py-0.5 bg-nexus-accent/10 text-nexus-accent text-xs font-medium rounded-full">{job.type}</span>
                                     <span className="px-2.5 py-0.5 bg-white/5 text-gray-400 text-xs font-medium rounded-full">{job.location}</span>
@@ -147,15 +147,15 @@ export default function CareersPage() {
             </div>
 
             {/* Hiring Process */}
-            <h2 className="text-2xl font-bold text-white mb-8">How Hiring Works</h2>
-            <div className="grid gap-4 md:grid-cols-2 mb-12">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">How Hiring Works</h2>
+            <div className="grid gap-4 md:grid-cols-2 mb-6 md:mb-12">
                 {steps.map((step, i) => (
-                    <div key={step.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors flex gap-4">
+                    <div key={step.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors flex gap-4">
                         <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/30 text-nexus-accent font-black">
                             {i + 1}
                         </div>
                         <div>
-                            <h3 className="text-white font-bold text-lg mb-1">{step.title}</h3>
+                            <h3 className="text-white font-bold text-base md:text-lg mb-1">{step.title}</h3>
                             <p className="text-gray-400 text-sm">{step.desc}</p>
                         </div>
                     </div>
@@ -163,14 +163,14 @@ export default function CareersPage() {
             </div>
 
             {/* Application Tips */}
-            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors mb-12">
+            <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors mb-6 md:mb-12">
                 <div className="flex items-center gap-3 mb-4">
                     <div className="text-nexus-accent">
                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                         </svg>
                     </div>
-                    <h3 className="text-white font-bold text-lg">What to Include in Your Application</h3>
+                    <h3 className="text-white font-bold text-base md:text-lg">What to Include in Your Application</h3>
                 </div>
                 <ul className="space-y-2">
                     {applicationTips.map(tip => (
@@ -183,7 +183,7 @@ export default function CareersPage() {
             </div>
 
             {/* Perks */}
-            <h2 className="text-2xl font-bold text-white mb-6">Why Work With Us</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-6">Why Work With Us</h2>
             <div className="grid gap-4 md:grid-cols-3">
                 {perks.map(perk => (
                     <div key={perk.title} className="bg-nexus-card border border-nexus-border rounded-xl p-5">

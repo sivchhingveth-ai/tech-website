@@ -245,9 +245,9 @@ export default function HelpCenterPage() {
     return (
         <InfoPageLayout title="Help Center" description="Find answers to common questions or contact our support team.">
             {/* Browse by topic */}
-            <div className="mb-16">
-                <h2 className="text-xl font-bold text-white mb-4">Browse by topic</h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mb-8 md:mb-16">
+                <h2 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">Browse by topic</h2>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {topics.map(topic => {
                         const isExternal = topic.href.startsWith('http');
                         return (
@@ -255,11 +255,11 @@ export default function HelpCenterPage() {
                                 key={topic.title}
                                 href={topic.href}
                                 {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                                className="group bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors"
+                                className="group bg-nexus-card border border-nexus-border rounded-2xl p-4 sm:p-6 hover:border-nexus-accent/20 transition-colors"
                             >
-                                <div className="text-nexus-accent mb-4">{topic.icon}</div>
+                                <div className="text-nexus-accent mb-3">{topic.icon}</div>
                                 <h3 className="text-white font-semibold mb-1 group-hover:text-nexus-highlight transition-colors">{topic.title}</h3>
-                                <p className="text-gray-500 text-sm">{topic.desc}</p>
+                                <p className="text-gray-500 text-xs sm:text-sm">{topic.desc}</p>
                             </a>
                         );
                     })}
@@ -267,7 +267,7 @@ export default function HelpCenterPage() {
             </div>
 
             {/* Search */}
-            <div className="mb-10">
+            <div className="mb-6 md:mb-10">
                 <div className="relative">
                     <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -277,7 +277,7 @@ export default function HelpCenterPage() {
                         placeholder="Search for answers..."
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        className="w-full bg-nexus-card border border-nexus-border rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-nexus-accent transition-colors text-lg"
+                        className="w-full bg-nexus-card border border-nexus-border rounded-xl pl-12 pr-4 py-3 md:py-4 text-white placeholder-gray-500 focus:outline-none focus:border-nexus-accent transition-colors text-sm md:text-lg"
                     />
                 </div>
             </div>
@@ -289,10 +289,10 @@ export default function HelpCenterPage() {
                     <p className="text-gray-600 text-sm mt-2">Try different keywords or contact us directly.</p>
                 </div>
             ) : (
-                <div className="space-y-10">
+                <div className="space-y-6 md:space-y-10">
                     {filtered.map(cat => (
                         <div key={cat.category}>
-                            <h2 className="text-xl font-bold text-white mb-4">{cat.category}</h2>
+                            <h2 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">{cat.category}</h2>
                             <div className="space-y-2">
                                 {cat.items.map(item => {
                                     const id = `${cat.category}-${item.q}`;
@@ -301,7 +301,7 @@ export default function HelpCenterPage() {
                                         <div key={id} className="border border-nexus-border rounded-xl overflow-hidden">
                                             <button
                                                 onClick={() => setOpenItem(isOpen ? null : id)}
-                                                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-nexus-card/50 transition-colors"
+                                                className="w-full flex items-center justify-between px-4 md:px-6 py-3 md:py-4 text-left hover:bg-nexus-card/50 transition-colors"
                                             >
                                                 <span className="text-white font-medium pr-4">{item.q}</span>
                                                 <svg
@@ -315,7 +315,7 @@ export default function HelpCenterPage() {
                                                 </svg>
                                             </button>
                                             {isOpen && (
-                                                <div className="px-6 pb-4 text-gray-400 leading-relaxed border-t border-nexus-border pt-4">
+                                                <div className="px-4 md:px-6 pb-3 md:pb-4 text-gray-400 leading-relaxed border-t border-nexus-border pt-3 md:pt-4">
                                                     {item.a}
                                                 </div>
                                             )}
@@ -329,8 +329,8 @@ export default function HelpCenterPage() {
             )}
 
             {/* Popular articles */}
-            <div className="mt-16">
-                <h2 className="text-xl font-bold text-white mb-4">Popular articles</h2>
+            <div className="mt-8 md:mt-16">
+                <h2 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">Popular articles</h2>
                 <div className="bg-nexus-card border border-nexus-border rounded-2xl divide-y divide-nexus-border overflow-hidden">
                     {popularArticles.map(article => {
                         const isExternal = article.href.startsWith('http');
@@ -357,9 +357,9 @@ export default function HelpCenterPage() {
             </div>
 
             {/* Contact CTA */}
-            <div className="mt-12 bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center">
-                <h3 className="text-white text-xl font-bold mb-2">Still need help?</h3>
-                <p className="text-gray-400 mb-6">Our support team is available on Telegram for instant responses.</p>
+            <div className="mt-6 md:mt-12 bg-nexus-card border border-nexus-border rounded-2xl p-5 md:p-8 text-center">
+                <h3 className="text-white text-lg md:text-xl font-bold mb-2">Still need help?</h3>
+                <p className="text-gray-400 mb-4 md:mb-6">Our support team is available on Telegram for instant responses.</p>
                 <a
                     href="https://t.me/Chhingzi"
                     target="_blank"

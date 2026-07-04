@@ -84,11 +84,11 @@ export default function ShippingInfoPage() {
     return (
         <InfoPageLayout title="Shipping Information" description="Everything you need to know about shipping, delivery, and tracking.">
             {/* Shipping Methods */}
-            <div className="grid gap-4 md:grid-cols-3 mb-16">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8 md:mb-16">
                 {shippingMethods.map(method => (
-                    <div key={method.name} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/30 transition-colors">
+                    <div key={method.name} className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/30 transition-colors">
                         <div className="text-nexus-accent mb-4">{method.icon}</div>
-                        <h3 className="text-white font-bold text-lg mb-1">{method.name}</h3>
+                        <h3 className="text-white font-bold text-base md:text-lg mb-1">{method.name}</h3>
                         <p className="text-gray-400 text-sm mb-4">{method.time}</p>
                         <div className="border-t border-nexus-border pt-4">
                             <p className="text-white font-semibold">{method.price}</p>
@@ -99,8 +99,8 @@ export default function ShippingInfoPage() {
             </div>
 
             {/* Rates & Zones */}
-            <div className="mb-16">
-                <h2 className="text-2xl font-bold text-white mb-2">Shipping Rates &amp; Zones</h2>
+            <div className="mb-8 md:mb-16">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Shipping Rates &amp; Zones</h2>
                 <p className="text-gray-400 mb-6">We ship domestically across Cambodia and internationally worldwide from Phnom Penh. Rates below are for standard shipping; express options are available at checkout.</p>
                 <div className="bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden">
                     <div className="overflow-x-auto">
@@ -134,10 +134,10 @@ export default function ShippingInfoPage() {
             </div>
 
             {/* Order cutoff / processing */}
-            <div className="mb-16">
-                <h2 className="text-2xl font-bold text-white mb-6">Order Cutoff &amp; Processing Times</h2>
-                <div className="grid gap-4 md:grid-cols-3">
-                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+            <div className="mb-8 md:mb-16">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-6">Order Cutoff &amp; Processing Times</h2>
+                <div className="grid gap-4 md:gap-6 md:grid-cols-3">
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="text-nexus-accent mb-4">
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -146,7 +146,7 @@ export default function ShippingInfoPage() {
                         <h3 className="text-white font-semibold mb-1">2:00 PM cutoff</h3>
                         <p className="text-gray-500 text-sm">Orders placed before 2:00 PM (ICT) on a business day are processed and shipped the same day.</p>
                     </div>
-                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="text-nexus-accent mb-4">
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
@@ -155,7 +155,7 @@ export default function ShippingInfoPage() {
                         <h3 className="text-white font-semibold mb-1">Weekend orders</h3>
                         <p className="text-gray-500 text-sm">Orders placed after the cutoff, on weekends, or on public holidays ship the next business day (typically Monday).</p>
                     </div>
-                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
                         <div className="text-nexus-accent mb-4">
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -168,10 +168,10 @@ export default function ShippingInfoPage() {
             </div>
 
             {/* Packaging & Handling */}
-            <div className="mb-16">
-                <h2 className="text-2xl font-bold text-white mb-6">Packaging &amp; Handling</h2>
-                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
-                    <div className="grid gap-6 md:grid-cols-3">
+            <div className="mb-8 md:mb-16">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-6">Packaging &amp; Handling</h2>
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-4 md:p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div className="grid gap-4 md:gap-6 md:grid-cols-3">
                         <div className="flex gap-4">
                             <svg className="w-6 h-6 text-nexus-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l3-3m0 0l3 3m-3-3v6m9-6l3 3m0 0l3-3m-3 3v-6m-6-3.75A2.25 2.25 0 019 3.75h6a2.25 2.25 0 012.25 2.25" />
@@ -205,9 +205,9 @@ export default function ShippingInfoPage() {
             </div>
 
             {/* Delivery Process */}
-            <div className="mb-16">
-                <h2 className="text-2xl font-bold text-white mb-8">How It Works</h2>
-                <div className="grid gap-6 md:grid-cols-4">
+            <div className="mb-8 md:mb-16">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">How It Works</h2>
+                <div className="grid gap-4 md:gap-6 md:grid-cols-4">
                     {[
                         { step: '01', title: 'Order Placed', desc: 'Your order is confirmed and payment is processed.' },
                         { step: '02', title: 'Processing', desc: 'We pick, pack, and quality-check your items.' },
@@ -228,17 +228,17 @@ export default function ShippingInfoPage() {
 
             {/* FAQ */}
             <div>
-                <h2 className="text-2xl font-bold text-white mb-8">Frequently Asked Questions</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-8">Frequently Asked Questions</h2>
                 <div className="space-y-3">
                     {faqs.map((item, i) => (
                         <details key={i} className="group border border-nexus-border rounded-xl overflow-hidden">
-                            <summary className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-nexus-card/50 transition-colors">
+                            <summary className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 cursor-pointer hover:bg-nexus-card/50 transition-colors">
                                 <span className="text-white font-medium pr-4">{item.q}</span>
                                 <svg className="w-5 h-5 text-gray-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </summary>
-                            <div className="px-6 pb-4 text-gray-400 leading-relaxed border-t border-nexus-border pt-4">
+                            <div className="px-4 md:px-6 pb-3 md:pb-4 text-gray-400 leading-relaxed border-t border-nexus-border pt-3 md:pt-4">
                                 {item.a}
                             </div>
                         </details>
