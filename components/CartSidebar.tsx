@@ -130,17 +130,6 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                         <h3 className="text-sm font-medium text-white line-clamp-1">{item.name}</h3>
                         <p className="text-sm font-mono font-bold text-white whitespace-nowrap">${(item.price * item.quantity).toFixed(2)}</p>
                       </div>
-                      <div className="flex items-center gap-2 mt-1">
-                        {item.size && (
-                          <span className="text-[10px] px-1.5 py-0.5 bg-nexus-dark text-gray-400 border border-nexus-border rounded font-medium">{item.size}</span>
-                        )}
-                        {item.quantity === 1 && (
-                          <span className="text-[10px] text-gray-500">${item.price.toFixed(2)} each</span>
-                        )}
-                        {item.quantity > 1 && (
-                          <span className="text-[10px] text-gray-500">${item.price.toFixed(2)} each</span>
-                        )}
-                      </div>
                     </div>
 
                     {/* Bottom row: quantity + remove */}

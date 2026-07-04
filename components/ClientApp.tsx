@@ -10,7 +10,6 @@ import CheckoutForm, { CustomerInfo } from './CheckoutForm';
 import HomeView from './HomeView';
 import ShowcaseView from './ShowcaseView';
 import TelegramButton from './TelegramButton';
-import CategorySidebar from './CategorySidebar';
 import { PRODUCTS } from '../constants';
 import { Product, CartItem, Category } from '../types';
 
@@ -203,7 +202,7 @@ export default function ClientApp() {
             />
 
             <div className="flex flex-1">
-                <main className="flex-1 min-w-0 pb-20 md:pb-0">
+                <main className="flex-1 min-w-0">
                     {currentView === 'home' && (
                         <>
                             {activeCategory === 'Home' && <Hero onViewFeatures={handleViewFeatures} />}
@@ -322,7 +321,6 @@ export default function ClientApp() {
             />
 
             <TelegramButton />
-            <CategorySidebar activeCategory={activeCategory} onCategoryChange={handleNavCategoryChange} />
         </div>
     );
 }

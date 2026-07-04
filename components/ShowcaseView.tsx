@@ -33,7 +33,7 @@ const ShowcaseView: React.FC<ShowcaseViewProps> = ({ products, onAddToCart, onVi
               </p>
               <button 
                 onClick={() => onBrowseCategory(category)}
-                className="hidden md:flex items-center gap-2 mt-6 text-white text-sm font-bold hover:text-nexus-accent transition-colors group"
+                className="flex items-center gap-2 mt-4 md:mt-6 text-white text-xs sm:text-sm font-bold hover:text-nexus-accent transition-colors group"
               >
                 VIEW ALL <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
