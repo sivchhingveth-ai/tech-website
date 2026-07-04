@@ -129,7 +129,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             </div>
           </div>
           <div
-            className="w-full aspect-square rounded-lg border border-nexus-border relative group cursor-zoom-in z-10 overflow-hidden"
+            className="w-full aspect-square sm:aspect-square rounded-lg border border-nexus-border relative group cursor-zoom-in z-10 overflow-hidden max-h-[50vh] sm:max-h-none"
             onClick={() => setIsImageModalOpen(true)}
           >
             <img
@@ -227,12 +227,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
             <div className="flex flex-col items-center gap-1 w-full sm:w-auto">
               <button
                 onClick={() => onAddToCart(product)}
                 disabled={!product.inStock}
-                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-6 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
               >
                 <ShoppingBag className="mr-2 h-5 w-5" />
                 {product.inStock ? 'Add to Cart' : 'Out of Stock'}
@@ -244,7 +244,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               <button
                 onClick={() => onAddToCart(product)}
                 disabled={!product.inStock}
-                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-6 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
               >
                 {product.inStock ? 'Buy Now' : 'Out of Stock'}
               </button>
@@ -270,12 +270,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       </div>
 
       {/* Reviews Section */}
-      <div className="mt-20 border-t border-nexus-border pt-10">
-        <h2 className="text-2xl font-bold text-white mb-8">Customer Feedback</h2>
+      <div className="mt-12 sm:mt-20 border-t border-nexus-border pt-8 sm:pt-10">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">Customer Feedback</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
           {/* Review Form */}
-          <div className="bg-nexus-card p-6 rounded-xl border border-nexus-border h-fit">
+          <div className="bg-nexus-card p-4 sm:p-6 rounded-xl border border-nexus-border h-fit">
             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <Star className="h-5 w-5 text-nexus-accent" /> Write a Review
             </h3>
@@ -425,8 +425,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       </div>
 
       {/* Recommended Products Section */}
-      <div className="mt-20 pt-10 border-t border-nexus-border">
-        <h2 className="text-2xl font-bold text-white mb-8">{similarTitle}</h2>
+      <div className="mt-12 sm:mt-20 pt-8 sm:pt-10 border-t border-nexus-border">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">{similarTitle}</h2>
         {recommendations.length > 0 ? (
           <div key={product.id} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {recommendations.map((rec, index) => (

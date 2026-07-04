@@ -59,7 +59,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
     <div className={`fixed inset-0 z-[60] overflow-hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
       <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
 
-      <div className="fixed inset-y-0 right-0 w-[88%] sm:w-[75%] md:w-[40%] lg:w-[32%] flex">
+      <div className="fixed inset-y-0 right-0 w-[75%] sm:w-[55%] md:w-[35%] lg:w-[28%] flex">
         <div
           ref={sidebarRef}
           className={`w-full bg-nexus-card shadow-2xl transform transition-transform duration-500 ease-in-out border-l border-nexus-border flex flex-col h-full ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -108,7 +108,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               </div>
             ) : (
               items.map((item, index) => (
-                <div key={item.id} className="group flex gap-3 p-3 rounded-xl border border-transparent hover:border-nexus-border hover:bg-nexus-dark/50 transition-all duration-200 animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+                <div key={item.id} className="group flex gap-3 p-3 rounded-xl border border-nexus-border bg-nexus-dark/50 transition-all duration-200 animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
                   {/* Image */}
                   <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-nexus-border bg-nexus-black relative">
                     <img
@@ -154,7 +154,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                         onClick={() => onRemoveItem(item.id)}
                         aria-label="Remove item"
                         title="Remove"
-                        className="p-1.5 rounded-md text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100"
+                        className="p-1.5 rounded-md text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-all"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>

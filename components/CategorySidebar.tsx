@@ -46,7 +46,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({ activeCategory, onCat
             </aside>
 
             {/* Mobile Navigation: Fixed Bottom Bar */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-nexus-card/95 backdrop-blur-lg border-t border-nexus-border z-40 px-6 py-3 flex justify-between items-center safe-area-pb shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-nexus-card/95 backdrop-blur-lg border-t border-nexus-border z-40 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center safe-area-pb shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
                 {navCategories.map((cat) => (
                     <button
                         key={cat.id}

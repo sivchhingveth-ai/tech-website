@@ -155,7 +155,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
           <div className="relative w-full max-w-2xl bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl animate-fade-in my-auto checkout-glow">
 
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-nexus-border">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-nexus-border">
             <div className="flex items-center gap-3">
               <button
                 onClick={onBack}
@@ -176,7 +176,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-5 sm:space-y-6">
 
             {/* Contact Information */}
             <div>

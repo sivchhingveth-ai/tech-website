@@ -34,16 +34,16 @@ const Hero: React.FC<HeroProps> = ({ onViewFeatures }) => {
 
       <div className="relative z-10 max-w-7xl mx-auto overflow-hidden">
         <div className="relative pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 overflow-hidden">
-            <p className="text-xl text-gray-300 font-medium sm:max-w-xl lg:mx-0 pr-4">
+          <main className="mt-8 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 overflow-hidden">
+            <p className="text-base sm:text-xl text-gray-300 font-medium sm:max-w-xl lg:mx-0 pr-4">
               Your ultimate destination for premium keyboards, mice, and gaming accessories. Elevate your setup today.
             </p>
 
-            <div className="mt-8 sm:mt-10 flex justify-start">
+            <div className="mt-6 sm:mt-10 flex justify-start">
               <div className="rounded-md shadow">
                 <button
                   onClick={onViewFeatures}
-                  className="animate-btn-explore w-full flex items-center justify-center px-8 py-4 border border-nexus-border text-base font-bold rounded-lg text-gray-300 bg-nexus-dark md:text-lg transition-all duration-300 group hover:bg-nexus-card hover:text-white hover:border-nexus-accent hover:shadow-[0_0_30px_rgba(226,232,240,0.15)]"
+                  className="animate-btn-explore w-full flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 border border-nexus-border text-sm sm:text-base font-bold rounded-lg text-gray-300 bg-nexus-dark md:text-lg transition-all duration-300 group hover:bg-nexus-card hover:text-white hover:border-nexus-accent hover:shadow-[0_0_30px_rgba(226,232,240,0.15)]"
                 >
                   <span>Explore Now</span>
                   <ArrowRight className="ml-2 h-5 w-5 animate-arrow-loop group-hover:translate-x-2 group-hover:text-nexus-accent transition-all" />
