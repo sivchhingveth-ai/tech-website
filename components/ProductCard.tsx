@@ -19,12 +19,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-64">
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 animate-fade-in-img"
-        />
+        <div className="absolute inset-0 animate-fade-in-img">
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
 
 
         {/* Badges */}
