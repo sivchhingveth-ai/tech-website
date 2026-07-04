@@ -5,17 +5,15 @@ interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onViewDetails: (product: Product) => void;
-  index?: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails, index = 0 }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails }) => {
   const isLowStock = product.inStock && product.stock > 0 && product.stock < 10;
 
   return (
     <div
       onClick={() => onViewDetails(product)}
-      style={{ animationDelay: `${index * 60}ms` }}
-      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer animate-fade-in"
+      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer"
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-64">
