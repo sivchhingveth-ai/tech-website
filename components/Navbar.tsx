@@ -1,15 +1,13 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
-import { Product, Category } from '../types';
+import { Category } from '../types';
 
 interface NavbarProps {
   cartCount: number;
   onCartClick: () => void;
   onSearch: (query: string) => void;
   onLogoClick: () => void;
-  products: Product[];
-  onProductSelect: (product: Product) => void;
   onCategoryClick?: (category: Category) => void;
   activeCategory?: Category;
 }
@@ -19,43 +17,16 @@ const Navbar: React.FC<NavbarProps> = ({
   onCartClick,
   onSearch,
   onLogoClick,
-  products,
-  onProductSelect,
   onCategoryClick,
   activeCategory
 }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const searchContainerRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (searchContainerRef.current && !searchContainerRef.current.contains(target)) {
-        setIsSearchFocused(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
     onSearch(e.target.value);
   };
-
-  // Search Suggestion Logic
-  const filteredSuggestions = searchValue
-    ? products.filter(p =>
-      p.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchValue.toLowerCase()) ||
-      p.tagline.toLowerCase().includes(searchValue.toLowerCase())
-    )
-    : [];
 
   const navLinks: { id: Category; label: string }[] = [
     { id: 'Keyboard', label: 'Keyboards' },
@@ -78,27 +49,24 @@ const Navbar: React.FC<NavbarProps> = ({
               <img
                 src="/logo/logo.svg"
                 alt="KeyCraft Studio Logo"
-                className="h-10 md:h-14 w-auto flex-shrink-0"
+                className="hidden md:block h-14 w-auto flex-shrink-0"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
-              <span className="hidden sm:inline">
-                <span className="brand-text-gaming animate-brand-3d text-lg md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
-                  KeyCRAFT Studio
-                </span>
+              <span className="brand-text-gaming animate-brand-3d text-sm md:text-2xl lg:text-3xl tracking-wider leading-none whitespace-nowrap">
+                KEYCRAFT STUDIO
               </span>
             </button>
           </div>
 
           {/* Right Section: Search & Cart */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
-            {/* Search Bar with Dropdown - Now Responsive (Short Form) */}
-            <div className="relative" ref={searchContainerRef}>
+            {/* Search Bar */}
+            <div className="relative">
               <div className="relative group">
                 <form
                   className="w-full h-full"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    // Don't close the dropdown on submit, let the user see the results
                   }}
                 >
                   <input
@@ -106,75 +74,26 @@ const Navbar: React.FC<NavbarProps> = ({
                     placeholder="Search"
                     value={searchValue}
                     onChange={handleSearchChange}
-                    onFocus={() => setIsSearchFocused(true)}
-                    className="bg-nexus-card/50 text-gray-300 text-sm rounded-full pl-11 pr-10 py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-36 focus:w-44 sm:w-44 sm:focus:w-52 md:w-52 md:focus:w-60 lg:w-64 lg:focus:w-72 transition-all duration-300 placeholder:text-gray-600 focus:bg-nexus-black focus:shadow-[0_0_15px_rgba(226,232,240,0.1)] [&::-webkit-search-cancel-button]:hidden"
+                    className="bg-nexus-card/50 text-gray-300 text-xs sm:text-sm rounded-full pl-9 sm:pl-11 pr-9 sm:pr-11 py-1.5 sm:py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-28 focus:w-36 sm:w-44 sm:focus:w-52 md:w-52 md:focus:w-60 lg:w-64 lg:focus:w-72 transition-all duration-300 placeholder:text-gray-600 focus:bg-nexus-black focus:shadow-[0_0_15px_rgba(226,232,240,0.1)] [&::-webkit-search-cancel-button]:hidden"
                   />
                   <button
                     type="submit"
-                    className="absolute left-4 top-2.5 text-gray-500 hover:text-nexus-accent transition-all duration-200 outline-none active:scale-90"
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-nexus-accent transition-all duration-200 outline-none active:scale-90"
                     aria-label="Submit search"
                   >
-                    <Search className="h-4 w-4 pointer-events-none" />
+                    <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 pointer-events-none" />
                   </button>
                 </form>
                 {searchValue && (
                   <button
                     type="button"
                     onClick={() => { setSearchValue(''); onSearch(''); }}
-                    className="absolute right-3 top-2.5 text-gray-500 hover:text-white transition-colors"
+                    className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </button>
                 )}
               </div>
-
-              {/* Search Dropdown - fixed full-width on mobile, anchored on desktop */}
-              {isSearchFocused && (
-                <div className="fixed left-0 right-0 top-16 mx-2 sm:absolute sm:mx-0 sm:top-full sm:mt-2 sm:w-72 sm:right-0 sm:left-auto bg-nexus-black/95 backdrop-blur-md border border-nexus-border rounded-lg shadow-2xl max-h-96 overflow-y-auto animate-fade-in z-[70]">
-                  {searchValue === '' ? (
-                    <div className="p-3 text-center text-xs text-gray-500">
-                      Type to search...
-                    </div>
-                  ) : (
-                    <div className="p-2">
-                      {filteredSuggestions.length > 0 ? (
-                        <>
-                          <p className="px-2 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Products</p>
-                          {filteredSuggestions.map((product) => (
-                            <button
-                              key={product.id}
-                              onClick={() => {
-                                onProductSelect(product);
-                                setSearchValue('');
-                                onSearch('');
-                                setIsSearchFocused(false);
-                              }}
-                              className="w-full text-left px-2 py-2 rounded-md flex items-center gap-3 hover:bg-nexus-card transition-colors group"
-                            >
-                              <div className="relative w-10 h-10 flex-shrink-0">
-                                <img
-                                  src={product.image}
-                                  alt=""
-                                  className="w-full h-full rounded object-cover border border-nexus-border"
-                                />
-                              </div>
-
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-200 group-hover:text-white truncate">{product.name}</p>
-                                <p className="text-xs text-gray-500 truncate font-mono">${product.price}</p>
-                              </div>
-                            </button>
-                          ))}
-                        </>
-                      ) : (
-                        <div className="p-4 text-center text-sm text-gray-500">
-                          No matches found.
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
 
             {/* Cart Button */}

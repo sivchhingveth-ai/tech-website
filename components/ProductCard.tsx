@@ -1,4 +1,4 @@
-import { ShoppingBag, AlertCircle, Zap } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
@@ -28,25 +28,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
 
         {/* Badges */}
         <div className="absolute top-0 left-0 w-full flex justify-between p-3 pointer-events-none">
-          {/* New Badge - Left */}
-          {product.isNew && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-green-500/90 text-white text-xs font-bold shadow-sm backdrop-blur-sm animate-bounce">
-              <Zap className="w-3 h-3" />
-              NEW
-            </span>
-          )}
+          <div></div>
 
           {/* Status Badges - Right */}
-          <div className="flex flex-col gap-2 items-end ml-auto">
-            {!product.inStock && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded bg-red-500/90 text-white text-xs font-bold shadow-sm backdrop-blur-sm">
-                OUT OF STOCK
+          <div className="flex flex-col gap-1.5 items-end">
+            {product.isNew && (
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-green-500/90 text-white text-[10px] font-bold shadow-sm backdrop-blur-sm animate-bounce">
+                NEW
               </span>
             )}
             {isLowStock && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-orange-500/90 text-white text-xs font-bold shadow-sm backdrop-blur-sm animate-bounce">
-                <AlertCircle className="w-3 h-3" />
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-orange-500/90 text-white text-[10px] font-bold shadow-sm backdrop-blur-sm animate-bounce">
                 ONLY {product.stock} LEFT!
+              </span>
+            )}
+            {!product.inStock && (
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-red-500/90 text-white text-[10px] font-bold shadow-sm backdrop-blur-sm animate-bounce">
+                OUT OF STOCK
               </span>
             )}
           </div>
@@ -65,9 +63,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
             </h3>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-xs px-2 py-0.5 bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 rounded-full font-medium whitespace-nowrap">{product.category}</span>
-              {product.size && (
-                <span className="text-xs px-2 py-0.5 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full whitespace-nowrap">{product.size}</span>
-              )}
             </div>
           </div>
           <p className="text-sm sm:text-lg font-bold font-mono text-white flex-shrink-0">

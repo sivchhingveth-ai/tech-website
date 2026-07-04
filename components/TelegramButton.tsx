@@ -23,32 +23,24 @@ const TelegramButton: React.FC = () => {
     <div className="fixed bottom-6 right-6 z-50">
       {/* Chat Popup */}
       {isOpen && (
-        <div className="absolute bottom-20 right-0 w-80 max-w-[calc(100vw-3rem)] bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl shadow-black/60 overflow-hidden animate-fade-in mb-2">
+        <div className="absolute bottom-20 right-0 w-80 max-w-[calc(100vw-3rem)] animate-fade-in mb-2 telegram-glow">
+          <div className="bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
           {/* Header */}
           <div className="relative bg-nexus-dark px-4 py-4 border-b border-nexus-border">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-11 h-11 rounded-xl overflow-hidden bg-black shadow-md shadow-black/20">
-                    <img src="/logo/logo.svg" alt="KeyCraft Studio" className="w-full h-full object-cover" />
-                  </div>
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-green-400 border-2 border-nexus-dark" />
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="w-11 h-11 rounded-xl overflow-hidden bg-black shadow-md shadow-black/20">
+                  <img src="/logo/logo.svg" alt="KeyCraft Studio" className="w-full h-full object-cover" />
                 </div>
-                <div>
-                  <h3 className="text-white font-bold text-sm leading-tight">KeyCraft Studio</h3>
-                  <p className="text-gray-400 text-xs flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    Online · replies instantly
-                  </p>
-                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-green-400 border-2 border-nexus-dark" />
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                aria-label="Close chat"
-                className="text-gray-400 hover:text-white hover:bg-white/10 rounded-lg p-1 transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <div>
+                <h3 className="text-white font-bold text-sm leading-tight">KeyCraft Studio</h3>
+                <p className="text-gray-400 text-xs flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Online · replies instantly
+                </p>
+              </div>
             </div>
           </div>
 
@@ -82,15 +74,16 @@ const TelegramButton: React.FC = () => {
 
             <p className="text-center text-[11px] text-gray-600 mt-4">Opens a conversation in Telegram</p>
           </div>
+          </div>
         </div>
       )}
 
       {/* Floating Button */}
-      <div className={`relative w-12 h-12 ${isOpen ? '' : 'animate-float'}`}>
+      <div className="absolute bottom-0 right-0 w-12 h-12">
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Close chat' : 'Chat with KeyCraft Studio'}
-          className={`relative w-full h-full flex items-center justify-center overflow-hidden transition-all duration-300 ${
+          className={`relative w-full h-full flex items-center justify-center overflow-hidden transition-all duration-300 ${!isOpen ? 'animate-pulse' : ''} ${
             isOpen
               ? 'rounded-full bg-nexus-card border border-nexus-border rotate-90 hover:border-nexus-accent shadow-lg shadow-black/40'
               : 'rounded-2xl backdrop-blur-md border border-white/15 shadow-lg shadow-black/40 hover:scale-105 hover:border-nexus-accent'
