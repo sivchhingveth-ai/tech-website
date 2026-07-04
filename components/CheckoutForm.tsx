@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ArrowLeft, CreditCard, MapPin, Phone, User, Mail, Building, Globe, Camera, Trash2, QrCode, Copy, CheckCheck } from 'lucide-react';
+import { X, ArrowLeft, CreditCard, MapPin, Phone, User, Mail, Building, Globe, Camera, Trash2, Copy, CheckCheck } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface CheckoutFormProps {
@@ -24,7 +24,7 @@ export interface CustomerInfo {
   country: string;
   notes: string;
   locationImages: string[];
-  paymentMethod: 'qr' | 'cod';
+  paymentMethod: 'aba' | 'acleda' | 'cod';
 }
 
 const initialInfo: CustomerInfo = {
@@ -40,14 +40,14 @@ const initialInfo: CustomerInfo = {
   country: 'Cambodia',
   notes: '',
   locationImages: [],
-  paymentMethod: 'qr',
+  paymentMethod: 'aba',
 };
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, items, onSubmit }) => {
   const [info, setInfo] = useState<CustomerInfo>(initialInfo);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [paymentMethod, setPaymentMethod] = useState<'qr' | 'cod'>('qr');
+  const [paymentMethod, setPaymentMethod] = useState<'aba' | 'acleda' | 'cod'>('aba');
   const [copied, setCopied] = useState(false);
 
   // Lock body scroll when checkout is open
@@ -97,6 +97,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
   const handlePayWithABA = () => {
     const ref = `KeyCraft-${Date.now()}`;
     const url = `https://pay.ababank.com/abaPay?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
+    window.open(url, '_blank');
+  };
+
+  const handlePayWithACLEDA = () => {
+    const ref = `KeyCraft-${Date.now()}`;
+    const url = `https://online.acledabank.com.kh/payment?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
     window.open(url, '_blank');
   };
 
@@ -393,18 +399,34 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 Payment Method
               </h3>
               
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-3 gap-3 mb-4">
                 <button
                   type="button"
-                  onClick={() => setPaymentMethod('qr')}
+                  onClick={() => setPaymentMethod('aba')}
                   className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
-                    paymentMethod === 'qr' 
+                    paymentMethod === 'aba' 
                       ? 'border-nexus-accent bg-nexus-accent/10 text-white' 
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
                   }`}
                 >
-                  <QrCode className="h-6 w-6" />
-                  <span className="text-sm font-medium">QR Code</span>
+                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  <span className="text-sm font-medium">ABA Pay</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('acleda')}
+                  className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                    paymentMethod === 'acleda' 
+                      ? 'border-nexus-accent bg-nexus-accent/10 text-white' 
+                      : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
+                  }`}
+                >
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                  <span className="text-sm font-medium">ACLEDA</span>
                 </button>
                 <button
                   type="button"
@@ -422,24 +444,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 </button>
               </div>
 
-              {paymentMethod === 'qr' && (
+              {paymentMethod === 'aba' && (
                 <div className="bg-nexus-dark rounded-xl p-6 border border-nexus-border flex flex-col items-center gap-4 animate-fade-in">
-                  <p className="text-xs text-gray-400 text-center">Scan this QR code to pay via ABA Bank QR</p>
-                  
-                  {/* QR Code */}
-                  <div className="bg-white p-4 rounded-xl">
-                    <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ABA%3A%2F%2Fpay%3Facc%3D006281601%26amt%3D${total.toFixed(2)}%26cur%3DUSD%26ref%3DKeyCraft-${Date.now()}`}
-                      alt="Payment QR Code"
-                      className="w-44 h-44"
-                    />
-                  </div>
+                  <p className="text-xs text-gray-400 text-center">You will be redirected to ABA Pay to complete payment</p>
                   
                   {/* Bank Info */}
                   <div className="w-full space-y-2 text-sm">
                     <div className="flex justify-between text-gray-400">
                       <span>Bank</span>
-                      <span className="text-white font-medium">ABA Bank (KHQR)</span>
+                      <span className="text-white font-medium">ABA Bank</span>
                     </div>
                     <div className="flex justify-between text-gray-400">
                       <span>Account Name</span>
@@ -459,10 +472,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                         </button>
                       </div>
                     </div>
-                    <div className="flex justify-between text-gray-400 items-center">
-                      <span>KHR Account</span>
-                      <span className="text-white font-mono font-medium">006 281 621</span>
-                    </div>
                     <div className="flex justify-between text-gray-400">
                       <span>Amount</span>
                       <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
@@ -479,6 +488,56 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                     Pay with ABA Pay
+                  </button>
+                  
+                  <p className="text-xs text-gray-500 text-center">After payment, your order will be confirmed within 5 minutes.</p>
+                </div>
+              )}
+
+              {paymentMethod === 'acleda' && (
+                <div className="bg-nexus-dark rounded-xl p-6 border border-nexus-border flex flex-col items-center gap-4 animate-fade-in">
+                  <p className="text-xs text-gray-400 text-center">You will be redirected to ACLEDA Bank to complete payment</p>
+                  
+                  {/* Bank Info */}
+                  <div className="w-full space-y-2 text-sm">
+                    <div className="flex justify-between text-gray-400">
+                      <span>Bank</span>
+                      <span className="text-white font-medium">ACLEDA Bank</span>
+                    </div>
+                    <div className="flex justify-between text-gray-400">
+                      <span>Account Name</span>
+                      <span className="text-white font-medium">SIVCHHING VETH</span>
+                    </div>
+                    <div className="flex justify-between text-gray-400 items-center">
+                      <span>USD Account</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-mono font-medium">006 281 601</span>
+                        <button
+                          type="button"
+                          onClick={handleCopyPayment}
+                          className="p-1.5 rounded-lg hover:bg-nexus-card transition-colors text-gray-400 hover:text-white"
+                          title="Copy account number"
+                        >
+                          {copied ? <CheckCheck className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-gray-400">
+                      <span>Amount</span>
+                      <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
+                    </div>
+                  </div>
+
+                  {/* Direct Pay Button */}
+                  <button
+                    type="button"
+                    onClick={handlePayWithACLEDA}
+                    className="w-full flex items-center justify-center gap-2 bg-[#c41e3a] hover:bg-[#e63950] text-white rounded-xl py-3.5 text-sm font-bold transition-all duration-200 hover:shadow-[0_0_15px_rgba(196,30,58,0.4)]"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    </svg>
+                    Pay with ACLEDA Bank
                   </button>
                   
                   <p className="text-xs text-gray-500 text-center">After payment, your order will be confirmed within 5 minutes.</p>
@@ -503,16 +562,26 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
             </div>
 
             {/* Submit */}
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <CreditCard className="h-5 w-5" />
-              Place Order - ${total.toFixed(2)}
-            </button>
+            {paymentMethod === 'cod' && (
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <CreditCard className="h-5 w-5" />
+                Place Order - ${total.toFixed(2)}
+              </button>
+            )}
+
+            {paymentMethod !== 'cod' && (
+              <p className="text-xs text-center text-gray-500">
+                Click the pay button above to complete your payment. Your order will be confirmed after payment.
+              </p>
+            )}
 
             <p className="text-xs text-center text-gray-500">
-              By placing your order, you agree to our Terms of Service and Privacy Policy.
+              {paymentMethod === 'cod' 
+                ? 'By placing your order, you agree to our Terms of Service and Privacy Policy.'
+                : 'By proceeding with payment, you agree to our Terms of Service and Privacy Policy.'}
             </p>
           </form>
         </div>
