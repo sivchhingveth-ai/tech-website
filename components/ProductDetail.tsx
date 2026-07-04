@@ -443,23 +443,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       {/* Full Screen Image Modal */}
       {isImageModalOpen && (
         <div
-          className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 bg-black flex items-center justify-center p-4 animate-fade-in"
+          style={{ zIndex: 9999 }}
           onClick={() => setIsImageModalOpen(false)}
         >
           <button
             onClick={() => setIsImageModalOpen(false)}
-            className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-50 p-2 rounded-full hover:bg-white/10"
+            className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+            style={{ zIndex: 10000 }}
           >
             <X className="h-10 w-10" />
           </button>
-          <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-            <img
-              src={activeImage}
-              alt={product.name}
-              className="max-w-full max-h-full object-contain rounded-md"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
+          <img
+            src={activeImage}
+            alt={product.name}
+            className="max-w-[90vw] max-h-[90vh] object-contain rounded-md"
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>
       )}
     </div>
