@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
       className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer"
     >
       {/* Image Container — always visible, no animation */}
-      <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-64">
+      <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-32 sm:h-64">
           <img
             src={product.image}
             alt={product.name}
@@ -50,11 +50,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
       {/* Content — animated with stagger delay */}
       <div
         style={{ animationDelay: `${index * 80}ms` }}
-        className="p-5 flex flex-col flex-grow animate-fade-in"
+        className="p-3 sm:p-5 flex flex-col flex-grow animate-fade-in"
       >
-        <div className="flex justify-between items-start gap-3 mb-2">
+        <div className="flex justify-between items-start gap-2 sm:gap-3 mb-2">
           <div className="min-w-0">
-            <h3 className="text-lg font-bold text-white group-hover:text-nexus-accent transition-colors">
+            <h3 className="text-sm sm:text-lg font-bold text-white group-hover:text-nexus-accent transition-colors line-clamp-1">
               {product.name}
             </h3>
             <div className="flex items-center gap-2 mt-1">
@@ -64,33 +64,33 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
               )}
             </div>
           </div>
-          <p className="text-lg font-bold font-mono text-white flex-shrink-0">
+          <p className="text-sm sm:text-lg font-bold font-mono text-white flex-shrink-0">
             ${product.price}
           </p>
         </div>
 
-        <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+        <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-4 line-clamp-2 hidden sm:block">
           {product.tagline}
         </p>
 
         {/* Quick Specs (Mini Pills) */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-4">
           {Object.entries(product.specs).slice(0, 2).map(([key, value]) => (
-            <span key={key} className="text-xs px-2 py-1 bg-nexus-black border border-nexus-border rounded text-gray-400 truncate max-w-[150px]">
+            <span key={key} className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-nexus-black border border-nexus-border rounded text-gray-400 truncate max-w-[100px] sm:max-w-[150px]">
               {value}
             </span>
           ))}
         </div>
 
         {/* Add to Cart Button (Bottom) */}
-        <div className="mt-auto pt-4 border-t border-nexus-border/50">
+        <div className="mt-auto pt-2 sm:pt-4 border-t border-nexus-border/50">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart(product);
             }}
             disabled={!product.inStock}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-nexus-dark border border-nexus-border rounded-lg text-sm font-medium text-gray-300 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group/btn hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+            className="w-full flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-nexus-dark border border-nexus-border rounded-lg text-xs sm:text-sm font-medium text-gray-300 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group/btn hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
           >
             <ShoppingBag className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
             {product.inStock ? 'Add to Cart' : 'Out of Stock'}
