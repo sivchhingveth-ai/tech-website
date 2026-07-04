@@ -554,12 +554,19 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
 
               {paymentMethod === 'cod' && (
                 <div className="bg-nexus-dark rounded-xl p-6 border border-nexus-border animate-fade-in">
+                  <p className="text-xs text-gray-400 text-center mb-4">Pay with cash when your order arrives</p>
+                  
+                  {/* Info */}
                   <div className="w-full space-y-2 text-sm">
                     <div className="flex justify-between text-gray-400">
-                      <span>Payment</span>
+                      <span>Payment Method</span>
                       <span className="text-white font-medium">Cash on Delivery</span>
                     </div>
                     <div className="flex justify-between text-gray-400">
+                      <span>Account Name</span>
+                      <span className="text-white font-medium">SIVCHHING VETH</span>
+                    </div>
+                    <div className="flex justify-between text-gray-400 items-center">
                       <span>Delivery Fee</span>
                       <span className="text-white font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
                     </div>
@@ -567,11 +574,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <p className="text-xs text-green-400">Free shipping on orders over $100</p>
                     )}
                     <div className="flex justify-between text-gray-400">
-                      <span>Total Amount</span>
+                      <span>Amount</span>
                       <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 text-center">Pay with cash when your order is delivered. Please have the exact amount ready.</p>
+
+                  <p className="text-xs text-gray-500 mt-4 text-center">Please have the exact amount ready when your order arrives.</p>
                 </div>
               )}
             </div>
