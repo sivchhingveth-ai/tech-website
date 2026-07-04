@@ -107,7 +107,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 lg:items-start pt-6">
         {/* Image Gallery */}
-        <div className="flex flex-col-reverse">
+        <div className="flex flex-col-reverse relative z-10">
           <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
             <div className="grid grid-cols-4 gap-6">
               {product.images.map((img, idx) => (
@@ -125,13 +125,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             </div>
           </div>
           <div
-            className="w-full aspect-square rounded-lg overflow-hidden border border-nexus-border relative group cursor-zoom-in"
+            className="w-full aspect-square rounded-lg border border-nexus-border relative group cursor-zoom-in z-10 overflow-hidden"
             onClick={() => setIsImageModalOpen(true)}
           >
             <img
               src={activeImage}
               alt={product.name}
-              className="absolute inset-0 w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors opacity-0 group-hover:opacity-100">
               <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm p-3 rounded-full text-white">
