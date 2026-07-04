@@ -294,23 +294,28 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-400 mb-1.5">Country</label>
-                  <select
-                    value={info.country}
-                    onChange={(e) => handleChange('country', e.target.value)}
-                    className={inputClass('country')}
-                  >
-                    <option value="Cambodia">Cambodia</option>
-                    <option value="Thailand">Thailand</option>
-                    <option value="Vietnam">Vietnam</option>
-                    <option value="Laos">Laos</option>
-                    <option value="United States">United States</option>
-                    <option value="Canada">Canada</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Japan">Japan</option>
-                    <option value="South Korea">South Korea</option>
-                    <option value="Other">Other</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={info.country}
+                      onChange={(e) => handleChange('country', e.target.value)}
+                      className={`${inputClass('country')} appearance-none cursor-pointer pr-10`}
+                    >
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Vietnam">Vietnam</option>
+                      <option value="Laos">Laos</option>
+                      <option value="United States">United States</option>
+                      <option value="Canada">Canada</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Japan">Japan</option>
+                      <option value="South Korea">South Korea</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
