@@ -543,7 +543,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     className="w-full flex items-center justify-center gap-2 bg-[#c41e3a] hover:bg-[#e63950] text-white rounded-xl py-3.5 text-sm font-bold transition-all duration-200 hover:shadow-[0_0_15px_rgba(196,30,58,0.4)]"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                     Pay with ACLEDA Bank
                   </button>
