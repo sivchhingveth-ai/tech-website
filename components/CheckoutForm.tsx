@@ -409,8 +409,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
                   }`}
                 >
-                  <div className="h-6 w-16 flex items-center justify-center">
-                    <img src="/logo/aba-logo.jpg" alt="ABA Pay" className="h-6 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }} />
+                  <div className="h-10 w-10 flex items-center justify-center">
+                    <img src="/logo/aba-logo.jpg" alt="ABA Pay" className="h-10 w-10 object-contain rounded-lg" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }} />
                     <svg className="h-6 w-6 hidden" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
@@ -426,8 +426,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
                   }`}
                 >
-                  <div className="h-6 w-16 flex items-center justify-center">
-                    <img src="/logo/acleda-logo.jpg" alt="ACLEDA Bank" className="h-6 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }} />
+                  <div className="h-10 w-10 flex items-center justify-center">
+                    <img src="/logo/acleda-logo.jpg" alt="ACLEDA Bank" className="h-10 w-10 object-contain rounded-lg" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }} />
                     <svg className="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
@@ -443,9 +443,11 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       : 'border-nexus-border bg-nexus-dark text-gray-400 hover:border-gray-500'
                   }`}
                 >
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+                  <div className="h-10 w-10 flex items-center justify-center">
+                    <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
                   <span className="text-sm font-medium">Cash on Delivery</span>
                 </button>
               </div>
