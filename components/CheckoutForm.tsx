@@ -24,6 +24,7 @@ export interface CustomerInfo {
   country: string;
   notes: string;
   locationImages: string[];
+  paymentMethod: 'qr' | 'cod';
 }
 
 const initialInfo: CustomerInfo = {
@@ -39,6 +40,7 @@ const initialInfo: CustomerInfo = {
   country: 'Cambodia',
   notes: '',
   locationImages: [],
+  paymentMethod: 'qr',
 };
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, items, onSubmit }) => {
@@ -109,7 +111,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) onSubmit(info);
+    if (validate()) {
+      onSubmit({ ...info, paymentMethod });
+    }
   };
 
   if (!isOpen) return null;
