@@ -546,7 +546,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
 
               {paymentMethod === 'cod' && (
                 <div className="bg-nexus-dark rounded-xl p-5 border border-nexus-border animate-fade-in">
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-3 mb-4">
                     <div className="p-2 bg-nexus-accent/10 rounded-lg">
                       <svg className="h-5 w-5 text-nexus-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -556,6 +556,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                       <p className="text-sm text-white font-medium">Cash on Delivery</p>
                       <p className="text-xs text-gray-400 mt-1">Pay with cash when your order is delivered. Please have the exact amount ready.</p>
                     </div>
+                  </div>
+                  <div className="border-t border-nexus-border pt-3 space-y-2 text-sm">
+                    <div className="flex justify-between text-gray-400">
+                      <span>Delivery Fee</span>
+                      <span className="text-white font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                    </div>
+                    {shipping === 0 && (
+                      <p className="text-xs text-green-400">Free shipping on orders over $100</p>
+                    )}
                   </div>
                 </div>
               )}
