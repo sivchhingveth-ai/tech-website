@@ -579,22 +579,20 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-500 mt-4 text-center">Please have the exact amount ready when your order arrives.</p>
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98] mt-4"
+                  >
+                    <CreditCard className="h-5 w-5" />
+                    Pay with Delivery
+                  </button>
+
+                  <p className="text-xs text-gray-500 mt-3 text-center">Please have the exact amount ready when your order arrives.</p>
                 </div>
               )}
             </div>
 
             {/* Submit */}
-            {paymentMethod === 'cod' && (
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <CreditCard className="h-5 w-5" />
-                Pay with Delivery
-              </button>
-            )}
-
             {paymentMethod !== 'cod' && (
               <p className="text-xs text-center text-gray-500">
                 Click the pay button above to complete your payment. Your order will be confirmed after payment.
