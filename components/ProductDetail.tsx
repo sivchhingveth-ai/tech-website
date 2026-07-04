@@ -195,12 +195,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           </div>
 
           {/* Features List */}
-          <div className="mt-8 border-t border-nexus-border pt-8">
+          <div className="mt-5 sm:mt-8 border-t border-nexus-border pt-5 sm:pt-8">
             <h3 className="text-sm font-medium text-white">Highlights</h3>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-3 sm:mt-4 grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-1.5 sm:space-y-2 sm:gap-x-0">
               {product.features.map((feature, i) => (
-                <li key={i} className="flex items-center text-sm text-gray-400">
-                  <Check className="h-4 w-4 text-nexus-accent mr-3" />
+                <li key={i} className="flex items-center text-xs sm:text-sm text-gray-400">
+                  <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-nexus-accent mr-2 sm:mr-3 flex-shrink-0" />
                   {feature}
                 </li>
               ))}
@@ -208,48 +208,42 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           </div>
 
           {/* Specs Table */}
-          <div className="mt-8 border-t border-nexus-border pt-8">
-            <h3 className="text-sm font-medium text-white mb-4">Specifications</h3>
-            <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+          <div className="mt-5 sm:mt-8 border-t border-nexus-border pt-5 sm:pt-8">
+            <h3 className="text-sm font-medium text-white mb-3 sm:mb-4">Specifications</h3>
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5 sm:gap-x-4 sm:gap-y-4">
               {product.size && (
-                <div className="border-b border-nexus-border/50 pb-2">
-                  <dt className="text-xs text-gray-500 uppercase">Size / Layout</dt>
-                  <dd className="mt-1 text-sm text-white font-medium">{product.size}</dd>
+                <div className="border-b border-nexus-border/50 pb-1.5 sm:pb-2">
+                  <dt className="text-[10px] sm:text-xs text-gray-500 uppercase">Size / Layout</dt>
+                  <dd className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-white font-medium">{product.size}</dd>
                 </div>
               )}
               {Object.entries(product.specs).map(([key, value]) => (
-                <div key={key} className="border-b border-nexus-border/50 pb-2">
-                  <dt className="text-xs text-gray-500 uppercase">{key}</dt>
-                  <dd className="mt-1 text-sm text-white font-medium">{value}</dd>
+                <div key={key} className="border-b border-nexus-border/50 pb-1.5 sm:pb-2">
+                  <dt className="text-[10px] sm:text-xs text-gray-500 uppercase">{key}</dt>
+                  <dd className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-white font-medium">{value}</dd>
                 </div>
               ))}
             </dl>
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
-            <div className="flex flex-col items-center gap-1 w-full sm:w-auto">
-              <button
-                onClick={() => onAddToCart(product)}
-                disabled={!product.inStock}
-                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-6 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
-              >
-                <ShoppingBag className="mr-2 h-5 w-5" />
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-              </button>
-              <span className="text-[10px] text-gray-500 tracking-wide">Add to cart</span>
-            </div>
+          <div className="mt-6 sm:mt-10 flex gap-3 sm:gap-4">
+            <button
+              onClick={() => onAddToCart(product)}
+              disabled={!product.inStock}
+              className="flex-1 bg-nexus-card border border-nexus-border rounded-md py-3 px-4 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+            >
+              <ShoppingBag className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+            </button>
 
-            <div className="flex flex-col items-center gap-1 w-full sm:w-auto">
-              <button
-                onClick={() => onAddToCart(product)}
-                disabled={!product.inStock}
-                className="w-full sm:w-auto bg-nexus-card border border-nexus-border rounded-md py-3 px-6 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
-              >
-                {product.inStock ? 'Buy Now' : 'Out of Stock'}
-              </button>
-              <span className="text-[10px] text-gray-500 tracking-wide">Buy now</span>
-            </div>
+            <button
+              onClick={() => onAddToCart(product)}
+              disabled={!product.inStock}
+              className="flex-1 bg-nexus-card border border-nexus-border rounded-md py-3 px-4 sm:px-8 flex items-center justify-center text-sm sm:text-base font-medium text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nexus-accent focus:ring-offset-nexus-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+            >
+              {product.inStock ? 'Buy Now' : 'Out of Stock'}
+            </button>
           </div>
 
           <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 text-center">

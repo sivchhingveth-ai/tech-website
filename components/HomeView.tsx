@@ -20,8 +20,8 @@ const HomeView: React.FC<HomeViewProps> = ({ products, onAddToCart, onViewDetail
       <section>
         <div className="flex items-end mb-8">
             <div>
-                 <h2 className="text-3xl md:text-4xl font-extrabold text-white">Latest Drops</h2>
-                 <p className="text-gray-400 mt-2">The latest engineering marvels from the lab.</p>
+                 <h2 className="text-3xl md:text-4xl font-extrabold text-white">New Arrivals</h2>
+                 <p className="text-gray-400 mt-2">Fresh gear just landed in the shop.</p>
             </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
