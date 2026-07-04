@@ -452,11 +452,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           >
             <X className="h-10 w-10" />
           </button>
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full max-w-4xl max-h-[85vh] flex items-center justify-center overflow-hidden">
             <img
               src={activeImage}
               alt={product.name}
-              className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-md"
+              className="max-w-full max-h-full object-contain rounded-md"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
