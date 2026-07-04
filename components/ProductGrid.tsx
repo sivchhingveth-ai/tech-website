@@ -71,7 +71,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
                 key={size}
                 onClick={() => setActiveSize(size)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${activeSize === size
-                  ? 'bg-nexus-accent text-white border-nexus-accent shadow-[0_0_10px_rgba(139,92,246,0.3)]'
+                   ? 'bg-nexus-accent text-nexus-dark border-nexus-accent shadow-[0_0_10px_rgba(226,232,240,0.2)]'
                   : 'bg-nexus-card text-gray-400 border-nexus-border hover:border-nexus-accent/50 hover:text-white'
                   }`}
               >

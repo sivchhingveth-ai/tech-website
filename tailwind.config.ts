@@ -20,8 +20,8 @@ const config: Config = {
                     dark: '#0a0a0a',
                     card: '#121212',
                     border: '#3a3a3a',
-                    accent: '#8b5cf6', // Violet
-                    accentGlow: '#a78bfa',
+                    accent: '#e2e8f0', // White/Gray
+                    accentGlow: '#f1f5f9',
                     highlight: '#00f3ff', // Cyan
                 }
             },
@@ -31,8 +31,13 @@ const config: Config = {
                 'spin-3d': 'spin3d 8s linear infinite',
                 'shake': 'shake 0.5s ease-in-out',
                 'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 3s ease-in-out infinite',
             },
             keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-6px)' },
+                },
                 fadeIn: {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },

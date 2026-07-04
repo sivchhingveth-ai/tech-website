@@ -47,19 +47,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
 
       {/* Content */}
       <div className="p-5 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-2">
-          <div>
+        <div className="flex justify-between items-start gap-3 mb-2">
+          <div className="min-w-0">
             <h3 className="text-lg font-bold text-white group-hover:text-nexus-accent transition-colors">
               {product.name}
             </h3>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs px-2 py-0.5 bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 rounded-full font-medium">{product.category}</span>
+              <span className="text-xs px-2 py-0.5 bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 rounded-full font-medium whitespace-nowrap">{product.category}</span>
               {product.size && (
-                <span className="text-xs px-2 py-0.5 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full">{product.size}</span>
+                <span className="text-xs px-2 py-0.5 bg-nexus-dark text-gray-400 border border-nexus-border rounded-full whitespace-nowrap">{product.size}</span>
               )}
             </div>
           </div>
-          <p className="text-lg font-bold font-mono text-white">
+          <p className="text-lg font-bold font-mono text-white flex-shrink-0">
             ${product.price}
           </p>
         </div>

@@ -28,7 +28,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({ activeCategory, onCat
                             className={`
                             group flex flex-col items-center justify-center gap-1.5 w-20 h-20 rounded-xl transition-all duration-300 relative
                             ${activeCategory === cat.id
-                                    ? 'bg-nexus-accent/10 text-nexus-accent shadow-[0_0_15px_rgba(139,92,246,0.15)] border border-nexus-accent/20'
+                                    ? 'bg-nexus-accent/10 text-nexus-accent shadow-[0_0_15px_rgba(226,232,240,0.15)] border border-nexus-accent/20'
                                     : 'text-gray-500 hover:text-white hover:bg-white/5 border border-transparent'}
                         `}
                             title={cat.label}
@@ -38,7 +38,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({ activeCategory, onCat
 
                             {/* Active Indicator Dot */}
                             {activeCategory === cat.id && (
-                                <div className="absolute right-1.5 top-1.5 w-1.5 h-1.5 rounded-full bg-nexus-accent shadow-[0_0_5px_#8b5cf6]" />
+                                <div className="absolute right-1.5 top-1.5 w-1.5 h-1.5 rounded-full bg-nexus-accent shadow-[0_0_5px_rgba(226,232,240,0.5)]" />
                             )}
                         </button>
                     ))}
@@ -53,7 +53,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({ activeCategory, onCat
                         onClick={() => onCategoryChange(cat.id)}
                         className={`flex flex-col items-center gap-1 transition-all duration-300 ${activeCategory === cat.id ? 'text-nexus-accent -translate-y-1' : 'text-gray-500'}`}
                     >
-                        <cat.icon className={`h-6 w-6 ${activeCategory === cat.id ? 'stroke-[2.5px] drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]' : ''}`} />
+                        <cat.icon className={`h-6 w-6 ${activeCategory === cat.id ? 'stroke-[2.5px] drop-shadow-[0_0_8px_rgba(226,232,240,0.5)]' : ''}`} />
                         <span className="text-[10px] font-medium">{cat.label}</span>
                     </button>
                 ))}

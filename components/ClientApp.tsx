@@ -189,7 +189,7 @@ export default function ClientApp() {
     const handleNavCategoryChange = (cat: Category) => navigate('home', cat, null, `/${cat.toLowerCase()}`);
 
     return (
-        <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-white flex flex-col">
+        <div className="min-h-screen bg-nexus-black text-gray-100 font-sans selection:bg-nexus-accent selection:text-nexus-dark flex flex-col">
             <Navbar
                 cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
                 onCartClick={() => setIsCartOpen(true)}
@@ -227,9 +227,9 @@ export default function ClientApp() {
             <footer className="bg-nexus-dark border-t border-nexus-border mt-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10 mb-10">
                         {/* Brand */}
-                        <div className="lg:col-span-2">
+                        <div className="col-span-2 md:col-span-4 lg:col-span-2">
                             <h3 className="text-white font-bold text-xl mb-3">KEYCRAFT STUDIO</h3>
                             <p className="text-gray-500 text-sm mb-4 max-w-xs">Premium keyboards, mice, and gaming accessories. Elevating your digital experience since 2024.</p>
                             <div className="flex gap-3">
@@ -267,7 +267,7 @@ export default function ClientApp() {
                                 <li><a href="/shipping-info" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Shipping Info</a></li>
                                 <li><a href="/returns" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Returns & Refunds</a></li>
                                 <li><a href="/warranty" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Warranty</a></li>
-                                <li><a href="https://t.me/Chhingzi" target="_blank" rel="noopener noreferrer" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Contact Us</a></li>
+                                <li><a href="/contact" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Contact Us</a></li>
                             </ul>
                         </div>
 

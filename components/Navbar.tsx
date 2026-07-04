@@ -103,11 +103,11 @@ const Navbar: React.FC<NavbarProps> = ({
                 >
                   <input
                     type="search"
-                    placeholder="Search..."
+                    placeholder="Search"
                     value={searchValue}
                     onChange={handleSearchChange}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="bg-nexus-card/50 text-gray-300 text-sm rounded-full pl-11 pr-10 py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-28 focus:w-36 sm:w-40 sm:focus:w-48 md:w-44 md:focus:w-56 lg:w-64 lg:focus:w-72 transition-all duration-300 placeholder:text-gray-600 focus:bg-nexus-black focus:shadow-[0_0_15px_rgba(139,92,246,0.3)] [&::-webkit-search-cancel-button]:hidden"
+                    className="bg-nexus-card/50 text-gray-300 text-sm rounded-full pl-11 pr-10 py-2 border border-nexus-border focus:outline-none focus:border-nexus-accent focus:ring-1 focus:ring-nexus-accent w-36 focus:w-44 sm:w-44 sm:focus:w-52 md:w-52 md:focus:w-60 lg:w-64 lg:focus:w-72 transition-all duration-300 placeholder:text-gray-600 focus:bg-nexus-black focus:shadow-[0_0_15px_rgba(226,232,240,0.1)] [&::-webkit-search-cancel-button]:hidden"
                   />
                   <button
                     type="submit"
@@ -184,7 +184,7 @@ const Navbar: React.FC<NavbarProps> = ({
             >
               <ShoppingBag className="h-6 w-6 group-hover:scale-105 transition-transform" />
               {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-white bg-nexus-accent rounded-full border-2 border-nexus-black shadow-[0_0_8px_rgba(139,92,246,0.6)]">
+                <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-nexus-dark bg-nexus-accent rounded-full border-2 border-nexus-black shadow-[0_0_8px_rgba(226,232,240,0.4)]">
                   {cartCount}
                 </span>
               )}

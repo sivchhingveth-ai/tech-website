@@ -355,7 +355,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-2 bg-nexus-accent/10 border border-nexus-accent/50 text-nexus-accent font-bold rounded-md hover:bg-nexus-accent hover:text-white transition-all duration-300"
+                className="w-full py-2 bg-nexus-accent/10 border border-nexus-accent/50 text-nexus-accent font-bold rounded-md hover:bg-nexus-accent hover:text-nexus-dark transition-all duration-300"
               >
                 Submit Review
               </button>

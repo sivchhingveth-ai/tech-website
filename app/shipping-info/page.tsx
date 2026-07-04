@@ -38,10 +38,17 @@ const shippingMethods = [
     },
 ];
 
+const rateRows = [
+    { zone: 'Phnom Penh', detail: 'Same-day / next-day', time: 'Same day (before 2 PM) – 1 day', rate: '$4.99', free: 'Over $50' },
+    { zone: 'Provinces (Cambodia)', detail: 'Nationwide delivery', time: '2-4 business days', rate: '$4.99', free: 'Over $50' },
+    { zone: 'International Zone 1', detail: 'Asia', time: '7-10 business days', rate: 'From $19.99', free: 'Over $150' },
+    { zone: 'International Zone 2', detail: 'Rest of world', time: '10-14 business days', rate: 'From $29.99', free: 'Over $150' },
+];
+
 const faqs = [
     {
         q: 'How do I get free shipping?',
-        a: 'Standard shipping is free on orders over $50. Express shipping is free on orders over $150. These thresholds are calculated after discounts and before taxes.',
+        a: 'Standard shipping is free on orders over $50 within Cambodia. International shipping is free on orders over $150. These thresholds are calculated after discounts and before taxes.',
     },
     {
         q: 'Do you offer same-day delivery?',
@@ -49,7 +56,7 @@ const faqs = [
     },
     {
         q: 'Can I choose a delivery time slot?',
-        a: 'For express and same-day deliveries, you can request a preferred time window (morning/afternoon/evening) in the order notes. We\'ll do our best to accommodate.',
+        a: 'For express and same-day deliveries, you can request a preferred time window (morning/afternoon/evening) in the order notes. We’ll do our best to accommodate.',
     },
     {
         q: 'What carriers do you use?',
@@ -57,7 +64,19 @@ const faqs = [
     },
     {
         q: 'How can I track my shipment?',
-        a: 'After your order ships, you\'ll receive an email with a tracking number and carrier link. You can also contact us on Telegram with your order ID for a status update.',
+        a: 'After your order ships, you’ll receive an email with a tracking number and carrier link. You can also contact us on Telegram with your order ID for a status update.',
+    },
+    {
+        q: 'Will I pay customs duties or taxes on international orders?',
+        a: 'International shipments may be subject to import duties and taxes charged by the destination country. These are set by your local customs authority and are the recipient’s responsibility, paid on delivery. We declare all shipments accurately and cannot mark orders as gifts.',
+    },
+    {
+        q: 'Can I change my shipping address after ordering?',
+        a: 'If your order hasn’t shipped yet, we can usually update the address. Message us on Telegram @Chhingzi with your order number as soon as possible. Once a package is with the carrier, we’re unable to redirect it.',
+    },
+    {
+        q: 'Do you deliver to PO boxes or offer pickup?',
+        a: 'Most couriers require a physical street address, so we recommend one where possible. Local pickup from our Phnom Penh showroom is available free of charge — select the pickup note at checkout and we’ll message you when your order is ready.',
     },
 ];
 
@@ -77,6 +96,112 @@ export default function ShippingInfoPage() {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            {/* Rates & Zones */}
+            <div className="mb-16">
+                <h2 className="text-2xl font-bold text-white mb-2">Shipping Rates &amp; Zones</h2>
+                <p className="text-gray-400 mb-6">We ship domestically across Cambodia and internationally worldwide from Phnom Penh. Rates below are for standard shipping; express options are available at checkout.</p>
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <div className="min-w-[640px]">
+                            {/* Header row */}
+                            <div className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-nexus-border bg-nexus-dark/40">
+                                <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Zone</div>
+                                <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Delivery Time</div>
+                                <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Standard Rate</div>
+                                <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Free Over</div>
+                            </div>
+                            {/* Data rows */}
+                            {rateRows.map((row, i) => (
+                                <div
+                                    key={row.zone}
+                                    className={`grid grid-cols-4 gap-4 px-6 py-4 ${i < rateRows.length - 1 ? 'border-b border-nexus-border' : ''}`}
+                                >
+                                    <div>
+                                        <p className="text-white font-medium">{row.zone}</p>
+                                        <p className="text-gray-600 text-xs mt-0.5">{row.detail}</p>
+                                    </div>
+                                    <div className="text-gray-400 text-sm">{row.time}</div>
+                                    <div className="text-white text-sm font-semibold">{row.rate}</div>
+                                    <div className="text-nexus-highlight text-sm">{row.free}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <p className="text-gray-600 text-xs mt-3">International rates are estimates and finalized at checkout based on weight, dimensions, and destination. Duties and taxes are not included.</p>
+            </div>
+
+            {/* Order cutoff / processing */}
+            <div className="mb-16">
+                <h2 className="text-2xl font-bold text-white mb-6">Order Cutoff &amp; Processing Times</h2>
+                <div className="grid gap-4 md:grid-cols-3">
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                        <div className="text-nexus-accent mb-4">
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 className="text-white font-semibold mb-1">2:00 PM cutoff</h3>
+                        <p className="text-gray-500 text-sm">Orders placed before 2:00 PM (ICT) on a business day are processed and shipped the same day.</p>
+                    </div>
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                        <div className="text-nexus-accent mb-4">
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                            </svg>
+                        </div>
+                        <h3 className="text-white font-semibold mb-1">Weekend orders</h3>
+                        <p className="text-gray-500 text-sm">Orders placed after the cutoff, on weekends, or on public holidays ship the next business day (typically Monday).</p>
+                    </div>
+                    <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                        <div className="text-nexus-accent mb-4">
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
+                        </div>
+                        <h3 className="text-white font-semibold mb-1">Made-to-order items</h3>
+                        <p className="text-gray-500 text-sm">Custom-built keyboards and pre-orders require additional handling time; the estimate is shown on the product page.</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Packaging & Handling */}
+            <div className="mb-16">
+                <h2 className="text-2xl font-bold text-white mb-6">Packaging &amp; Handling</h2>
+                <div className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                    <div className="grid gap-6 md:grid-cols-3">
+                        <div className="flex gap-4">
+                            <svg className="w-6 h-6 text-nexus-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l3-3m0 0l3 3m-3-3v6m9-6l3 3m0 0l3-3m-3 3v-6m-6-3.75A2.25 2.25 0 019 3.75h6a2.25 2.25 0 012.25 2.25" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75A2.25 2.25 0 016 4.5h12a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0118 19.5H6a2.25 2.25 0 01-2.25-2.25V6.75z" />
+                            </svg>
+                            <div>
+                                <h3 className="text-white font-semibold mb-1">Protective packing</h3>
+                                <p className="text-gray-500 text-sm">Electronics ship in anti-static bags with foam and molded inserts so switches, PCBs, and keycaps arrive undamaged.</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <svg className="w-6 h-6 text-nexus-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                            </svg>
+                            <div>
+                                <h3 className="text-white font-semibold mb-1">Eco-friendly materials</h3>
+                                <p className="text-gray-500 text-sm">We use recyclable boxes and paper-based void fill, minimizing single-use plastics wherever possible.</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <svg className="w-6 h-6 text-nexus-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                            </svg>
+                            <div>
+                                <h3 className="text-white font-semibold mb-1">Discreet packaging</h3>
+                                <p className="text-gray-500 text-sm">All parcels ship in plain, unbranded outer boxes with no price details on the exterior for your privacy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Delivery Process */}

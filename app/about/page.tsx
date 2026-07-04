@@ -9,6 +9,37 @@ const stats = [
     { value: '24/7', label: 'Customer Support' },
 ];
 
+const whatWeDo = [
+    {
+        title: 'Curated Gear',
+        desc: 'Every keyboard, mouse, and keycap set is chosen by enthusiasts who actually use it — no filler, no fluff.',
+        icon: (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+            </svg>
+        ),
+    },
+    {
+        title: 'Try Before You Buy',
+        desc: 'Our Phnom Penh showroom and switch-tester station let you feel every switch and layout before you commit.',
+        icon: (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        ),
+    },
+    {
+        title: 'Community & Education',
+        desc: 'We host build sessions, share guides, and answer questions so newcomers and veterans both level up their setups.',
+        icon: (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+        ),
+    },
+];
+
 const values = [
     {
         title: 'Quality First',
@@ -48,6 +79,57 @@ const values = [
     },
 ];
 
+const milestones = [
+    {
+        year: '2024',
+        title: 'KeyCraft Studio is founded',
+        desc: 'Started in Phnom Penh with a small, hand-picked collection of mechanical keyboards for the local community.',
+    },
+    {
+        year: '2024',
+        title: 'First 1,000 orders shipped',
+        desc: 'Word spread fast. We crossed a thousand orders in our first months by focusing on gear we would genuinely recommend to a friend.',
+    },
+    {
+        year: '2025',
+        title: 'Showroom & switch-tester station open',
+        desc: 'We opened our Phnom Penh showroom with a dedicated switch-tester station so customers can feel every switch before buying.',
+    },
+    {
+        year: '2025',
+        title: '50+ brands on the shelf',
+        desc: 'Direct partnerships grew our catalog past fifty brands — from budget-friendly staples to premium enthusiast builds.',
+    },
+    {
+        year: '2026',
+        title: '5,000+ products sold nationwide',
+        desc: 'Now serving customers across Cambodia with same-day delivery in Phnom Penh and fast express shipping nationwide.',
+    },
+];
+
+const team = [
+    {
+        role: 'Founders & Buyers',
+        initials: 'FB',
+        desc: 'Set the vision and personally curate every brand and product we bring to Cambodia.',
+    },
+    {
+        role: 'Build & Repair Techs',
+        initials: 'BR',
+        desc: 'Assemble custom keyboards, lube and mod switches, and keep every build running like new.',
+    },
+    {
+        role: 'Customer Care',
+        initials: 'CC',
+        desc: 'Answer questions around the clock on Telegram and make sure every order arrives right.',
+    },
+    {
+        role: 'Content & Community',
+        initials: 'CO',
+        desc: 'Create reviews and guides, run build sessions, and grow the KeyCraft enthusiast community.',
+    },
+];
+
 export default function AboutPage() {
     return (
         <InfoPageLayout title="About KeyCraft Studio" description="Cambodia's premier destination for mechanical keyboards, gaming mice, and enthusiast accessories.">
@@ -64,12 +146,52 @@ export default function AboutPage() {
                 </p>
             </div>
 
+            {/* Mission / What We Do */}
+            <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
+            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                To make premium mechanical keyboards and gaming gear genuinely accessible in Cambodia — with honest advice, hands-on testing, and support that treats every customer like part of the community.
+            </p>
+            <div className="grid gap-6 md:grid-cols-3 mb-16">
+                {whatWeDo.map(item => (
+                    <div key={item.title} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                        <div className="text-nexus-accent mb-3">{item.icon}</div>
+                        <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
+                        <p className="text-gray-400 text-sm">{item.desc}</p>
+                    </div>
+                ))}
+            </div>
+
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
                 {stats.map(stat => (
                     <div key={stat.label} className="text-center">
                         <div className="text-3xl md:text-4xl font-black text-nexus-accent mb-1">{stat.value}</div>
                         <div className="text-gray-500 text-sm">{stat.label}</div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Milestones */}
+            <h2 className="text-2xl font-bold text-white mb-8">Our Journey</h2>
+            <div className="mb-16">
+                {milestones.map((m, i) => (
+                    <div key={`${m.year}-${i}`} className="relative flex gap-4 pb-8 last:pb-0 md:gap-6">
+                        {/* Connector: runs from the bottom of this badge to the top of the next one */}
+                        {i < milestones.length - 1 && (
+                            <span
+                                aria-hidden="true"
+                                className="absolute left-6 top-12 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-nexus-accent/40 to-nexus-border md:left-8 md:top-16"
+                            />
+                        )}
+                        <div className="relative z-10 flex-shrink-0">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/40 text-nexus-accent text-xs font-black ring-4 ring-nexus-black md:h-16 md:w-16 md:text-sm">
+                                {m.year}
+                            </div>
+                        </div>
+                        <div className="flex-1 bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors">
+                            <h3 className="text-white font-bold text-lg mb-1">{m.title}</h3>
+                            <p className="text-gray-400 text-sm">{m.desc}</p>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -86,12 +208,31 @@ export default function AboutPage() {
                 ))}
             </div>
 
+            {/* Meet the Team */}
+            <h2 className="text-2xl font-bold text-white mb-4">Meet the Team</h2>
+            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                We&apos;re a small crew of keyboard enthusiasts wearing a lot of hats. Here&apos;s who keeps KeyCraft running.
+            </p>
+            <div className="grid gap-6 md:grid-cols-2 mb-16">
+                {team.map(member => (
+                    <div key={member.role} className="bg-nexus-card border border-nexus-border rounded-2xl p-6 hover:border-nexus-accent/20 transition-colors flex items-center gap-4">
+                        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-nexus-accent/10 border border-nexus-accent/30 text-nexus-accent font-black">
+                            {member.initials}
+                        </div>
+                        <div>
+                            <h3 className="text-white font-bold text-lg mb-1">{member.role}</h3>
+                            <p className="text-gray-400 text-sm">{member.desc}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
             {/* CTA */}
             <div className="bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center">
                 <h3 className="text-white text-xl font-bold mb-2">Join the Community</h3>
                 <p className="text-gray-400 mb-6">Follow us on social media for the latest drops, reviews, and exclusive deals.</p>
                 <div className="flex justify-center gap-4">
-                    <a href="https://t.me/Chhingzi" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-nexus-accent text-white px-5 py-2.5 rounded-xl font-bold hover:bg-nexus-accentGlow transition-colors text-sm">
+                    <a href="https://t.me/Chhingzi" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-nexus-accent text-nexus-dark px-5 py-2.5 rounded-xl font-bold hover:bg-nexus-accentGlow transition-colors text-sm">
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                         Telegram
                     </a>
