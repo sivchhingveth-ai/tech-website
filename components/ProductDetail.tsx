@@ -425,12 +425,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
         <h2 className="text-2xl font-bold text-white mb-8">{similarTitle}</h2>
         {recommendations.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {recommendations.map(rec => (
+            {recommendations.map((rec, index) => (
               <ProductCard
                 key={rec.id}
                 product={rec}
                 onAddToCart={onAddToCart}
                 onViewDetails={onViewDetails}
+                index={index}
               />
             ))}
           </div>

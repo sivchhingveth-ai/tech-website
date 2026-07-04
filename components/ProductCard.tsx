@@ -5,14 +5,16 @@ interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onViewDetails: (product: Product) => void;
+  index?: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails, index = 0 }) => {
   const isLowStock = product.inStock && product.stock > 0 && product.stock < 10;
 
   return (
     <div
       onClick={() => onViewDetails(product)}
+      style={{ animationDelay: `${index * 80}ms` }}
       className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full animate-fade-in cursor-pointer"
     >
       {/* Image Container */}
@@ -20,7 +22,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
         <img
           src={product.image}
           alt={product.name}
-          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 animate-fade-in-img"
         />
 
 

@@ -26,7 +26,8 @@ const config: Config = {
                 }
             },
             animation: {
-                'fade-in': 'fadeIn 0.5s ease-out',
+                'fade-in': 'fadeIn 0.5s ease-out forwards',
+                'fade-in-img': 'fadeInImg 0.8s ease-out forwards',
                 'slide-in': 'slideIn 0.3s ease-out',
                 'spin-3d': 'spin3d 8s linear infinite',
                 'shake': 'shake 0.5s ease-in-out',
@@ -39,8 +40,12 @@ const config: Config = {
                     '50%': { transform: 'translateY(-6px)' },
                 },
                 fadeIn: {
-                    '0%': { opacity: '0' },
-                    '100%': { opacity: '1' },
+                    '0%': { opacity: '0', transform: 'translateY(8px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                fadeInImg: {
+                    '0%': { opacity: '0', transform: 'scale(1.05)' },
+                    '100%': { opacity: '1', transform: 'scale(1)' },
                 },
                 slideIn: {
                     '0%': { transform: 'translateX(100%)' },
