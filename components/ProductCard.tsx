@@ -5,9 +5,10 @@ interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onViewDetails: (product: Product) => void;
+  index?: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewDetails, index = 0 }) => {
   const isLowStock = product.inStock && product.stock > 0 && product.stock < 10;
 
   return (
@@ -15,7 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
       onClick={() => onViewDetails(product)}
       className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer"
     >
-      {/* Image Container */}
+      {/* Image Container — always visible, no animation */}
       <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-64">
           <img
             src={product.image}
@@ -46,8 +47,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-grow">
+      {/* Content — animated with stagger delay */}
+      <div
+        style={{ animationDelay: `${index * 80}ms` }}
+        className="p-5 flex flex-col flex-grow animate-fade-in"
+      >
         <div className="flex justify-between items-start gap-3 mb-2">
           <div className="min-w-0">
             <h3 className="text-lg font-bold text-white group-hover:text-nexus-accent transition-colors">

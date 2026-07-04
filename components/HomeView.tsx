@@ -25,12 +25,13 @@ const HomeView: React.FC<HomeViewProps> = ({ products, onAddToCart, onViewDetail
             </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {newArrivals.map((product) => (
+          {newArrivals.map((product, index) => (
             <ProductCard 
                 key={product.id} 
                 product={product} 
                 onAddToCart={onAddToCart} 
                 onViewDetails={onViewDetails} 
+                index={index}
             />
           ))}
         </div>
