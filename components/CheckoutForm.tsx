@@ -553,19 +553,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
               )}
 
               {paymentMethod === 'cod' && (
-                <div className="bg-nexus-dark rounded-xl p-5 border border-nexus-border animate-fade-in">
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className="p-2 bg-nexus-accent/10 rounded-lg">
-                      <svg className="h-5 w-5 text-nexus-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+                <div className="bg-nexus-dark rounded-xl p-6 border border-nexus-border animate-fade-in">
+                  <div className="w-full space-y-2 text-sm">
+                    <div className="flex justify-between text-gray-400">
+                      <span>Payment</span>
+                      <span className="text-white font-medium">Cash on Delivery</span>
                     </div>
-                    <div>
-                      <p className="text-sm text-white font-medium">Cash on Delivery</p>
-                      <p className="text-xs text-gray-400 mt-1">Pay with cash when your order is delivered. Please have the exact amount ready.</p>
-                    </div>
-                  </div>
-                  <div className="border-t border-nexus-border pt-3 space-y-2 text-sm">
                     <div className="flex justify-between text-gray-400">
                       <span>Delivery Fee</span>
                       <span className="text-white font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
@@ -573,7 +566,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     {shipping === 0 && (
                       <p className="text-xs text-green-400">Free shipping on orders over $100</p>
                     )}
+                    <div className="flex justify-between text-gray-400">
+                      <span>Total Amount</span>
+                      <span className="text-nexus-accent font-mono font-bold text-lg">${total.toFixed(2)}</span>
+                    </div>
                   </div>
+                  <p className="text-xs text-gray-500 mt-4 text-center">Pay with cash when your order is delivered. Please have the exact amount ready.</p>
                 </div>
               )}
             </div>
@@ -585,7 +583,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                 className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <CreditCard className="h-5 w-5" />
-                Place Order - ${total.toFixed(2)}
+                Pay with Delivery - ${total.toFixed(2)}
               </button>
             )}
 
