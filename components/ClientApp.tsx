@@ -219,7 +219,7 @@ export default function ClientApp() {
                         <ShowcaseView products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} onBrowseCategory={handleBrowseCategory} />
                     )}
                     {currentView === 'product' && selectedProduct && (
-                        <ProductDetail product={selectedProduct} products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
+                        <ProductDetail key={selectedProduct.id} product={selectedProduct} products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
                     )}
                 </main>
             </div>
