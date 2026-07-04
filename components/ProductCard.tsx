@@ -28,15 +28,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
 
         {/* Badges */}
         <div className="absolute top-0 left-0 w-full flex justify-between p-3 pointer-events-none">
-          <div></div>
-
-          {/* Status Badges - Right */}
-          <div className="flex flex-col gap-1.5 items-end">
+          {/* Left Badges */}
+          <div className="flex flex-col gap-1.5 items-start">
             {product.isNew && (
               <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-green-500/90 text-white text-[10px] font-bold shadow-sm backdrop-blur-sm animate-bounce">
                 NEW
               </span>
             )}
+          </div>
+
+          {/* Right Badges */}
+          <div className="flex flex-col gap-1.5 items-end">
             {isLowStock && (
               <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-orange-500/90 text-white text-[10px] font-bold shadow-sm backdrop-blur-sm animate-bounce">
                 ONLY {product.stock} LEFT!
