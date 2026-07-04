@@ -444,8 +444,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                   }`}
                 >
                   <div className="h-10 w-10 flex items-center justify-center">
-                    <svg className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
                   <span className="text-sm font-medium">Cash on Delivery</span>
@@ -583,7 +583,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
                     type="submit"
                     className="w-full flex items-center justify-center gap-2 rounded-xl bg-nexus-accent px-6 py-4 text-sm font-bold text-nexus-dark shadow-lg shadow-nexus-accent/25 transition-all duration-300 hover:bg-nexus-accentGlow hover:shadow-nexus-accent/40 hover:scale-[1.02] active:scale-[0.98] mt-4"
                   >
-                    <CreditCard className="h-5 w-5" />
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
                     Pay with Delivery
                   </button>
 
