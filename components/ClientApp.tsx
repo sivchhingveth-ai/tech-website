@@ -256,7 +256,6 @@ export default function ClientApp() {
                                 <li><a href="/mouse" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Mice</a></li>
                                 <li><a href="/keycap" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Keycaps</a></li>
                                 <li><a href="/accessory" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Accessories</a></li>
-                                <li><a href="/track-order" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Track Order</a></li>
                             </ul>
                         </div>
 
