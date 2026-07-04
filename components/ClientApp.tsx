@@ -263,10 +263,10 @@ export default function ClientApp() {
                         <div>
                             <h4 className="text-white font-semibold text-sm mb-4">Support</h4>
                             <ul className="space-y-2.5">
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Help Center</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Shipping Info</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Returns & Refunds</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Warranty</a></li>
+                                <li><a href="/help-center" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Help Center</a></li>
+                                <li><a href="/shipping-info" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Shipping Info</a></li>
+                                <li><a href="/returns" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Returns & Refunds</a></li>
+                                <li><a href="/warranty" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Warranty</a></li>
                                 <li><a href="https://t.me/Chhingzi" target="_blank" rel="noopener noreferrer" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Contact Us</a></li>
                             </ul>
                         </div>
@@ -275,11 +275,11 @@ export default function ClientApp() {
                         <div>
                             <h4 className="text-white font-semibold text-sm mb-4">Company</h4>
                             <ul className="space-y-2.5">
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">About Us</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Careers</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Blog</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Terms of Service</a></li>
+                                <li><a href="/about" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">About Us</a></li>
+                                <li><a href="/careers" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Careers</a></li>
+                                <li><a href="/blog" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Blog</a></li>
+                                <li><a href="/privacy" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Privacy Policy</a></li>
+                                <li><a href="/terms" className="text-gray-500 text-sm hover:text-nexus-accent transition-colors">Terms of Service</a></li>
                             </ul>
                         </div>
                     </div>
