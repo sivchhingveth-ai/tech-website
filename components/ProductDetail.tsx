@@ -99,6 +99,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
     setNewReviewImage(null);
   };
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const similarTitle = 'Similar Items';
 
   const isLowStock = product.inStock && product.stock > 0 && product.stock < 10;
@@ -442,7 +445,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       </div>
 
       {/* Full Screen Image Modal */}
-      {isImageModalOpen && createPortal(
+      {isImageModalOpen && mounted && createPortal(
         <div
           className="fixed inset-0 bg-black flex items-center justify-center p-4"
           style={{ zIndex: 99999 }}
