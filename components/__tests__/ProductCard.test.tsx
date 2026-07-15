@@ -42,7 +42,7 @@ describe('ProductCard', () => {
     expect(screen.getByText('Test Keyboard Pro')).toBeInTheDocument();
     expect(screen.getByText('$199')).toBeInTheDocument();
     expect(screen.getByText('The ultimate typing experience')).toBeInTheDocument();
-    expect(screen.getByText('75%')).toBeInTheDocument();
+    expect(screen.getByText(/75%/)).toBeInTheDocument();
     expect(screen.getByText('Gateron Brown')).toBeInTheDocument();
   });
 

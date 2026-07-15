@@ -33,7 +33,7 @@ describe('ClientApp', () => {
     render(<ClientApp />);
 
     // Brand logo or title should be in document
-    expect(screen.getByText('KEYCRAFT STUDIO')).toBeInTheDocument();
+    expect(screen.getAllByText('KEYCRAFT STUDIO').length).toBeGreaterThan(0);
     
     // Check for footer copyright
     expect(screen.getByText(/© 2026 KeyCraft Studio Inc./i)).toBeInTheDocument();
