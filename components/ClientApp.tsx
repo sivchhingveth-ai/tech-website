@@ -119,17 +119,19 @@ export default function ClientApp() {
     }, [cartItems]);
 
     // Handlers
+    const maxQuantity = (item: { stock: number }) => item.stock > 0 ? item.stock : Infinity;
+
     const handleAddToCart = (product: Product) => {
         setCartItems(prev => {
             const existing = prev.find(item => item.id === product.id);
-            if (existing) return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+            if (existing) return prev.map(item => item.id === product.id ? { ...item, quantity: Math.min(item.quantity + 1, maxQuantity(item)) } : item);
             return [...prev, { ...product, quantity: 1 }];
         });
         setIsCartOpen(true);
     };
 
     const handleUpdateQuantity = (id: string, quantity: number) => {
-        setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item));
+        setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: Math.min(Math.max(1, quantity), maxQuantity(item)) } : item));
     };
 
     const handleRemoveItem = (id: string) => setCartItems(prev => prev.filter(item => item.id !== id));
@@ -218,6 +220,18 @@ export default function ClientApp() {
                     )}
                     {currentView === 'product' && selectedProduct && (
                         <ProductDetail key={selectedProduct.id} product={selectedProduct} products={PRODUCTS} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
+                    )}
+                    {currentView === 'product' && !selectedProduct && (
+                        <div className="max-w-7xl mx-auto px-4 py-24 text-center">
+                            <h2 className="text-2xl font-bold text-white mb-3">Product not found</h2>
+                            <p className="text-gray-400 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+                            <button
+                                onClick={handleGoHome}
+                                className="px-6 py-2.5 rounded-lg bg-nexus-accent text-nexus-dark text-sm font-bold transition-all duration-300 hover:bg-white"
+                            >
+                                Back to Home
+                            </button>
+                        </div>
                     )}
                 </main>
             </div>

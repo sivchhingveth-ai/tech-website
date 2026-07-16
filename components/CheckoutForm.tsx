@@ -95,15 +95,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose, onBack, it
   };
 
   const handlePayWithABA = () => {
-    const ref = `KeyCraft-${Date.now()}`;
-    const url = `https://pay.ababank.com/abaPay?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
-    window.open(url, '_blank');
+    if (!validate()) return;
+    window.open(getPaymentUrl('aba'), '_blank');
+    onSubmit({ ...info, paymentMethod: 'aba' });
   };
 
   const handlePayWithACLEDA = () => {
-    const ref = `KeyCraft-${Date.now()}`;
-    const url = `https://online.acledabank.com.kh/payment?acc=006281601&amt=${total.toFixed(2)}&cur=USD&ref=${ref}`;
-    window.open(url, '_blank');
+    if (!validate()) return;
+    window.open(getPaymentUrl('acleda'), '_blank');
+    onSubmit({ ...info, paymentMethod: 'acleda' });
   };
 
   const getPaymentUrl = (method: 'aba' | 'acleda') => {

@@ -14,7 +14,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
   return (
     <div
       onClick={() => onViewDetails(product)}
-      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer"
+      style={{ animationDelay: `${index * 80}ms` }}
+      className="group relative bg-nexus-card border border-nexus-border rounded-xl overflow-hidden hover:border-nexus-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-nexus-accent/10 flex flex-col h-full cursor-pointer opacity-0 animate-fade-in"
     >
       {/* Image Container — always visible, no animation */}
       <div className="relative aspect-[4/3] bg-nexus-black overflow-hidden h-32 sm:h-64">
@@ -53,11 +54,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onViewD
         </div>
       </div>
 
-      {/* Content — animated with stagger delay */}
-      <div
-        style={{ animationDelay: `${index * 80}ms` }}
-        className="p-3 sm:p-5 flex flex-col flex-grow animate-fade-in"
-      >
+      {/* Content */}
+      <div className="p-3 sm:p-5 flex flex-col flex-grow">
         <div className="flex justify-between items-start gap-2 sm:gap-3 mb-2">
           <div className="min-w-0">
             <h3 className="text-sm sm:text-lg font-bold text-white group-hover:text-nexus-accent transition-colors line-clamp-1">

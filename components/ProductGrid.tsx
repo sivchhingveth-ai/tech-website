@@ -1,7 +1,10 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ProductCard from './ProductCard';
 import { Product, Category, KeyboardSize } from '../types';
+
+// Render the grid in batches so a long list doesn't mount (and decode images) all at once
+const BATCH_SIZE = 8;
 
 interface ProductGridProps {
   products: Product[];
@@ -19,11 +22,18 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   onViewDetails
 }) => {
   const [activeSize, setActiveSize] = useState<KeyboardSize | 'All'>('All');
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   // Reset active size filter when main category changes
   useEffect(() => {
     setActiveSize('All');
   }, [category]);
+
+  // Start over with the first batch whenever the visible set changes
+  useEffect(() => {
+    setVisibleCount(BATCH_SIZE);
+  }, [category, activeSize, searchQuery]);
 
   const sizes: (KeyboardSize | 'All')[] = ['All', '40%', '60%', '65-68%', '75%', 'TKL (80-84%)', '96-99%', '100%'];
 
@@ -46,6 +56,23 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   if (category === 'All') {
     filteredProducts = [...filteredProducts].sort((a, b) => b.sales - a.sales);
   }
+
+  const visibleProducts = filteredProducts.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredProducts.length;
+
+  // Reveal the next batch shortly before the user reaches the bottom
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) setVisibleCount(c => c + BATCH_SIZE);
+      },
+      { rootMargin: '600px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [visibleCount, filteredProducts.length]);
 
   const getCategoryTitle = (cat: Category) => {
     if (cat === 'All') return 'Best Selling Products';
@@ -95,17 +122,20 @@ const ProductGrid: React.FC<ProductGridProps> = ({
           )}
         </div>
       ) : (
-        <div key={`${category}-${activeSize}-${searchQuery}`} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-          {filteredProducts.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              onViewDetails={onViewDetails}
-              index={index}
-            />
-          ))}
-        </div>
+        <>
+          <div key={`${category}-${activeSize}-${searchQuery}`} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+            {visibleProducts.map((product, index) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+                onViewDetails={onViewDetails}
+                index={index % BATCH_SIZE}
+              />
+            ))}
+          </div>
+          {hasMore && <div ref={sentinelRef} className="h-1" aria-hidden="true" />}
+        </>
       )}
     </div>
   );
